@@ -26,13 +26,13 @@ export default function Hero() {
           alt="Rescued animals" 
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-background/90"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-background/90"></div>
       </div>
       
       {/* Content */}
       <div className="container relative z-10 px-6 flex flex-col items-center text-center">
         <div className={`transition-all duration-1000 ease-out ${isLoaded ? 'opacity-100' : 'opacity-0 translate-y-8'}`}>
-          <span className="inline-block py-1 px-3 rounded-full bg-secondary/70 text-secondary-foreground text-sm font-medium mb-6 backdrop-blur-sm">
+          <span className="inline-block py-1 px-3 rounded-full bg-secondary/90 text-secondary-foreground text-sm font-medium mb-6 backdrop-blur-sm shadow-lg">
             Welcome to the Paws Project
           </span>
         </div>
@@ -42,7 +42,7 @@ export default function Hero() {
           <span className="text-secondary">Everywhere</span>
         </h1>
         
-        <p className={`max-w-2xl text-lg text-white/80 mb-10 transition-all duration-1000 delay-500 ease-out ${isLoaded ? 'opacity-100' : 'opacity-0 translate-y-8'}`}>
+        <p className={`max-w-2xl text-lg text-white mb-10 transition-all duration-1000 delay-500 ease-out ${isLoaded ? 'opacity-100' : 'opacity-0 translate-y-8'}`}>
           Join our mission to protect and advocate for animals through education, 
           community engagement, and direct action. Together, we can create a 
           safer world for all creatures.
@@ -51,26 +51,29 @@ export default function Hero() {
         <div className={`flex flex-col sm:flex-row gap-4 transition-all duration-1000 delay-700 ease-out ${isLoaded ? 'opacity-100' : 'opacity-0 translate-y-8'}`}>
           <Button 
             size="lg" 
-            className="bg-primary hover:bg-primary/90 text-white rounded-full"
+            className="bg-primary hover:bg-primary/90 text-white rounded-full shadow-lg relative overflow-hidden group"
             onClick={() => navigate('/report')}
           >
-            Report Animal Cruelty
+            <span className="relative z-10">Report Animal Cruelty</span>
+            <span className="absolute inset-0 bg-white/20 scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500"></span>
           </Button>
           <Button 
             size="lg" 
             variant="outline" 
-            className="border-white/30 text-white hover:bg-white/10 backdrop-blur-sm rounded-full"
+            className="border-white text-white hover:bg-white/10 backdrop-blur-sm rounded-full shadow-lg transition-all duration-300 group overflow-hidden"
             onClick={() => navigate('/volunteer')}
           >
-            Volunteer With Us <ArrowRight size={16} className="ml-2" />
+            <span className="relative z-10 group-hover:translate-x-[-4px] transition-transform duration-300">Volunteer With Us</span>
+            <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+            <span className="absolute inset-0 bg-white/10 scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500"></span>
           </Button>
         </div>
       </div>
       
       {/* Scroll indicator */}
       <div className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce transition-all duration-1000 delay-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
-        <div className="w-[30px] h-[50px] rounded-full border-2 border-white/30 flex items-start justify-center p-2">
-          <div className="w-1.5 h-3 bg-white/60 rounded-full animate-float"></div>
+        <div className="w-[30px] h-[50px] rounded-full border-2 border-white/50 flex items-start justify-center p-2">
+          <div className="w-1.5 h-3 bg-white/80 rounded-full animate-float"></div>
         </div>
       </div>
     </section>
