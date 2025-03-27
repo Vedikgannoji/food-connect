@@ -22,24 +22,24 @@ export default function Hero() {
       {/* Background image with overlay */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b" 
+          src="https://images.unsplash.com/photo-1546527868-ccb7ee7dfa6a?q=80&w=2070" 
           alt="Rescued animals" 
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-background/90"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/70 to-black/50"></div>
       </div>
       
       {/* Content */}
       <div className="container relative z-10 px-6 flex flex-col items-center text-center">
         <div className={`transition-all duration-1000 ease-out ${isLoaded ? 'opacity-100' : 'opacity-0 translate-y-8'}`}>
-          <span className="inline-block py-1 px-3 rounded-full bg-secondary/90 text-secondary-foreground text-sm font-medium mb-6 backdrop-blur-sm shadow-lg">
+          <span className="inline-block py-1 px-3 rounded-full bg-paws-green text-white text-sm font-medium mb-6 backdrop-blur-sm shadow-lg">
             Welcome to the Paws Project
           </span>
         </div>
         
         <h1 className={`text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 transition-all duration-1000 delay-300 ease-out ${isLoaded ? 'opacity-100' : 'opacity-0 translate-y-8'}`}>
           Ensuring Animal Safety <br className="hidden md:block" />
-          <span className="text-secondary">Everywhere</span>
+          <span className="text-paws-green">Everywhere</span>
         </h1>
         
         <p className={`max-w-2xl text-lg text-white mb-10 transition-all duration-1000 delay-500 ease-out ${isLoaded ? 'opacity-100' : 'opacity-0 translate-y-8'}`}>
@@ -51,7 +51,7 @@ export default function Hero() {
         <div className={`flex flex-col sm:flex-row gap-4 transition-all duration-1000 delay-700 ease-out ${isLoaded ? 'opacity-100' : 'opacity-0 translate-y-8'}`}>
           <Button 
             size="lg" 
-            className="bg-primary hover:bg-primary/90 text-white rounded-full shadow-lg relative overflow-hidden group"
+            className="bg-paws-green hover:bg-paws-green/90 text-white font-medium rounded-full shadow-lg relative overflow-hidden group"
             onClick={() => navigate('/report')}
           >
             <span className="relative z-10">Report Animal Cruelty</span>
