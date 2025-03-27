@@ -52,7 +52,7 @@ export const rescueStories: RescueStory[] = [
   {
     id: '2',
     title: 'Luna\'s Second Chance',
-    content: 'Luna was rescued from a hoarding situation with 30+ other cats. Severely malnourished and scared, she slowly learned to trust humans again through patient care and socialization. Today, she's a playful, confident companion to her new family.',
+    content: 'Luna was rescued from a hoarding situation with 30+ other cats. Severely malnourished and scared, she slowly learned to trust humans again through patient care and socialization. Today, she\'s a playful, confident companion to her new family.',
     author: 'Michael Brown',
     date: '2023-09-22',
     imageUrl: 'https://images.unsplash.com/photo-1548802673-380ab8ebc7b7',
