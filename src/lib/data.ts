@@ -70,56 +70,64 @@ export const rescueStories: RescueStory[] = [
 export const contactInfoList: ContactInfo[] = [
   {
     id: '1',
-    name: 'Paws & Claws Animal Shelter',
-    address: '123 Rescue Lane, Anytown, CA 90210',
-    phone: '(555) 123-4567',
-    email: 'info@pawsclaws.org',
+    name: 'Blue Cross of Hyderabad',
+    address: 'Plot No. 71, Road No. 10, Jubilee Hills, Hyderabad, Telangana 500033',
+    phone: '040 2354 4360',
+    email: 'info@bluecrosshyd.org',
     type: 'shelter',
   },
   {
     id: '2',
-    name: 'Pet Emergency Helpline',
-    address: 'Available 24/7',
-    phone: '(555) 911-PETS',
-    email: 'emergency@pethelp.org',
+    name: 'People For Animals Hyderabad',
+    address: 'Dattagiri Complex, Lothkunta Rd, Secunderabad, Telangana 500015',
+    phone: '040 2780 6027',
+    email: 'contact@pfahyderabad.org',
     type: 'helpline',
   },
   {
     id: '3',
-    name: 'Furry Friends Veterinary Clinic',
-    address: '456 Healing Way, Anytown, CA 90210',
-    phone: '(555) 789-0123',
-    email: 'appointments@furryfriendvet.com',
+    name: 'PVNR Veterinary Hospital',
+    address: 'Street No. 8, Banjara Hills, Hyderabad, Telangana 500034',
+    phone: '040 2339 5066',
+    email: 'appointments@pvnrvet.com',
     type: 'vet',
   },
   {
     id: '4',
-    name: 'Wildlife Rescue Center',
-    address: '789 Forest Road, Anytown, CA 90210',
-    phone: '(555) 456-7890',
-    email: 'help@wildliferescue.org',
+    name: 'Care Animal Rescue Foundation',
+    address: 'Plot 94, Phase 3, KPHB Colony, Kukatpally, Hyderabad, Telangana 500072',
+    phone: '9848053568',
+    email: 'help@carefoundation.org',
     type: 'shelter',
   },
   {
     id: '5',
-    name: 'Animal Cruelty Reporting Hotline',
+    name: 'Animal Cruelty Helpline Hyderabad',
     address: 'Confidential',
-    phone: '(555) 222-SAFE',
-    email: 'report@animalprotection.org',
+    phone: '040 2323 1234',
+    email: 'report@animalwelfarehyd.org',
     type: 'helpline',
+  },
+  {
+    id: '6',
+    name: 'Pawsome Sanctuary',
+    address: 'Plot 15, Road 12, Gachibowli, Hyderabad, Telangana 500032',
+    phone: '9876543210',
+    email: 'contact@pawsomesanctuary.org',
+    type: 'shelter',
   },
 ];
 
 export const faqs: FAQ[] = [
   {
     id: '1',
-    question: 'What should I do if I find a stray animal?',
-    answer: 'First, ensure your safety and the animal\'s. Approach cautiously, as the animal may be scared. If possible, contain the animal in a safe area, provide water, and contact local animal control or a rescue organization. Take photos and share on local lost pet groups.'
+    question: 'What should I do if I find a stray animal in Hyderabad?',
+    answer: 'First, ensure your safety and the animal\'s. Approach cautiously, as the animal may be scared. If possible, contain the animal in a safe area, provide water, and contact Blue Cross of Hyderabad or People For Animals Hyderabad. Take photos and share on local lost pet groups.'
   },
   {
     id: '2',
-    question: 'How can I report animal cruelty?',
-    answer: 'Document what you\'ve witnessed with photos or videos if safe to do so. Contact your local animal control, humane society, or police department immediately. You can usually report anonymously. You can also use our Report form on this website.'
+    question: 'How can I report animal cruelty in Hyderabad?',
+    answer: 'Document what you\'ve witnessed with photos or videos if safe to do so. Contact the Animal Cruelty Helpline Hyderabad, GHMC Animal Care Centre, or local police station immediately. You can usually report anonymously. You can also use our Report form on this website.'
   },
   {
     id: '3',
@@ -128,8 +136,8 @@ export const faqs: FAQ[] = [
   },
   {
     id: '4',
-    question: 'How can I volunteer to help animals?',
-    answer: 'You can volunteer at local shelters, foster animals temporarily, transport animals to vet appointments, help with adoption events, or offer professional skills like photography or web design. Fill out our Volunteer form to get started!'
+    question: 'How can I volunteer to help animals in Hyderabad?',
+    answer: 'You can volunteer at Blue Cross of Hyderabad, Care Animal Rescue Foundation, or People For Animals. You can foster animals temporarily, transport animals to vet appointments, help with adoption events, or offer professional skills like photography or web design. Fill out our Volunteer form to get started!'
   },
   {
     id: '5',

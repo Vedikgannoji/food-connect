@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { ContactInfo as ContactInfoType } from '@/lib/types';
 import AnimatedCard from '@/components/ui/AnimatedCard';
 import { Button } from '@/components/ui/button';
-import { Phone, Mail, MapPin, Copy, Check } from 'lucide-react';
+import { Phone, Mail, MapPin, Copy, Check, ExternalLink } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 
 interface ContactInfoProps {
@@ -44,34 +44,34 @@ export default function ContactInfo({ contact, index }: ContactInfoProps) {
 
   return (
     <AnimatedCard delay={index * 100} className="h-full">
-      <div className="p-6 flex flex-col h-full">
+      <div className="p-6 flex flex-col h-full bg-card/70 hover:bg-card/90 transition-colors duration-300">
         <div className="flex justify-between items-start mb-4">
           <div className="text-3xl">{getIcon()}</div>
-          <div className="text-xs px-2 py-1 rounded-full bg-muted">
+          <div className="text-xs px-2 py-1 rounded-full bg-paws-green/20 text-paws-green font-medium">
             {contact.type === 'shelter' ? 'Animal Shelter' : 
              contact.type === 'helpline' ? 'Helpline' : 'Veterinary Clinic'}
           </div>
         </div>
         
-        <h3 className="text-xl font-semibold mb-3">{contact.name}</h3>
+        <h3 className="text-xl font-semibold mb-3 text-foreground">{contact.name}</h3>
         
         <div className="space-y-3 mb-4 flex-grow">
           <div className="flex items-start">
-            <MapPin size={16} className="mr-2 mt-1 text-muted-foreground" />
+            <MapPin size={16} className="mr-2 mt-1 text-paws-green" />
             <span className="text-muted-foreground">{contact.address}</span>
           </div>
           
           <div className="flex items-center group">
-            <Phone size={16} className="mr-2 text-muted-foreground" />
+            <Phone size={16} className="mr-2 text-paws-green" />
             <span className="text-muted-foreground">{contact.phone}</span>
             <Button
               variant="ghost"
               size="icon"
-              className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity"
+              className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity hover:text-paws-green"
               onClick={() => copyToClipboard(contact.phone, 'phone')}
             >
               {copied === 'phone' ? (
-                <Check size={14} className="text-secondary" />
+                <Check size={14} className="text-paws-green" />
               ) : (
                 <Copy size={14} />
               )}
@@ -79,16 +79,16 @@ export default function ContactInfo({ contact, index }: ContactInfoProps) {
           </div>
           
           <div className="flex items-center group">
-            <Mail size={16} className="mr-2 text-muted-foreground" />
+            <Mail size={16} className="mr-2 text-paws-green" />
             <span className="text-muted-foreground">{contact.email}</span>
             <Button
               variant="ghost"
               size="icon"
-              className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity"
+              className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity hover:text-paws-green"
               onClick={() => copyToClipboard(contact.email, 'email')}
             >
               {copied === 'email' ? (
-                <Check size={14} className="text-secondary" />
+                <Check size={14} className="text-paws-green" />
               ) : (
                 <Copy size={14} />
               )}
@@ -97,8 +97,10 @@ export default function ContactInfo({ contact, index }: ContactInfoProps) {
         </div>
         
         <div className="mt-auto pt-4 border-t border-border">
-          <Button variant="outline" className="w-full rounded-full" size="sm">
-            <Phone size={14} className="mr-2" /> Call Now
+          <Button variant="default" className="w-full rounded-full group relative" size="sm">
+            <Phone size={14} className="mr-2 group-hover:animate-pulse" /> 
+            <span>Call Now</span>
+            <span className="absolute inset-0 bg-white/20 scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500"></span>
           </Button>
         </div>
       </div>
