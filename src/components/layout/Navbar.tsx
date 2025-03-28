@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { Sun, Moon, Menu, X } from 'lucide-react';
+import { Sun, Moon, Menu, X, PawPrint } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
 
@@ -57,77 +57,89 @@ export default function Navbar() {
   };
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled 
-        ? 'bg-background/90 dark:bg-background/90 backdrop-blur-lg shadow-md py-3 border-b border-border' 
-        : 'bg-black/50 dark:bg-black/50 backdrop-blur-sm py-5'
-    }`}>
-      <div className="container flex items-center justify-between">
-        <NavLink 
-          to="/" 
-          className="flex items-center space-x-2 text-white font-bold text-xl"
-        >
-          <span className="text-2xl">🐾</span>
-          <span className="hidden sm:inline">Paws Project</span>
-        </NavLink>
-        
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-1">
-          {NavItems.map((item) => (
-            <NavLink
-              key={item.href}
-              to={item.href}
-              className={({ isActive }) => `
-                px-4 py-2 rounded-full transition-all duration-300
-                ${isActive 
-                  ? 'text-primary-foreground bg-primary font-medium shadow-lg' 
-                  : isScrolled
-                    ? 'text-foreground hover:bg-accent hover:text-accent-foreground font-medium'
-                    : 'text-white hover:bg-white/20 font-medium'
-                }
-              `}
+    <div className="fixed top-0 left-0 right-0 flex justify-center z-50 pt-4 px-4">
+      <header className={`w-full max-w-6xl transition-all duration-300 rounded-full ${
+        isScrolled ? 'py-2' : 'py-3'
+      } ${
+        isDarkMode 
+          ? 'bg-black/70 text-white' 
+          : 'bg-white/80 text-black'
+      } backdrop-blur-md shadow-lg border ${isDarkMode ? 'border-white/10' : 'border-black/5'}`}>
+        <div className="container flex items-center justify-between">
+          <NavLink 
+            to="/" 
+            className="flex items-center space-x-2 font-bold text-xl"
+          >
+            <PawPrint className={`h-6 w-6 ${isDarkMode ? 'text-paws-green' : 'text-paws-brown'}`} />
+            <span className={`hidden sm:inline ${isDarkMode ? 'text-white' : 'text-black'}`}>
+              Paws Project
+            </span>
+          </NavLink>
+          
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-1">
+            {NavItems.map((item) => (
+              <NavLink
+                key={item.href}
+                to={item.href}
+                className={({ isActive }) => `
+                  px-4 py-2 rounded-full transition-all duration-300
+                  ${isActive 
+                    ? 'text-white bg-paws-green font-medium shadow-md' 
+                    : isDarkMode
+                      ? 'text-white hover:bg-white/10 font-medium'
+                      : 'text-black hover:bg-black/5 font-medium'
+                  }
+                `}
+              >
+                {item.title}
+              </NavLink>
+            ))}
+          </nav>
+
+          {/* Right side items */}
+          <div className="flex items-center space-x-2">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={toggleDarkMode}
+              className={`rounded-full 
+                ${isDarkMode 
+                  ? 'text-white hover:bg-white/10' 
+                  : 'text-black hover:bg-black/5'
+                }`}
+              aria-label="Toggle dark mode"
             >
-              {item.title}
-            </NavLink>
-          ))}
-        </nav>
+              {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
+            </Button>
 
-        {/* Right side items */}
-        <div className="flex items-center space-x-2">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={toggleDarkMode}
-            className={`rounded-full ${
-              isScrolled 
-                ? 'text-foreground hover:bg-accent hover:text-accent-foreground' 
-                : 'text-white hover:bg-white/20'
-            }`}
-            aria-label="Toggle dark mode"
-          >
-            {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
-          </Button>
-
-          {/* Mobile menu button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className={`rounded-full md:hidden ${
-              isScrolled 
-                ? 'text-foreground hover:bg-accent hover:text-accent-foreground' 
-                : 'text-white hover:bg-white/20'
-            }`}
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
-          </Button>
+            {/* Mobile menu button */}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className={`rounded-full md:hidden 
+                ${isDarkMode 
+                  ? 'text-white hover:bg-white/10' 
+                  : 'text-black hover:bg-black/5'
+                }`}
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
+            </Button>
+          </div>
         </div>
-      </div>
+      </header>
 
       {/* Mobile Navigation */}
       {mobileMenuOpen && (
-        <div className="bg-background/95 dark:bg-background/95 backdrop-blur-md border-t border-border absolute top-full left-0 right-0 animate-slide-down md:hidden">
+        <div className={`
+          absolute top-full left-0 right-0 mt-2 mx-4 rounded-2xl overflow-hidden 
+          transition-all duration-300 animate-fade-in md:hidden
+          ${isDarkMode ? 'bg-black/80' : 'bg-white/90'} 
+          backdrop-blur-md shadow-lg border
+          ${isDarkMode ? 'border-white/10' : 'border-black/5'}
+        `}>
           <nav className="flex flex-col p-4 space-y-2">
             {NavItems.map((item) => (
               <NavLink
@@ -136,8 +148,10 @@ export default function Navbar() {
                 className={({ isActive }) => `
                   px-4 py-3 rounded-lg transition-all duration-200
                   ${isActive 
-                    ? 'text-primary-foreground bg-primary font-medium' 
-                    : 'text-foreground hover:bg-accent hover:text-accent-foreground'
+                    ? 'bg-paws-green text-white font-medium' 
+                    : isDarkMode
+                      ? 'text-white hover:bg-white/10'
+                      : 'text-black hover:bg-black/5'
                   }
                 `}
               >
@@ -147,6 +161,6 @@ export default function Navbar() {
           </nav>
         </div>
       )}
-    </header>
+    </div>
   );
 }

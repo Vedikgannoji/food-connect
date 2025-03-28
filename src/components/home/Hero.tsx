@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, PawPrint } from 'lucide-react';
 
 export default function Hero() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -22,11 +22,11 @@ export default function Hero() {
       {/* Background image with overlay */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="https://images.unsplash.com/photo-1472396961693-142e6e269027?q=80&w=2070" 
-          alt="Rescued animals" 
+          src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?q=80&w=2069&auto=format&fit=crop" 
+          alt="Dogs running in a field" 
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/70 to-black/60"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/30"></div>
       </div>
       
       {/* Content */}
@@ -54,6 +54,7 @@ export default function Hero() {
             className="bg-paws-green hover:bg-paws-green/90 text-white font-medium rounded-full shadow-lg relative overflow-hidden group"
             onClick={() => navigate('/report')}
           >
+            <PawPrint className="mr-1 h-5 w-5" />
             <span className="relative z-10">Report Animal Cruelty</span>
             <span className="absolute inset-0 bg-white/20 scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500"></span>
           </Button>
