@@ -22,11 +22,11 @@ export default function Hero() {
       {/* Background image with overlay */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="https://images.unsplash.com/photo-1546527868-ccb7ee7dfa6a?q=80&w=2070" 
+          src="https://images.unsplash.com/photo-1472396961693-142e6e269027?q=80&w=2070" 
           alt="Rescued animals" 
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/70 to-black/50"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/70 to-black/60"></div>
       </div>
       
       {/* Content */}

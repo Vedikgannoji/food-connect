@@ -57,7 +57,11 @@ export default function Navbar() {
   };
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'glass py-3 shadow-md' : 'py-5 bg-black/40'}`}>
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      isScrolled 
+        ? 'bg-background/90 dark:bg-background/90 backdrop-blur-lg shadow-md py-3 border-b border-border' 
+        : 'bg-black/50 dark:bg-black/50 backdrop-blur-sm py-5'
+    }`}>
       <div className="container flex items-center justify-between">
         <NavLink 
           to="/" 
@@ -77,7 +81,9 @@ export default function Navbar() {
                 px-4 py-2 rounded-full transition-all duration-300
                 ${isActive 
                   ? 'text-primary-foreground bg-primary font-medium shadow-lg' 
-                  : 'text-white hover:bg-white/20 font-medium'
+                  : isScrolled
+                    ? 'text-foreground hover:bg-accent hover:text-accent-foreground font-medium'
+                    : 'text-white hover:bg-white/20 font-medium'
                 }
               `}
             >
@@ -92,7 +98,11 @@ export default function Navbar() {
             variant="ghost"
             size="icon"
             onClick={toggleDarkMode}
-            className="rounded-full text-white hover:bg-white/20"
+            className={`rounded-full ${
+              isScrolled 
+                ? 'text-foreground hover:bg-accent hover:text-accent-foreground' 
+                : 'text-white hover:bg-white/20'
+            }`}
             aria-label="Toggle dark mode"
           >
             {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
@@ -103,7 +113,11 @@ export default function Navbar() {
             variant="ghost"
             size="icon"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="rounded-full text-white hover:bg-white/20 md:hidden"
+            className={`rounded-full md:hidden ${
+              isScrolled 
+                ? 'text-foreground hover:bg-accent hover:text-accent-foreground' 
+                : 'text-white hover:bg-white/20'
+            }`}
             aria-label="Toggle menu"
           >
             {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
@@ -113,7 +127,7 @@ export default function Navbar() {
 
       {/* Mobile Navigation */}
       {mobileMenuOpen && (
-        <div className="bg-black/90 backdrop-blur-md border-t border-white/10 absolute top-full left-0 right-0 animate-slide-down md:hidden">
+        <div className="bg-background/95 dark:bg-background/95 backdrop-blur-md border-t border-border absolute top-full left-0 right-0 animate-slide-down md:hidden">
           <nav className="flex flex-col p-4 space-y-2">
             {NavItems.map((item) => (
               <NavLink
@@ -123,7 +137,7 @@ export default function Navbar() {
                   px-4 py-3 rounded-lg transition-all duration-200
                   ${isActive 
                     ? 'text-primary-foreground bg-primary font-medium' 
-                    : 'text-white hover:bg-white/10'
+                    : 'text-foreground hover:bg-accent hover:text-accent-foreground'
                   }
                 `}
               >
