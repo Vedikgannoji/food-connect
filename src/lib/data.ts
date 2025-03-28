@@ -46,7 +46,7 @@ export const rescueStories: RescueStory[] = [
     content: 'Rani was found severely injured after being hit by a car in the busy streets of Hyderabad. Local residents called our emergency team, who provided immediate medical attention. After months of rehabilitation, Rani made a full recovery and was adopted by a loving family in Jubilee Hills. She now enjoys morning walks at KBR Park and has become the neighborhood\'s beloved mascot.',
     author: 'Dr. Priya Sharma',
     date: '2023-08-15',
-    imageUrl: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070&auto=format&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1000&auto=format&fit=crop',
   },
   {
     id: '2',
@@ -54,7 +54,7 @@ export const rescueStories: RescueStory[] = [
     content: 'Lakshmi was a temple elephant who suffered from years of mistreatment and neglect. Our team, along with Wildlife SOS, worked tirelessly to legally rescue her and provide urgent medical care for her wounded feet and malnourished body. Today, Lakshmi roams freely at our sanctuary outside Hyderabad, enjoying natural elephant behaviors like mud baths and foraging. Her story has inspired stronger enforcement of wildlife protection laws across Telangana.',
     author: 'Vikram Aditya',
     date: '2023-10-22',
-    imageUrl: 'https://images.unsplash.com/photo-1528495612343-9ca9f4a9f67c?q=80&w=2074&auto=format&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1527118732049-c88155f2107c?q=80&w=1000&auto=format&fit=crop',
   },
   {
     id: '3',
@@ -62,7 +62,7 @@ export const rescueStories: RescueStory[] = [
     content: 'Krishna was abandoned after becoming unproductive, despite cows\' sacred status in India. Found wandering highways near Gachibowli with life-threatening injuries, our team rescued him just in time. After treatment and care at our gaushala, Krishna recovered fully, becoming an ambassador for abandoned cattle. He now lives peacefully at our sanctuary, where visitors learn about ethical treatment of all animals, sacred or otherwise.',
     author: 'Arjun Reddy',
     date: '2023-12-05',
-    imageUrl: 'https://images.unsplash.com/photo-1599843533756-8d3aed4ebb31?q=80&w=2074&auto=format&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1599843533756-8d3aed4ebb31?q=80&w=1000&auto=format&fit=crop',
   },
   {
     id: '4',
@@ -70,7 +70,7 @@ export const rescueStories: RescueStory[] = [
     content: 'Bagheera, a black leopard, spent seven years performing in an illegal traveling circus across India. After a coordinated raid with forest officials in Telangana, we rescued him and several other wild animals from cramped cages and inhumane conditions. At our wildlife rehabilitation center, Bagheera has slowly recovered from physical and psychological trauma. While he cannot be released into the wild, he now has a spacious naturalistic enclosure where he can climb, rest, and be a leopard without the fear of punishment.',
     author: 'Nisha Kumar',
     date: '2024-01-30',
-    imageUrl: 'https://images.unsplash.com/photo-1553425300-8c56e9d7d9e3?q=80&w=2071&auto=format&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1553425300-8c56e9d7d9e3?q=80&w=1000&auto=format&fit=crop',
   },
   {
     id: '5',
@@ -78,7 +78,7 @@ export const rescueStories: RescueStory[] = [
     content: 'When monsoon floods devastated rural areas outside Hyderabad, our rescue team found two goat kids, Radha and Mohan, stranded on a roof. After bringing them to safety, we discovered they had formed an inseparable bond through their shared trauma. We couldn\'t bear to separate them, so we found them a forever home together at a sanctuary where they continue to support each other. Their story demonstrates that animals, like humans, form deep emotional connections that deserve our respect.',
     author: 'Sunita Devi',
     date: '2024-02-18',
-    imageUrl: 'https://images.unsplash.com/photo-1527153857715-3908f2bae5e8?q=80&w=2070&auto=format&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1527153857715-3908f2bae5e8?q=80&w=1000&auto=format&fit=crop',
   },
   {
     id: '6',
@@ -86,8 +86,32 @@ export const rescueStories: RescueStory[] = [
     content: 'For 50 years, Raju carried tourists and pulled heavy loads, living in chains that cut into his legs. When we found him in a remote area near Hyderabad, he was severely malnourished and had infected wounds. After a complex legal battle with his owner, we were finally able to free Raju. The moment his chains were removed, witnesses reported seeing tears in his eyes. Today, Raju lives at our elephant sanctuary where he enjoys freedom, proper medical care, and the company of other rescued elephants.',
     author: 'Mahesh Babu',
     date: '2023-07-04',
-    imageUrl: 'https://images.unsplash.com/photo-1551316679-9c6ae9dec224?q=80&w=2070&auto=format&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1603483080228-04f2313d9f10?q=80&w=1000&auto=format&fit=crop',
   },
+  {
+    id: '7',
+    title: 'Maya: The Dancing Bear\'s New Life',
+    content: 'Maya was forced to "dance" on the streets of India from a young age, with a painful rope threaded through her sensitive nose. Our team located her in a remote village outside Hyderabad and worked with authorities to confiscate her from her handlers. After years of rehabilitation, Maya has learned to forage, play, and interact with other bears. Today, she lives at the Bannerghatta Bear Rescue Centre where she can finally express natural bear behaviors without fear of punishment.',
+    author: 'Kiran Desai',
+    date: '2023-05-12',
+    imageUrl: 'https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?q=80&w=1000&auto=format&fit=crop',
+  },
+  {
+    id: '8',
+    title: 'Sundari: The Tiger\'s Recovery',
+    content: 'Sundari was confiscated from an illegal wildlife trader in Hyderabad who was selling tiger parts on the black market. When we found her, she was severely malnourished and showing signs of abuse. After extensive veterinary care and rehabilitation at our wildlife center, Sundari regained her strength and natural behaviors. While she cannot be released back to the wild, she now lives in a spacious, naturalistic enclosure at our sanctuary where she serves as an ambassador for tiger conservation in India.',
+    author: 'Dr. Rajiv Singh',
+    date: '2023-09-18',
+    imageUrl: 'https://images.unsplash.com/photo-1549480017-d76466a4b7e8?q=80&w=1000&auto=format&fit=crop',
+  },
+  {
+    id: '9',
+    title: 'Chotu: The Monkey Who Found Freedom',
+    content: 'Chotu was kept as a "pet" in a tiny cage in an apartment in Hyderabad. When neighbors reported the situation, our team worked with forest officials to confiscate him. After a period of rehabilitation where he learned how to socialize with other monkeys and develop natural foraging skills, Chotu was successfully integrated into a troop of his own species. Today, he lives free in a protected forest area, a true conservation success story that shows the importance of keeping wildlife in the wild.',
+    author: 'Ananya Gupta',
+    date: '2024-03-05',
+    imageUrl: 'https://images.unsplash.com/photo-1548816265-bbe8b4b27726?q=80&w=1000&auto=format&fit=crop',
+  }
 ];
 
 export const contactInfoList: ContactInfo[] = [

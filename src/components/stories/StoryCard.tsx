@@ -26,6 +26,9 @@ export default function StoryCard({ story, index }: StoryCardProps) {
   const isLongContent = story.content.length > 150;
   const displayContent = expanded ? story.content : isLongContent ? `${story.content.slice(0, 150)}...` : story.content;
 
+  // Fallback image if the story image doesn't load
+  const fallbackImage = "https://images.unsplash.com/photo-1587559070757-f72a388edbba?q=80&w=2000&auto=format&fit=crop";
+
   return (
     <AnimatedCard delay={index * 150} className="h-full">
       <Card className="flex flex-col h-full overflow-hidden group border-none shadow-lg hover:shadow-xl transition-all duration-300">
@@ -35,6 +38,10 @@ export default function StoryCard({ story, index }: StoryCardProps) {
               src={story.imageUrl}
               alt={story.title}
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.src = fallbackImage;
+              }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </div>
@@ -68,7 +75,7 @@ export default function StoryCard({ story, index }: StoryCardProps) {
           <Button 
             variant="ghost" 
             size="icon" 
-            className="rounded-full"
+            className="rounded-full hover:bg-paws-green/10"
             onClick={() => setIsLiked(!isLiked)}
           >
             <Heart 

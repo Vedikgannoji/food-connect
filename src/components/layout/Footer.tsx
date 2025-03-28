@@ -1,6 +1,5 @@
-
 import { NavLink } from 'react-router-dom';
-import { Heart, Facebook, Twitter, Instagram, Youtube, Mail } from 'lucide-react';
+import { Heart, Facebook, Twitter, Instagram, Youtube, Mail, PawPrint } from 'lucide-react';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -11,7 +10,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
             <div className="flex items-center space-x-2 text-primary font-bold text-xl">
-              <span className="text-2xl">🐾</span>
+              <PawPrint className="h-6 w-6 text-paws-green" />
               <span>Paws Project</span>
             </div>
             <p className="text-muted-foreground">
