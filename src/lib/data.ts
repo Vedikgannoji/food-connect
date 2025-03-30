@@ -55,7 +55,7 @@ export const rescueStories: RescueStory[] = [
     content: 'For 30 years, Sita served as a temple elephant in Tamil Nadu, suffering from chronic foot infections and malnutrition. When we found her, she was chained to a concrete floor, unable to move freely and displaying clear signs of psychological distress. After months of legal battles, we secured her release to our sanctuary outside Chennai. Sita\'s rehabilitation was slow but remarkable - her wounds healed, she gained healthy weight, and gradually began forming bonds with other rescued elephants. Today, two years after her rescue, Sita enjoys mud baths and forages freely with her new herd. Her case helped strengthen enforcement of the Wildlife Protection Act in the region.',
     author: 'Dr. Vikram Patel',
     date: '2023-05-22',
-    imageUrl: 'https://images.unsplash.com/photo-1581852017571-2f6c966e22b1?q=80&w=1000&auto=format&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?q=80&w=1000&auto=format&fit=crop',
   },
   {
     id: '3',
@@ -79,7 +79,7 @@ export const rescueStories: RescueStory[] = [
     content: 'Moti and Raja were work bullocks abandoned when they became too old to plow fields. When our team found them in a rural area outside Pune, they were severely dehydrated and malnourished, tied to a tree without adequate food or water. After their rescue, both required intensive veterinary care to treat their infections and malnutrition. Through our Farm Animal Rehabilitation Program, they were given sanctuary at our Pune facility where they now live peacefully, enjoying fresh grass and shady rest areas. Their story highlights the plight of working animals discarded when no longer deemed useful. We\'ve since established an education program in the region to promote compassionate retirement for work animals.',
     author: 'Rajesh Patil',
     date: '2024-02-18',
-    imageUrl: 'https://images.unsplash.com/photo-1566813999067-adf124fdc3a6?q=80&w=1000&auto=format&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1583309219338-a582f1f9ca6d?q=80&w=1000&auto=format&fit=crop',
   },
   {
     id: '6',
@@ -95,7 +95,7 @@ export const rescueStories: RescueStory[] = [
     content: 'Laxmi was a "plastic cow" - one of many urban street cows in Jaipur consuming dangerous amounts of plastic waste while scavenging. When our team found her, she was severely bloated and in pain from an intestinal blockage. Emergency surgery removed over 35 kg of plastic from her stomach - one of the worst cases we\'d seen. Her recovery was long, requiring multiple follow-up treatments and a special diet. Today, Laxmi lives at our gaushala outside the city where she receives proper nutrition and care. Her story sparked our "Plastic-Free Streets" campaign in Jaipur, which has educated thousands about the dangers urban waste poses to street animals and implemented regular waste collection in key areas.',
     author: 'Dr. Meera Sharma',
     date: '2023-07-12',
-    imageUrl: 'https://images.unsplash.com/photo-1583309219338-a582f1f9ca6d?q=80&w=1000&auto=format&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1570042225831-d98fa7577f1e?q=80&w=1000&auto=format&fit=crop',
   },
   {
     id: '8',

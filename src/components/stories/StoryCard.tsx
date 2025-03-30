@@ -1,11 +1,10 @@
 
 import { RescueStory } from '@/lib/types';
 import AnimatedCard from '@/components/ui/AnimatedCard';
-import { Calendar, Heart } from 'lucide-react';
+import { Calendar } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
-import { useToast } from "@/components/ui/use-toast";
 
 interface StoryCardProps {
   story: RescueStory;
@@ -13,9 +12,7 @@ interface StoryCardProps {
 }
 
 export default function StoryCard({ story, index }: StoryCardProps) {
-  const [isLiked, setIsLiked] = useState(false);
   const [expanded, setExpanded] = useState(false);
-  const { toast } = useToast();
   
   // Format the date in Indian style (DD-MM-YYYY)
   const formattedDate = new Date(story.date).toLocaleDateString('en-IN', {
@@ -30,15 +27,6 @@ export default function StoryCard({ story, index }: StoryCardProps) {
 
   // Fallback image if the story image doesn't load
   const fallbackImage = "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?q=80&w=2000&auto=format&fit=crop";
-
-  const handleLike = () => {
-    setIsLiked(!isLiked);
-    toast({
-      title: isLiked ? "Removed from favorites" : "Added to favorites",
-      description: isLiked ? `${story.title} removed from your favorites` : `${story.title} added to your favorites`,
-      duration: 3000,
-    });
-  };
 
   return (
     <AnimatedCard delay={index * 150} className="h-full">
@@ -83,17 +71,6 @@ export default function StoryCard({ story, index }: StoryCardProps) {
         
         <CardFooter className="flex justify-between items-center pt-2 border-t">
           <span className="text-sm font-medium">By {story.author}</span>
-          <Button 
-            variant="ghost" 
-            size="icon" 
-            className="rounded-full hover:bg-paws-green/10"
-            onClick={handleLike}
-          >
-            <Heart 
-              size={18} 
-              className={`transition-colors duration-300 ${isLiked ? 'fill-paws-green text-paws-green' : 'text-muted-foreground'}`}
-            />
-          </Button>
         </CardFooter>
       </Card>
     </AnimatedCard>
