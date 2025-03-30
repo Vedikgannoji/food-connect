@@ -43,17 +43,27 @@ export default function Volunteer() {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-grow pt-24">
-        {/* Header */}
-        <section className="py-12 md:py-20 bg-muted/30">
-          <div className="container px-6">
+        {/* Header with background image */}
+        <section className="py-12 md:py-20 relative">
+          {/* Background image with overlay */}
+          <div className="absolute inset-0 z-0">
+            <img 
+              src="https://images.unsplash.com/photo-1626553683558-dd8051d88e02?q=80&w=2069&auto=format&fit=crop" 
+              alt="Volunteers helping animals" 
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40 dark:from-black/70 dark:to-black/50"></div>
+          </div>
+          
+          <div className="container px-6 relative z-10">
             <div className="max-w-3xl mx-auto text-center">
-              <span className={`inline-block py-1 px-3 rounded-full bg-secondary/30 text-secondary-foreground text-sm font-medium mb-6 transition-all duration-700 ease-out ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+              <span className={`inline-block py-1 px-3 rounded-full bg-secondary/30 text-white text-sm font-medium mb-6 transition-all duration-700 ease-out backdrop-blur-sm ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
                 <Heart size={14} className="inline mr-1" /> Get Involved
               </span>
-              <h1 className={`text-3xl md:text-5xl font-bold mb-6 transition-all duration-700 delay-100 ease-out ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-4'}`}>
+              <h1 className={`text-3xl md:text-5xl font-bold mb-6 transition-all duration-700 delay-100 ease-out text-white ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-4'}`}>
                 Volunteer With Us
               </h1>
-              <p className={`text-muted-foreground text-lg mb-8 transition-all duration-700 delay-200 ease-out ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-4'}`}>
+              <p className={`text-white/90 text-lg mb-8 transition-all duration-700 delay-200 ease-out ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-4'}`}>
                 Your time and skills can make a world of difference for animals in need.
                 Join our network of dedicated volunteers and help create a safer world for all creatures.
               </p>
