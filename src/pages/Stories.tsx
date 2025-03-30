@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
@@ -13,7 +12,6 @@ export default function Stories() {
   const [currentPage, setCurrentPage] = useState(1);
   const storiesPerPage = 3;
   
-  // Calculate current stories to display
   const indexOfLastStory = currentPage * storiesPerPage;
   const indexOfFirstStory = indexOfLastStory - storiesPerPage;
   const currentStories = rescueStories.slice(indexOfFirstStory, indexOfLastStory);
@@ -23,7 +21,6 @@ export default function Stories() {
     document.title = 'Indian Rescue Stories - Paws Project';
     window.scrollTo(0, 0);
     
-    // Trigger animations after a small delay
     const timer = setTimeout(() => {
       setIsVisible(true);
     }, 100);
@@ -35,13 +32,11 @@ export default function Stories() {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-grow pt-24">
-        {/* Header with background image */}
         <section className="py-12 md:py-20 relative">
-          {/* Background image with overlay */}
           <div className="absolute inset-0 z-0">
             <img 
-              src="https://images.unsplash.com/photo-1548767797-d8c844163c4c?q=80&w=2071&auto=format&fit=crop" 
-              alt="Animal rescue story" 
+              src="https://images.unsplash.com/photo-1559190394-df5a28aab5c5?q=80&w=2070&auto=format&fit=crop" 
+              alt="Animal rescue compassion" 
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/60 dark:from-black/80 dark:via-black/60 dark:to-black/70"></div>
@@ -72,7 +67,6 @@ export default function Stories() {
           </div>
         </section>
 
-        {/* Stories Grid */}
         <section className="py-12">
           <div className="container px-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -81,7 +75,6 @@ export default function Stories() {
               ))}
             </div>
             
-            {/* Pagination */}
             {totalPages > 1 && (
               <Pagination className="mt-10">
                 <PaginationContent>
@@ -106,7 +99,6 @@ export default function Stories() {
           </div>
         </section>
 
-        {/* Submit Your Story */}
         <section className="py-12 bg-muted/50">
           <div className="container px-6">
             <div className="max-w-2xl mx-auto">
