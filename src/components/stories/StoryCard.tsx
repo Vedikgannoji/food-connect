@@ -27,7 +27,7 @@ export default function StoryCard({ story, index }: StoryCardProps) {
   const displayContent = expanded ? story.content : isLongContent ? `${story.content.slice(0, 150)}...` : story.content;
 
   // Fallback image if the story image doesn't load
-  const fallbackImage = "https://images.unsplash.com/photo-1587559070757-f72a388edbba?q=80&w=2000&auto=format&fit=crop";
+  const fallbackImage = "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?q=80&w=2000&auto=format&fit=crop";
 
   return (
     <AnimatedCard delay={index * 150} className="h-full">
