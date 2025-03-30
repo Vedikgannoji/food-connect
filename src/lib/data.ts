@@ -1,4 +1,3 @@
-
 import { SafetyTip, RescueStory, ContactInfo, FAQ } from './types';
 
 export const safetyTips: SafetyTip[] = [
@@ -79,7 +78,7 @@ export const rescueStories: RescueStory[] = [
     content: 'Moti and Raja were work bullocks abandoned when they became too old to plow fields. When our team found them in a rural area outside Pune, they were severely dehydrated and malnourished, tied to a tree without adequate food or water. After their rescue, both required intensive veterinary care to treat their infections and malnutrition. Through our Farm Animal Rehabilitation Program, they were given sanctuary at our Pune facility where they now live peacefully, enjoying fresh grass and shady rest areas. Their story highlights the plight of working animals discarded when no longer deemed useful. We\'ve since established an education program in the region to promote compassionate retirement for work animals.',
     author: 'Rajesh Patil',
     date: '2024-02-18',
-    imageUrl: 'https://images.unsplash.com/photo-1583309219338-a582f1f9ca6d?q=80&w=1000&auto=format&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1493962853295-0fd70327578a',
   },
   {
     id: '6',
