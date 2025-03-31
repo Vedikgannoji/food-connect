@@ -1,10 +1,9 @@
-
 import { useEffect, useState } from 'react';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import ContactInfo from '@/components/contact/ContactInfo';
 import { contactInfoList, faqs } from '@/lib/data';
-import { Phone, MessageSquare, ChevronDown, ChevronUp, ExternalLink } from 'lucide-react';
+import { Phone, MessageSquare, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   Accordion,
@@ -72,7 +71,7 @@ export default function Contact() {
         {/* Contact Grid */}
         <section className="py-12">
           <div className="container px-6">
-            <h2 className="text-2xl font-bold text-center mb-10">Shelters & Helplines in Hyderabad</h2>
+            <h2 className="text-2xl font-bold text-center mb-10">Shelters & Helplines</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {contactInfoList.map((contact, index) => (
                 <ContactInfo key={contact.id} contact={contact} index={index} />
@@ -110,12 +109,12 @@ export default function Contact() {
         <section className="py-12">
           <div className="container px-6">
             <div className="max-w-4xl mx-auto">
-              <h2 className="text-2xl font-bold text-center mb-10">Find Us in Hyderabad</h2>
+              <h2 className="text-2xl font-bold text-center mb-10">Find Us</h2>
               <div className="rounded-xl overflow-hidden h-[400px] glass-card p-4">
                 <div className="w-full h-full relative rounded-lg overflow-hidden">
                   <iframe 
                     title="Hyderabad Map"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d243647.32396256838!2d78.24323162466424!3d17.412281196554146!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb99daeaebd2c7%3A0xae93b78392bafbc2!2sHyderabad%2C%20Telangana!5e0!3m2!1sen!2sin!4v1593593390822!5m2!1sen!2sin" 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d243647.32396256838!2d78.24323162466424!3d17.412281196554146!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb99daeaebd2c7%3A0xae93b78392bafbc2!2sHyderabad%2C%20Telangana!5e0!3m2!1sen!2sin!4v1593593390822!5m2!1sen!2sin!4v1593593390822!5m2!1sen!2sin" 
                     width="100%" 
                     height="100%" 
                     style={{ border: 0 }} 

@@ -168,13 +168,13 @@ export const contactInfoList: ContactInfo[] = [
 export const faqs: FAQ[] = [
   {
     id: '1',
-    question: 'What should I do if I find a stray animal in Hyderabad?',
-    answer: 'First, ensure your safety and the animal\'s. Approach cautiously, as the animal may be scared. If possible, contain the animal in a safe area, provide water, and contact Blue Cross of Hyderabad or People For Animals Hyderabad. Take photos and share on local lost pet groups.'
+    question: 'What should I do if I find a stray animal?',
+    answer: 'First, ensure your safety and the animal\'s. Approach cautiously, as the animal may be scared. If possible, contain the animal in a safe area, provide water, and contact local animal rescue organizations. Take photos and share on local lost pet groups.'
   },
   {
     id: '2',
-    question: 'How can I report animal cruelty in Hyderabad?',
-    answer: 'Document what you\'ve witnessed with photos or videos if safe to do so. Contact the Animal Cruelty Helpline Hyderabad, GHMC Animal Care Centre, or local police station immediately. You can usually report anonymously. You can also use our Report form on this website.'
+    question: 'How can I report animal cruelty?',
+    answer: 'Document what you\'ve witnessed with photos or videos if safe to do so. Contact local animal welfare helplines or police station immediately. You can usually report anonymously. You can also use our Report form on this website.'
   },
   {
     id: '3',
@@ -183,7 +183,7 @@ export const faqs: FAQ[] = [
   },
   {
     id: '4',
-    question: 'How can I volunteer to help animals in Hyderabad?',
+    question: 'How can I volunteer to help animals?',
     answer: 'You can volunteer at Blue Cross of Hyderabad, Care Animal Rescue Foundation, or People For Animals. You can foster animals temporarily, transport animals to vet appointments, help with adoption events, or offer professional skills like photography or web design. Fill out our Volunteer form to get started!'
   },
   {
