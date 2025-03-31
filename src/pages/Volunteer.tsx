@@ -48,11 +48,11 @@ export default function Volunteer() {
           {/* Background image with overlay */}
           <div className="absolute inset-0 z-0">
             <img 
-              src="https://images.unsplash.com/photo-1626553683558-dd8051d88e02?q=80&w=2069&auto=format&fit=crop" 
+              src="https://images.unsplash.com/photo-1590424042118-b619eba62b53?q=80&w=2070&auto=format&fit=crop" 
               alt="Volunteers helping animals" 
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40 dark:from-black/70 dark:to-black/50"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/70 to-black/50 dark:from-black/90 dark:via-black/80 dark:to-black/60"></div>
           </div>
           
           <div className="container px-6 relative z-10">

@@ -46,11 +46,11 @@ export default function Contact() {
           {/* Background image with overlay */}
           <div className="absolute inset-0 z-0">
             <img 
-              src="https://images.unsplash.com/photo-1604328698692-f76ea9498e76?q=80&w=2070&auto=format&fit=crop" 
+              src="https://images.unsplash.com/photo-1444212477490-ca407925329e?q=80&w=2428&auto=format&fit=crop" 
               alt="Pet care contact" 
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/50 dark:from-black/80 dark:to-black/60"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/70 dark:from-black/90 dark:via-black/80 dark:to-black/80"></div>
           </div>
           
           <div className="container px-6 relative z-10">

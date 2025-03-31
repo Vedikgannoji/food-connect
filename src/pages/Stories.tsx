@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
@@ -35,11 +36,11 @@ export default function Stories() {
         <section className="py-12 md:py-20 relative">
           <div className="absolute inset-0 z-0">
             <img 
-              src="https://images.unsplash.com/photo-1559190394-df5a28aab5c5?q=80&w=2070&auto=format&fit=crop" 
+              src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?q=80&w=2064&auto=format&fit=crop" 
               alt="Animal rescue compassion" 
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/60 dark:from-black/80 dark:via-black/60 dark:to-black/70"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/80 dark:from-black/90 dark:via-black/80 dark:to-black/90"></div>
           </div>
           
           <div className="container px-6 relative z-10">

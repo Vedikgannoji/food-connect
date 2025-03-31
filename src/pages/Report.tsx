@@ -29,11 +29,11 @@ export default function Report() {
           {/* Background image with overlay */}
           <div className="absolute inset-0 z-0">
             <img 
-              src="https://images.unsplash.com/photo-1425082661705-1834bfd09dca?q=80&w=2076&auto=format&fit=crop" 
+              src="https://images.unsplash.com/photo-1503256207526-0d5d80fa2f47?q=80&w=2033&auto=format&fit=crop" 
               alt="Animal rescue background" 
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/50 dark:from-black/80 dark:to-black/60"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/60 dark:from-black/90 dark:via-black/80 dark:to-black/70"></div>
           </div>
           
           <div className="container px-6 relative z-10">
