@@ -1,3 +1,4 @@
+
 import { NavLink } from 'react-router-dom';
 import { Heart, Facebook, Twitter, Instagram, Youtube, Mail, PawPrint } from 'lucide-react';
 
@@ -58,14 +59,14 @@ export default function Footer() {
                 </NavLink>
               </li>
               <li>
-                <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+                <NavLink to="/privacy-policy" className="text-muted-foreground hover:text-primary transition-colors">
                   Privacy Policy
-                </a>
+                </NavLink>
               </li>
               <li>
-                <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+                <NavLink to="/terms-of-service" className="text-muted-foreground hover:text-primary transition-colors">
                   Terms of Service
-                </a>
+                </NavLink>
               </li>
             </ul>
           </div>
