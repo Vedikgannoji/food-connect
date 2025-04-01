@@ -1,4 +1,3 @@
-
 # Paws Project
 
 ## Project info
@@ -68,3 +67,11 @@ Simply open [Lovable](https://lovable.dev/projects/81e94b5a-2cab-43ed-b2a5-ad22b
 ## I want to use a custom domain - is that possible?
 
 We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+
+## Generating Favicon
+
+To generate a new favicon using the PawPrint icon:
+
+```sh
+node scripts/generate-favicon.js
+```
