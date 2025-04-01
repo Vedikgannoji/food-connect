@@ -47,7 +47,7 @@ export default function Volunteer() {
           {/* Background image with overlay */}
           <div className="absolute inset-0 z-0">
             <img 
-              src="https://images.unsplash.com/photo-1535268647677-300dbf3d78d1?q=80&w=2070&auto=format&fit=crop" 
+              src="https://images.unsplash.com/photo-1542296332-2e4473faf563?q=80&w=2070&auto=format&fit=crop" 
               alt="Volunteers helping animals" 
               className="w-full h-full object-cover"
             />
