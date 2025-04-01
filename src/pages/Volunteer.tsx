@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
@@ -48,7 +47,7 @@ export default function Volunteer() {
           {/* Background image with overlay */}
           <div className="absolute inset-0 z-0">
             <img 
-              src="https://images.unsplash.com/photo-1615166928653-06eec2d3328e?q=80&w=2070&auto=format&fit=crop" 
+              src="https://images.unsplash.com/photo-1615166928653-06eec2d3328e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3" 
               alt="Volunteers helping animals" 
               className="w-full h-full object-cover"
             />
