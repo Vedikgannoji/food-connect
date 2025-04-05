@@ -14,6 +14,7 @@ import Contact from "./pages/Contact";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import NotFound from "./pages/NotFound";
+import AnimalProtectionLaws from "./pages/AnimalProtectionLaws";
 
 // Scroll to top on route change
 function ScrollToTop() {
@@ -44,6 +45,7 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
+          <Route path="/animal-protection-laws" element={<AnimalProtectionLaws />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

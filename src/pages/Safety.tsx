@@ -1,12 +1,12 @@
 
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import SafetyCard from '@/components/safety/SafetyCard';
 import { safetyTips } from '@/lib/data';
 import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { ArrowRight, Book } from 'lucide-react';
 
 export default function Safety() {
   const [isVisible, setIsVisible] = useState(false);
@@ -63,6 +63,84 @@ export default function Safety() {
               {safetyTips.map((tip, index) => (
                 <SafetyCard key={tip.id} tip={tip} index={index} />
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Animal Protection Laws Section */}
+        <section className="py-16 bg-muted/30">
+          <div className="container px-6">
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-12">
+                <span className="inline-block py-1 px-3 rounded-full bg-secondary/20 text-secondary dark:text-secondary text-sm font-medium mb-4">
+                  Legal Protection
+                </span>
+                <h2 className="text-3xl font-bold mb-4">Animal Protection Laws</h2>
+                <p className="text-muted-foreground max-w-2xl mx-auto">
+                  Understanding animal protection legislation is crucial for effective advocacy and enforcement. 
+                  Learn about the legal framework that safeguards animal welfare in India.
+                </p>
+              </div>
+              
+              <div className="glass-card p-8 md:p-12 rounded-xl">
+                <div className="flex items-center justify-between mb-8">
+                  <div>
+                    <h3 className="text-xl font-medium mb-2">Know Your Rights & Responsibilities</h3>
+                    <p className="text-muted-foreground">
+                      Explore comprehensive information about animal protection laws, penalties for violations, and how to report cases effectively.
+                    </p>
+                  </div>
+                  <div className="hidden md:block bg-primary/10 rounded-full p-6">
+                    <Book size={32} className="text-primary" />
+                  </div>
+                </div>
+                
+                <ul className="space-y-4 mb-8">
+                  <li className="flex gap-3">
+                    <div className="bg-primary/10 rounded-full p-2 h-fit">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 className="font-medium">Prevention of Cruelty to Animals Act</h4>
+                      <p className="text-sm text-muted-foreground">The fundamental law that addresses animal cruelty in India</p>
+                    </div>
+                  </li>
+                  <li className="flex gap-3">
+                    <div className="bg-primary/10 rounded-full p-2 h-fit">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 className="font-medium">Wildlife Protection Act</h4>
+                      <p className="text-sm text-muted-foreground">Protects wildlife and endangered species across the country</p>
+                    </div>
+                  </li>
+                  <li className="flex gap-3">
+                    <div className="bg-primary/10 rounded-full p-2 h-fit">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 className="font-medium">Animal Rules & Regulations</h4>
+                      <p className="text-sm text-muted-foreground">Guidelines for the maintenance and transportation of animals</p>
+                    </div>
+                  </li>
+                </ul>
+                
+                <div className="flex justify-center">
+                  <Button
+                    size="lg"
+                    className="rounded-full"
+                    onClick={() => navigate('/animal-protection-laws')}
+                  >
+                    Explore Animal Protection Laws <ArrowRight size={16} className="ml-2" />
+                  </Button>
+                </div>
+              </div>
             </div>
           </div>
         </section>

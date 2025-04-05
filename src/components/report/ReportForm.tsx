@@ -1,3 +1,4 @@
+
 import { useState, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -6,7 +7,14 @@ import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/components/ui/use-toast';
 import { incidentTypes } from '@/lib/data';
 import { Camera, Send, Upload } from 'lucide-react';
-import Confetti from '@/components/ui/Confetti';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogClose,
+} from "@/components/ui/dialog";
 
 export default function ReportForm() {
   const [name, setName] = useState('');
@@ -16,7 +24,8 @@ export default function ReportForm() {
   const [image, setImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [showConfetti, setShowConfetti] = useState(false);
+  const [reportDetails, setReportDetails] = useState<any>(null);
+  const [showReportDialog, setShowReportDialog] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
 
@@ -65,14 +74,15 @@ export default function ReportForm() {
       // Log the data (in a real app, you would send this to an API)
       console.log('Report submitted:', reportData);
       
-      // Show confetti
-      setShowConfetti(true);
-      
       // Show success message
       toast({
         title: "Report Submitted",
         description: "Thank you for your report. We will review it and take appropriate action.",
       });
+
+      // Set report data and show dialog
+      setReportDetails(reportData);
+      setShowReportDialog(true);
 
       // Reset form
       setName('');
@@ -95,10 +105,6 @@ export default function ReportForm() {
 
   return (
     <>
-      <Confetti 
-        active={showConfetti} 
-        onComplete={() => setShowConfetti(false)} 
-      />
       <form onSubmit={handleSubmit} className="space-y-6 glass-card p-8">
         <div className="space-y-4">
           <Label htmlFor="name">Your Name</Label>
@@ -221,6 +227,63 @@ export default function ReportForm() {
           )}
         </Button>
       </form>
+
+      {/* Report details dialog */}
+      <Dialog open={showReportDialog} onOpenChange={setShowReportDialog}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Report Submitted Successfully</DialogTitle>
+            <DialogDescription>
+              Thank you for reporting this incident. Here's a summary of your report:
+            </DialogDescription>
+          </DialogHeader>
+          
+          {reportDetails && (
+            <div className="space-y-4 py-4">
+              <div className="grid grid-cols-1 gap-2">
+                <div className="font-medium">Report ID:</div>
+                <div className="text-sm text-muted-foreground">{reportDetails.id}</div>
+
+                <div className="font-medium">Name:</div>
+                <div className="text-sm text-muted-foreground">{reportDetails.name}</div>
+
+                <div className="font-medium">Location:</div>
+                <div className="text-sm text-muted-foreground">{reportDetails.location}</div>
+
+                <div className="font-medium">Incident Type:</div>
+                <div className="text-sm text-muted-foreground">{reportDetails.incidentType}</div>
+
+                <div className="font-medium">Description:</div>
+                <div className="text-sm text-muted-foreground">{reportDetails.description}</div>
+
+                <div className="font-medium">Date Submitted:</div>
+                <div className="text-sm text-muted-foreground">
+                  {new Date(reportDetails.date).toLocaleString()}
+                </div>
+              </div>
+
+              {reportDetails.imageUrl && (
+                <div className="mt-4">
+                  <div className="font-medium">Image:</div>
+                  <div className="mt-2">
+                    <img 
+                      src={reportDetails.imageUrl} 
+                      alt="Reported incident" 
+                      className="max-h-40 object-contain rounded-md"
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          <div className="flex justify-end">
+            <DialogClose asChild>
+              <Button variant="outline">Close</Button>
+            </DialogClose>
+          </div>
+        </DialogContent>
+      </Dialog>
     </>
   );
 }
