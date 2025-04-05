@@ -21,20 +21,29 @@ const canvasStyles = {
 const Confetti = ({ active, onComplete }: ConfettiProps) => {
   const [confettiInstance, setConfettiInstance] = useState<any>(null);
   
-  const getInstance = useCallback((instance: any) => {
-    setConfettiInstance(instance);
+  // Use callback to get the confetti instance
+  const getConfettiInstance = useCallback((instance: any) => {
+    if (instance) {
+      setConfettiInstance(instance);
+    }
   }, []);
 
+  // Fire confetti with specific parameters
   const makeShot = useCallback((particleRatio: number, opts: any) => {
     if (confettiInstance) {
-      confettiInstance({
-        ...opts,
-        origin: { y: 0.7 },
-        particleCount: Math.floor(200 * particleRatio),
-      });
+      try {
+        confettiInstance({
+          ...opts,
+          origin: { y: 0.7 },
+          particleCount: Math.floor(200 * particleRatio),
+        });
+      } catch (error) {
+        console.error("Error firing confetti:", error);
+      }
     }
   }, [confettiInstance]);
 
+  // Combine multiple shots for a rich confetti effect
   const fire = useCallback(() => {
     makeShot(0.25, {
       spread: 26,
@@ -69,21 +78,30 @@ const Confetti = ({ active, onComplete }: ConfettiProps) => {
     });
   }, [makeShot]);
 
+  // Fire confetti when active changes
   useEffect(() => {
+    // Only fire if active and confetti instance exists
     if (active && confettiInstance) {
-      fire();
-      
-      const timer = setTimeout(() => {
-        onComplete && onComplete();
-      }, 2000);
-      
-      return () => clearTimeout(timer);
+      try {
+        fire();
+        
+        // Call onComplete after delay
+        const timer = setTimeout(() => {
+          if (onComplete) onComplete();
+        }, 2000);
+        
+        return () => clearTimeout(timer);
+      } catch (error) {
+        console.error("Error in confetti effect:", error);
+        // Ensure onComplete is still called even if there's an error
+        if (onComplete) onComplete();
+      }
     }
   }, [active, confettiInstance, fire, onComplete]);
 
   return (
     <ReactCanvasConfetti
-      refConfetti={getInstance}
+      refConfetti={getConfettiInstance}
       style={canvasStyles}
     />
   );

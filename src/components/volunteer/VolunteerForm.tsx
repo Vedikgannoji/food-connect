@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -5,7 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/components/ui/use-toast';
 import { volunteerInterests } from '@/lib/data';
-import { Heart, Send } from 'lucide-react';
+import { Heart } from 'lucide-react';
 import Confetti from '@/components/ui/Confetti';
 
 export default function VolunteerForm() {
@@ -61,14 +62,14 @@ export default function VolunteerForm() {
       // Log the data (in a real app, you would send this to an API)
       console.log('Volunteer application submitted:', volunteerData);
       
-      // Show confetti
-      setShowConfetti(true);
-      
       // Show success message
       toast({
         title: "Application Submitted",
         description: "Thank you for volunteering! We'll contact you soon with more information.",
       });
+      
+      // Show confetti after successful submission
+      setShowConfetti(true);
 
       // Reset form
       setName('');
