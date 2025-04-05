@@ -71,7 +71,7 @@ const Confetti = ({ active, onComplete }: ConfettiProps) => {
 
   return (
     <ReactCanvasConfetti
-      refConfetti={getInstance}
+      ref={getInstance}
       style={{
         position: 'fixed',
         pointerEvents: 'none',
