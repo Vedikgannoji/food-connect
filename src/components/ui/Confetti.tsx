@@ -1,5 +1,5 @@
 
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import ReactCanvasConfetti from 'react-canvas-confetti';
 
 type ConfettiProps = {
@@ -7,21 +7,33 @@ type ConfettiProps = {
   onComplete?: () => void;
 }
 
-const Confetti = ({ active, onComplete }: ConfettiProps) => {
-  const refAnimationInstance = useRef<any>(null);
+// Define confetti canvas style
+const canvasStyles = {
+  position: 'fixed',
+  pointerEvents: 'none',
+  width: '100%',
+  height: '100%',
+  top: 0,
+  left: 0,
+  zIndex: 999,
+} as const;
 
+const Confetti = ({ active, onComplete }: ConfettiProps) => {
+  const [confettiInstance, setConfettiInstance] = useState<any>(null);
+  
   const getInstance = useCallback((instance: any) => {
-    refAnimationInstance.current = instance;
+    setConfettiInstance(instance);
   }, []);
 
   const makeShot = useCallback((particleRatio: number, opts: any) => {
-    refAnimationInstance.current && 
-      refAnimationInstance.current({
+    if (confettiInstance) {
+      confettiInstance({
         ...opts,
         origin: { y: 0.7 },
         particleCount: Math.floor(200 * particleRatio),
       });
-  }, []);
+    }
+  }, [confettiInstance]);
 
   const fire = useCallback(() => {
     makeShot(0.25, {
@@ -58,7 +70,7 @@ const Confetti = ({ active, onComplete }: ConfettiProps) => {
   }, [makeShot]);
 
   useEffect(() => {
-    if (active) {
+    if (active && confettiInstance) {
       fire();
       
       const timer = setTimeout(() => {
@@ -67,20 +79,12 @@ const Confetti = ({ active, onComplete }: ConfettiProps) => {
       
       return () => clearTimeout(timer);
     }
-  }, [active, fire, onComplete]);
+  }, [active, confettiInstance, fire, onComplete]);
 
   return (
     <ReactCanvasConfetti
-      ref={getInstance}
-      style={{
-        position: 'fixed',
-        pointerEvents: 'none',
-        width: '100%',
-        height: '100%',
-        top: 0,
-        left: 0,
-        zIndex: 999,
-      }}
+      refConfetti={getInstance}
+      style={canvasStyles}
     />
   );
 };
