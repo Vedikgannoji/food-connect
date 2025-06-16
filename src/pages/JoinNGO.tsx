@@ -1,5 +1,6 @@
 
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import { Button } from '@/components/ui/button';
@@ -9,12 +10,15 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
+import { useAuth } from '@/contexts/AuthContext';
+import { supabase } from '@/integrations/supabase/client';
 
 export default function JoinNGO() {
   const [formData, setFormData] = useState({
     organizationName: '',
     contactName: '',
     email: '',
+    password: '',
     phone: '',
     registrationNumber: '',
     capacity: '',
@@ -22,31 +26,80 @@ export default function JoinNGO() {
     description: '',
     serviceArea: ''
   });
+  const [loading, setLoading] = useState(false);
   const { toast } = useToast();
+  const { signUp } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     document.title = 'Join as NGO - Food Connect';
     window.scrollTo(0, 0);
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "NGO Registration Submitted!",
-      description: "We'll verify your organization and contact you within 48 hours.",
-    });
-    // Reset form
-    setFormData({
-      organizationName: '',
-      contactName: '',
-      email: '',
-      phone: '',
-      registrationNumber: '',
-      capacity: '',
-      address: '',
-      description: '',
-      serviceArea: ''
-    });
+    setLoading(true);
+
+    try {
+      // Create auth user
+      const { error: authError } = await signUp(
+        formData.email,
+        formData.password,
+        formData.contactName,
+        'ngo'
+      );
+
+      if (authError) {
+        toast({
+          title: "Registration Failed",
+          description: authError.message,
+          variant: "destructive",
+        });
+        return;
+      }
+
+      // Get the current user
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      if (user) {
+        // Create NGO profile
+        const { error: profileError } = await supabase
+          .from('ngo_profiles')
+          .insert({
+            id: user.id,
+            contact_name: formData.contactName,
+            organization_name: formData.organizationName,
+            phone: formData.phone,
+            registration_number: formData.registrationNumber,
+            capacity: formData.capacity,
+            service_area: formData.serviceArea,
+            address: formData.address,
+            description: formData.description
+          });
+
+        if (profileError) {
+          console.error('Profile creation error:', profileError);
+        }
+      }
+
+      toast({
+        title: "NGO Registration Successful!",
+        description: "Welcome to Food Connect! You can now start receiving food donations.",
+      });
+
+      // Redirect to NGO dashboard
+      setTimeout(() => navigate('/ngo-dashboard'), 1500);
+
+    } catch (error) {
+      console.error('Registration error:', error);
+      toast({
+        title: "Registration Failed",
+        description: "An unexpected error occurred. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleInputChange = (field: string, value: string) => {
@@ -106,6 +159,18 @@ export default function JoinNGO() {
                           required
                         />
                       </div>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="password">Password *</Label>
+                      <Input
+                        id="password"
+                        type="password"
+                        value={formData.password}
+                        onChange={(e) => handleInputChange('password', e.target.value)}
+                        required
+                        minLength={6}
+                      />
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -178,8 +243,8 @@ export default function JoinNGO() {
                       />
                     </div>
 
-                    <Button type="submit" className="w-full">
-                      Submit NGO Registration
+                    <Button type="submit" className="w-full" disabled={loading}>
+                      {loading ? 'Creating Account...' : 'Create NGO Account'}
                     </Button>
                   </form>
                 </CardContent>

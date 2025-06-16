@@ -9,7 +9,159 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      donor_profiles: {
+        Row: {
+          address: string | null
+          created_at: string
+          description: string | null
+          donor_type: string | null
+          id: string
+          organization: string | null
+          phone: string | null
+        }
+        Insert: {
+          address?: string | null
+          created_at?: string
+          description?: string | null
+          donor_type?: string | null
+          id: string
+          organization?: string | null
+          phone?: string | null
+        }
+        Update: {
+          address?: string | null
+          created_at?: string
+          description?: string | null
+          donor_type?: string | null
+          id?: string
+          organization?: string | null
+          phone?: string | null
+        }
+        Relationships: []
+      }
+      food_donations: {
+        Row: {
+          additional_notes: string | null
+          claimed_at: string | null
+          claimed_by: string | null
+          created_at: string
+          donor_id: string
+          expiry_time: string
+          food_title: string
+          food_type: string
+          id: string
+          image_url: string | null
+          pickup_address: string
+          pickup_time: string
+          quantity: number
+          status: string
+          suitable_for: string
+          unit: string
+        }
+        Insert: {
+          additional_notes?: string | null
+          claimed_at?: string | null
+          claimed_by?: string | null
+          created_at?: string
+          donor_id: string
+          expiry_time: string
+          food_title: string
+          food_type: string
+          id?: string
+          image_url?: string | null
+          pickup_address: string
+          pickup_time: string
+          quantity: number
+          status?: string
+          suitable_for: string
+          unit: string
+        }
+        Update: {
+          additional_notes?: string | null
+          claimed_at?: string | null
+          claimed_by?: string | null
+          created_at?: string
+          donor_id?: string
+          expiry_time?: string
+          food_title?: string
+          food_type?: string
+          id?: string
+          image_url?: string | null
+          pickup_address?: string
+          pickup_time?: string
+          quantity?: number
+          status?: string
+          suitable_for?: string
+          unit?: string
+        }
+        Relationships: []
+      }
+      ngo_profiles: {
+        Row: {
+          address: string | null
+          capacity: string | null
+          contact_name: string
+          created_at: string
+          description: string | null
+          id: string
+          organization_name: string
+          phone: string | null
+          registration_number: string | null
+          service_area: string | null
+        }
+        Insert: {
+          address?: string | null
+          capacity?: string | null
+          contact_name: string
+          created_at?: string
+          description?: string | null
+          id: string
+          organization_name: string
+          phone?: string | null
+          registration_number?: string | null
+          service_area?: string | null
+        }
+        Update: {
+          address?: string | null
+          capacity?: string | null
+          contact_name?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          organization_name?: string
+          phone?: string | null
+          registration_number?: string | null
+          service_area?: string | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          updated_at: string
+          user_type: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          full_name: string
+          id: string
+          updated_at?: string
+          user_type: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          updated_at?: string
+          user_type?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

@@ -1,23 +1,30 @@
 
 import { useState, useEffect } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { Sun, Moon, Menu, X, Utensils } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
-
-const NavItems = [
-  { title: 'Home', href: '/' },
-  { title: 'Features', href: '/features' },
-  { title: 'About', href: '/about' },
-  { title: 'Login', href: '/login' },
-];
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user, userType, signOut } = useAuth();
   const isMobile = useIsMobile();
+
+  const NavItems = user ? [
+    { title: 'Home', href: '/' },
+    { title: 'Features', href: '/features' },
+    { title: 'About', href: '/about' },
+  ] : [
+    { title: 'Home', href: '/' },
+    { title: 'Features', href: '/features' },
+    { title: 'About', href: '/about' },
+    { title: 'Login', href: '/login' },
+  ];
 
   useEffect(() => {
     const checkScrollPosition = () => {
@@ -52,6 +59,29 @@ export default function Navbar() {
     } else {
       document.documentElement.classList.remove('dark');
     }
+  };
+
+  const handleDashboardClick = () => {
+    if (userType === 'donor') {
+      navigate('/donor-dashboard');
+    } else if (userType === 'ngo') {
+      navigate('/ngo-dashboard');
+    }
+  };
+
+  const handleActionButtonClick = () => {
+    if (user && userType === 'donor') {
+      navigate('/donor-dashboard');
+    } else if (user && userType === 'ngo') {
+      navigate('/ngo-dashboard');
+    } else {
+      navigate('/join-donor');
+    }
+  };
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate('/');
   };
 
   return (
@@ -93,6 +123,39 @@ export default function Navbar() {
                 {item.title}
               </NavLink>
             ))}
+            
+            {user && (
+              <>
+                <Button
+                  onClick={handleDashboardClick}
+                  className="px-4 py-2 rounded-full bg-paws-green text-white hover:bg-paws-green/90 font-medium"
+                >
+                  Dashboard
+                </Button>
+                <Button
+                  onClick={handleActionButtonClick}
+                  variant="outline"
+                  className={`px-4 py-2 rounded-full font-medium ${
+                    isDarkMode 
+                      ? 'border-white/20 text-white hover:bg-white/10' 
+                      : 'border-black/20 text-black hover:bg-black/5'
+                  }`}
+                >
+                  {userType === 'donor' ? 'Donate Now' : 'Find Food Nearby'}
+                </Button>
+                <Button
+                  onClick={handleSignOut}
+                  variant="ghost"
+                  className={`px-4 py-2 rounded-full font-medium ${
+                    isDarkMode 
+                      ? 'text-white hover:bg-white/10' 
+                      : 'text-black hover:bg-black/5'
+                  }`}
+                >
+                  Sign Out
+                </Button>
+              </>
+            )}
           </nav>
 
           {/* Right side items */}
@@ -156,6 +219,31 @@ export default function Navbar() {
                 {item.title}
               </NavLink>
             ))}
+            
+            {user && (
+              <>
+                <Button
+                  onClick={handleDashboardClick}
+                  className="justify-start bg-paws-green text-white hover:bg-paws-green/90"
+                >
+                  Dashboard
+                </Button>
+                <Button
+                  onClick={handleActionButtonClick}
+                  variant="outline"
+                  className="justify-start"
+                >
+                  {userType === 'donor' ? 'Donate Now' : 'Find Food Nearby'}
+                </Button>
+                <Button
+                  onClick={handleSignOut}
+                  variant="ghost"
+                  className="justify-start"
+                >
+                  Sign Out
+                </Button>
+              </>
+            )}
           </nav>
         </div>
       )}

@@ -52,8 +52,9 @@ export default function Features() {
       <Navbar />
       <main className="flex-grow pt-24">
         {/* Hero Section */}
-        <section className="py-20 bg-gradient-to-br from-paws-green/10 to-paws-brown/10">
-          <div className="container px-6">
+        <section className="relative py-20 bg-gradient-to-br from-paws-green/10 to-paws-brown/10">
+          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1488459716781-31db52582fe9?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-20"></div>
+          <div className="container px-6 relative z-10">
             <div className="text-center max-w-3xl mx-auto">
               <h1 className="text-4xl md:text-5xl font-bold mb-6">
                 Powerful Features for <span className="text-paws-green">Food Rescue</span>

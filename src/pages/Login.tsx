@@ -1,19 +1,20 @@
 
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
-import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function Login() {
-  const [donorData, setDonorData] = useState({ email: '', password: '' });
-  const [ngoData, setNgoData] = useState({ email: '', password: '' });
+  const [formData, setFormData] = useState({ email: '', password: '' });
+  const [loading, setLoading] = useState(false);
   const { toast } = useToast();
+  const { signIn, user, userType } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,22 +22,49 @@ export default function Login() {
     window.scrollTo(0, 0);
   }, []);
 
-  const handleDonorLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast({
-      title: "Login Successful!",
-      description: "Welcome back! Redirecting to your dashboard...",
-    });
-    setTimeout(() => navigate('/donor-dashboard'), 1500);
-  };
+  useEffect(() => {
+    // Redirect if already logged in
+    if (user && userType) {
+      if (userType === 'donor') {
+        navigate('/donor-dashboard');
+      } else if (userType === 'ngo') {
+        navigate('/ngo-dashboard');
+      }
+    }
+  }, [user, userType, navigate]);
 
-  const handleNGOLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Login Successful!",
-      description: "Welcome back! Redirecting to your dashboard...",
-    });
-    setTimeout(() => navigate('/ngo-dashboard'), 1500);
+    setLoading(true);
+
+    try {
+      const { error } = await signIn(formData.email, formData.password);
+
+      if (error) {
+        toast({
+          title: "Login Failed",
+          description: error.message,
+          variant: "destructive",
+        });
+        return;
+      }
+
+      toast({
+        title: "Login Successful!",
+        description: "Welcome back! Redirecting to your dashboard...",
+      });
+
+      // Navigation will be handled by useEffect when user state updates
+    } catch (error) {
+      console.error('Login error:', error);
+      toast({
+        title: "Login Failed",
+        description: "An unexpected error occurred. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -57,72 +85,35 @@ export default function Login() {
                 <CardHeader>
                   <CardTitle>Login to Food Connect</CardTitle>
                   <CardDescription>
-                    Choose your account type to sign in
+                    Enter your credentials to access your account
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <Tabs defaultValue="donor" className="w-full">
-                    <TabsList className="grid w-full grid-cols-2">
-                      <TabsTrigger value="donor">Food Donor</TabsTrigger>
-                      <TabsTrigger value="ngo">NGO Partner</TabsTrigger>
-                    </TabsList>
-                    
-                    <TabsContent value="donor">
-                      <form onSubmit={handleDonorLogin} className="space-y-4">
-                        <div>
-                          <Label htmlFor="donor-email">Email</Label>
-                          <Input
-                            id="donor-email"
-                            type="email"
-                            value={donorData.email}
-                            onChange={(e) => setDonorData(prev => ({ ...prev, email: e.target.value }))}
-                            required
-                          />
-                        </div>
-                        <div>
-                          <Label htmlFor="donor-password">Password</Label>
-                          <Input
-                            id="donor-password"
-                            type="password"
-                            value={donorData.password}
-                            onChange={(e) => setDonorData(prev => ({ ...prev, password: e.target.value }))}
-                            required
-                          />
-                        </div>
-                        <Button type="submit" className="w-full">
-                          Sign In as Donor
-                        </Button>
-                      </form>
-                    </TabsContent>
-                    
-                    <TabsContent value="ngo">
-                      <form onSubmit={handleNGOLogin} className="space-y-4">
-                        <div>
-                          <Label htmlFor="ngo-email">Email</Label>
-                          <Input
-                            id="ngo-email"
-                            type="email"
-                            value={ngoData.email}
-                            onChange={(e) => setNgoData(prev => ({ ...prev, email: e.target.value }))}
-                            required
-                          />
-                        </div>
-                        <div>
-                          <Label htmlFor="ngo-password">Password</Label>
-                          <Input
-                            id="ngo-password"
-                            type="password"
-                            value={ngoData.password}
-                            onChange={(e) => setNgoData(prev => ({ ...prev, password: e.target.value }))}
-                            required
-                          />
-                        </div>
-                        <Button type="submit" className="w-full">
-                          Sign In as NGO
-                        </Button>
-                      </form>
-                    </TabsContent>
-                  </Tabs>
+                  <form onSubmit={handleLogin} className="space-y-4">
+                    <div>
+                      <Label htmlFor="email">Email</Label>
+                      <Input
+                        id="email"
+                        type="email"
+                        value={formData.email}
+                        onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+                        required
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="password">Password</Label>
+                      <Input
+                        id="password"
+                        type="password"
+                        value={formData.password}
+                        onChange={(e) => setFormData(prev => ({ ...prev, password: e.target.value }))}
+                        required
+                      />
+                    </div>
+                    <Button type="submit" className="w-full" disabled={loading}>
+                      {loading ? 'Signing In...' : 'Sign In'}
+                    </Button>
+                  </form>
 
                   <div className="mt-6 text-center text-sm text-muted-foreground">
                     <p>Don't have an account?</p>
