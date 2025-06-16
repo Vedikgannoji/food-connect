@@ -1,16 +1,16 @@
 
 import { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { Sun, Moon, Menu, X, PawPrint } from 'lucide-react';
+import { Sun, Moon, Menu, X, Utensils } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 const NavItems = [
   { title: 'Home', href: '/' },
-  { title: 'Safety', href: '/safety' },
-  { title: 'Report', href: '/report' },
-  { title: 'Volunteer', href: '/volunteer' },
-  { title: 'Stories', href: '/stories' },
+  { title: 'Features', href: '/features' },
+  { title: 'Join as Donor', href: '/join-donor' },
+  { title: 'Join as NGO', href: '/join-ngo' },
+  { title: 'About', href: '/about' },
   { title: 'Contact', href: '/contact' },
 ];
 
@@ -70,9 +70,9 @@ export default function Navbar() {
             to="/" 
             className="flex items-center space-x-2 font-bold text-xl"
           >
-            <PawPrint className={`h-6 w-6 ${isDarkMode ? 'text-paws-green' : 'text-paws-brown'}`} />
+            <Utensils className={`h-6 w-6 ${isDarkMode ? 'text-paws-green' : 'text-paws-brown'}`} />
             <span className={`hidden sm:inline ${isDarkMode ? 'text-white' : 'text-black'}`}>
-              Paws Project
+              Food Connect
             </span>
           </NavLink>
           

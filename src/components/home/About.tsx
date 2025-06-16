@@ -40,29 +40,30 @@ export default function About() {
             <span className="inline-block py-1 px-3 rounded-full bg-muted text-muted-foreground text-sm font-medium mb-6">
               Our Mission
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">We're dedicated to animal welfare and safety</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">We're fighting food waste and hunger simultaneously</h2>
             <p className="text-muted-foreground mb-6">
-              The Paws Project was founded on a simple belief: every animal deserves care, protection, and respect. 
-              Our organization works to prevent cruelty, provide education, and promote the welfare of animals through 
-              community engagement and direct action.
+              Food Connect was founded on a simple belief: no one should go hungry while perfectly good food goes to waste. 
+              Our platform connects restaurants, grocery stores, and households with NGOs and food banks to redistribute 
+              surplus food before it expires.
             </p>
             <p className="text-muted-foreground mb-8">
-              We envision a world where animals are free from abuse, neglect, and suffering. Through our programs 
-              and with help from volunteers like you, we're making that vision a reality—one animal at a time.
+              We envision a world where food waste is minimized and hunger is eliminated through smart distribution. 
+              Through our real-time matching system and community of donors and NGOs, we're making food rescue 
+              accessible and efficient—one meal at a time.
             </p>
             <Button 
               className="rounded-full bg-primary hover:bg-primary/90"
-              onClick={() => navigate('/volunteer')}
+              onClick={() => navigate('/about')}
             >
-              Join Our Mission <ArrowRight size={16} className="ml-2" />
+              Learn More About Us <ArrowRight size={16} className="ml-2" />
             </Button>
           </div>
           
           <div className={`relative transition-all duration-1000 delay-300 ease-out ${isVisible ? 'opacity-100' : 'opacity-0 translate-x-[50px]'}`}>
             <div className="relative z-10 rounded-2xl overflow-hidden shadow-xl">
               <img 
-                src="https://images.unsplash.com/photo-1450778869180-41d0601e046e" 
-                alt="Dog being rescued" 
+                src="https://images.unsplash.com/photo-1593113598332-cd288d649433?q=80&w=2070&auto=format&fit=crop" 
+                alt="Volunteers distributing food" 
                 className="w-full h-[500px] object-cover"
               />
             </div>

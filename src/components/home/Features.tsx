@@ -8,31 +8,31 @@ import { ArrowRight } from 'lucide-react';
 const features = [
   {
     id: 1,
-    title: 'Animal Education',
-    description: 'Learn about proper animal care, behavior, and rights to become a more responsible pet owner and animal advocate.',
-    icon: '📚',
-    link: '/safety'
+    title: 'Post Food Donations',
+    description: 'Restaurants and households can quickly post surplus food with photos, quantities, and pickup details.',
+    icon: '🍽️',
+    link: '/join-donor'
   },
   {
     id: 2,
-    title: 'Report Cruelty',
-    description: 'See something concerning? Report animal cruelty incidents through our simple, confidential reporting system.',
-    icon: '🚨',
-    link: '/report'
+    title: 'Real-time Matching',
+    description: 'Our smart algorithm instantly matches food donations with nearby NGOs based on location and capacity.',
+    icon: '⚡',
+    link: '/features'
   },
   {
     id: 3,
-    title: 'Volunteer Program',
-    description: 'Join our network of dedicated volunteers and make a tangible difference in animals\' lives in your community.',
-    icon: '✋',
-    link: '/volunteer'
+    title: 'NGO Dashboard',
+    description: 'Food banks and NGOs can browse available donations, claim items, and coordinate pickup logistics.',
+    icon: '📊',
+    link: '/join-ngo'
   },
   {
     id: 4,
-    title: 'Rescue Stories',
-    description: 'Read inspiring stories of rescued animals and share your own experiences with the community.',
-    icon: '📖',
-    link: '/stories'
+    title: 'Impact Tracking',
+    description: 'Track your contributions with detailed analytics showing meals saved, waste reduced, and lives impacted.',
+    icon: '📈',
+    link: '/features'
   }
 ];
 
@@ -70,14 +70,14 @@ export default function Features() {
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className={`inline-block py-1 px-3 rounded-full bg-secondary/30 text-secondary-foreground text-sm font-medium mb-6 transition-all duration-700 ease-out ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-            What We Do
+            How It Works
           </span>
           <h2 className={`text-3xl md:text-4xl font-bold mb-6 transition-all duration-700 delay-100 ease-out ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-4'}`}>
-            Making a Difference for Animals
+            Connecting Food Donors with Those in Need
           </h2>
           <p className={`text-muted-foreground transition-all duration-700 delay-200 ease-out ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-4'}`}>
-            Through education, advocacy, and direct action, we work to improve the lives of 
-            animals in our community and beyond. Explore our key initiatives below.
+            Our platform makes food rescue simple and efficient. From posting donations to tracking impact, 
+            we streamline the entire process of getting good food to people who need it.
           </p>
         </div>
         

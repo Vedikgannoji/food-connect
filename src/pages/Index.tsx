@@ -8,7 +8,7 @@ import Features from '@/components/home/Features';
 
 export default function Index() {
   useEffect(() => {
-    document.title = 'Paws Project - Ensuring Animal Safety Everywhere';
+    document.title = 'Food Connect - Bridge Hunger. Save Food. Connect Lives.';
     window.scrollTo(0, 0);
   }, []);
 
