@@ -36,7 +36,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             .eq('id', session.user.id)
             .single();
           
-          setUserType(profile?.user_type || null);
+          // Type guard to ensure user_type is valid
+          const validUserType = profile?.user_type;
+          if (validUserType === 'donor' || validUserType === 'ngo') {
+            setUserType(validUserType);
+          } else {
+            setUserType(null);
+          }
         } else {
           setUserType(null);
         }
@@ -57,7 +63,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           .eq('id', session.user.id)
           .single()
           .then(({ data: profile }) => {
-            setUserType(profile?.user_type || null);
+            // Type guard to ensure user_type is valid
+            const validUserType = profile?.user_type;
+            if (validUserType === 'donor' || validUserType === 'ngo') {
+              setUserType(validUserType);
+            } else {
+              setUserType(null);
+            }
             setLoading(false);
           });
       } else {
