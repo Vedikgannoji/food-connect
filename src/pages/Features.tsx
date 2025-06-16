@@ -1,0 +1,104 @@
+
+import { useEffect } from 'react';
+import Navbar from '@/components/layout/Navbar';
+import Footer from '@/components/layout/Footer';
+import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
+import { MapPin, Clock, Users, BarChart3, Bell, Shield } from 'lucide-react';
+
+const features = [
+  {
+    icon: <MapPin className="h-8 w-8 text-paws-green" />,
+    title: "Real-time Food Mapping",
+    description: "See available food donations on an interactive map with pickup locations and distances."
+  },
+  {
+    icon: <Clock className="h-8 w-8 text-paws-green" />,
+    title: "Instant Matching",
+    description: "Our smart algorithm instantly connects food donors with nearby NGOs based on location and capacity."
+  },
+  {
+    icon: <Users className="h-8 w-8 text-paws-green" />,
+    title: "Community Network",
+    description: "Join a growing network of restaurants, households, and NGOs working together to reduce food waste."
+  },
+  {
+    icon: <BarChart3 className="h-8 w-8 text-paws-green" />,
+    title: "Impact Analytics",
+    description: "Track your contributions with detailed metrics on meals saved, waste reduced, and lives impacted."
+  },
+  {
+    icon: <Bell className="h-8 w-8 text-paws-green" />,
+    title: "Smart Notifications",
+    description: "Get notified about food donations near you and time-sensitive pickup opportunities."
+  },
+  {
+    icon: <Shield className="h-8 w-8 text-paws-green" />,
+    title: "Quality Assurance",
+    description: "Built-in safety checks and guidelines ensure all food donations meet quality standards."
+  }
+];
+
+export default function Features() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = 'Features - Food Connect';
+    window.scrollTo(0, 0);
+  }, []);
+
+  return (
+    <div className="min-h-screen flex flex-col">
+      <Navbar />
+      <main className="flex-grow pt-24">
+        {/* Hero Section */}
+        <section className="py-20 bg-gradient-to-br from-paws-green/10 to-paws-brown/10">
+          <div className="container px-6">
+            <div className="text-center max-w-3xl mx-auto">
+              <h1 className="text-4xl md:text-5xl font-bold mb-6">
+                Powerful Features for <span className="text-paws-green">Food Rescue</span>
+              </h1>
+              <p className="text-xl text-muted-foreground mb-8">
+                Discover how Food Connect makes it easy to donate surplus food and connect with those who need it most.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Features Grid */}
+        <section className="py-20">
+          <div className="container px-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {features.map((feature, index) => (
+                <div key={index} className="bg-card rounded-lg p-6 shadow-sm border hover:shadow-md transition-shadow">
+                  <div className="mb-4">{feature.icon}</div>
+                  <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
+                  <p className="text-muted-foreground">{feature.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="py-20 bg-muted">
+          <div className="container px-6 text-center">
+            <h2 className="text-3xl font-bold mb-6">Ready to Make a Difference?</h2>
+            <p className="text-xl text-muted-foreground mb-8">
+              Join thousands of donors and NGOs already making an impact through Food Connect.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button size="lg" onClick={() => navigate('/join-donor')}>
+                Become a Donor
+              </Button>
+              <Button size="lg" variant="outline" onClick={() => navigate('/join-ngo')}>
+                Join as NGO
+              </Button>
+            </div>
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </div>
+  );
+}
