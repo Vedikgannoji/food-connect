@@ -5,7 +5,7 @@ import Footer from '@/components/layout/Footer';
 
 export default function TermsOfService() {
   useEffect(() => {
-    document.title = 'Terms of Service - Paws Project';
+    document.title = 'Terms of Service - Food Connect';
     window.scrollTo(0, 0);
   }, []);
 
@@ -20,75 +20,86 @@ export default function TermsOfService() {
             <div className="prose prose-sm sm:prose lg:prose-lg dark:prose-invert max-w-none">
               <p className="lead">Last updated: {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
               
-              <h2>1. Introduction</h2>
               <p>
-                These terms and conditions outline the rules and regulations for the use of Paws Project's website.
-                By accessing this website, we assume you accept these terms and conditions in full. Do not continue 
-                to use Paws Project's website if you do not accept all of the terms and conditions stated on this page.
+                Welcome to Food Connect. These Terms of Service ("Terms") govern your use of our platform, which connects food donors with non-governmental organizations (NGOs) to facilitate the donation and redistribution of surplus food.
               </p>
               
-              <h2>2. License</h2>
               <p>
-                Unless otherwise stated, Paws Project and/or its licensors own the intellectual property rights for all 
-                material on this website. All intellectual property rights are reserved. You may view and/or print pages 
-                from the website for your own personal use subject to restrictions set in these terms and conditions.
+                By using this website, you agree to be bound by these Terms. If you do not agree, you may not access or use the platform.
               </p>
               
-              <h3>You must not:</h3>
+              <h2>1. Purpose</h2>
+              <p>
+                Food Connect is a non-commercial platform designed to reduce food waste by connecting individuals and businesses with surplus food to NGOs that can redistribute it to people and animals in need. This initiative is primarily for social good and educational demonstration.
+              </p>
+              
+              <h2>2. User Roles</h2>
+              <p>Food Connect supports two types of users:</p>
+              <p><strong>Donors:</strong> Individuals, households, or businesses that wish to donate surplus food.</p>
+              <p><strong>NGOs:</strong> Verified organizations that receive food donations and manage pickups.</p>
+              <p>Users must register with accurate details and agree to use the platform ethically and responsibly.</p>
+              
+              <h2>3. User Responsibilities</h2>
+              <p>By using this platform, users agree to:</p>
               <ul>
-                <li>Republish material from this website</li>
-                <li>Sell, rent or sub-license material from this website</li>
-                <li>Reproduce, duplicate or copy material from this website</li>
-                <li>Redistribute content from Paws Project (unless content is specifically made for redistribution)</li>
+                <li>Share only food that is safe and hygienic for human or animal consumption.</li>
+                <li>Provide accurate and timely information regarding donations.</li>
+                <li>Respond responsibly to donation claims and pickups.</li>
+                <li>Avoid misrepresentation, misuse, or spam.</li>
+              </ul>
+              <p>Food Connect reserves the right to suspend accounts for any misuse or unethical activity.</p>
+              
+              <h2>4. Food Safety</h2>
+              <p>
+                Food Connect does not verify the quality or condition of food being donated. It is the sole responsibility of the donor to ensure that:
+              </p>
+              <ul>
+                <li>The food is properly handled, stored, and fit for consumption.</li>
+                <li>The posted details (type, quantity, expiry, etc.) are accurate.</li>
+              </ul>
+              <p>NGOs are responsible for inspecting food before accepting it. Food Connect is not liable for any food safety-related incidents.</p>
+              
+              <h2>5. Claims and Cancellations</h2>
+              <ul>
+                <li>Donors may edit or delete unclaimed posts at any time.</li>
+                <li>NGOs should claim donations only if they are able to collect them within the specified time.</li>
+                <li>Repeated cancellations or unfulfilled pickups may result in review or restriction of access.</li>
               </ul>
               
-              <h2>3. User Content</h2>
+              <h2>6. Prohibited Use</h2>
+              <p>Users may not:</p>
+              <ul>
+                <li>Share expired, spoiled, or unsafe food</li>
+                <li>Upload misleading or fraudulent information</li>
+                <li>Engage in discriminatory or abusive behavior</li>
+                <li>Use the platform for any illegal or unauthorized purpose</li>
+              </ul>
+              <p>Violation of these terms may result in account termination and, where applicable, legal action.</p>
+              
+              <h2>7. Privacy and Data</h2>
               <p>
-                In these terms and conditions, "User Content" means material (including without limitation text, images, 
-                audio material, video material and audio-visual material) that you submit to this website, for whatever purpose.
-              </p>
-              <p>
-                You grant to Paws Project a worldwide, irrevocable, non-exclusive, royalty-free license to use, reproduce, 
-                adapt, publish, translate and distribute your User Content in any existing or future media. You also grant 
-                to Paws Project the right to sub-license these rights, and the right to bring an action for infringement of these rights.
+                We respect your privacy. Any personal information provided (such as name, contact details, and location) will be used solely for communication and platform functionality. We do not sell or share your data with third-party services.
               </p>
               
-              <h2>4. Limitation of Liability</h2>
+              <h2>8. Limitation of Liability</h2>
               <p>
-                In no event shall Paws Project, nor any of its officers, directors and employees, be held liable for 
-                anything arising out of or in any way connected with your use of this website whether such liability 
-                is under contract, tort or otherwise.
+                Food Connect is a prototype platform built for educational and social good purposes. While we aim to provide a reliable service, we do not guarantee the accuracy, availability, or reliability of the platform at all times.
+              </p>
+              <p>We are not responsible for:</p>
+              <ul>
+                <li>The safety or quality of donated food</li>
+                <li>Delays, cancellations, or disputes between users</li>
+                <li>Any direct or indirect damages resulting from use of the platform</li>
+              </ul>
+              
+              <h2>9. Modifications</h2>
+              <p>
+                We reserve the right to update or modify these Terms at any time. Changes will be posted on this page. Continued use of the platform constitutes your acceptance of the revised Terms.
               </p>
               
-              <h2>5. Indemnification</h2>
+              <h2>10. Contact Us</h2>
               <p>
-                You hereby indemnify to the fullest extent Paws Project from and against any and all liabilities, costs, 
-                demands, causes of action, damages and expenses arising in any way related to your breach of any of the 
-                provisions of these terms.
-              </p>
-              
-              <h2>6. Severability</h2>
-              <p>
-                If any provision of these terms is found to be invalid under any applicable law, such provisions shall be 
-                deleted without affecting the remaining provisions herein.
-              </p>
-              
-              <h2>7. Variation of Terms</h2>
-              <p>
-                Paws Project is permitted to revise these terms at any time as it sees fit, and by using this website you 
-                are expected to review these terms on a regular basis.
-              </p>
-              
-              <h2>8. Governing Law & Jurisdiction</h2>
-              <p>
-                These terms and conditions are governed by and construed in accordance with the laws applicable in India, 
-                and you irrevocably submit to the exclusive jurisdiction of the courts in that location.
-              </p>
-              
-              <h2>9. Contact Us</h2>
-              <p>
-                If you have any questions about these Terms of Service, please contact us through our contact form or by 
-                emailing terms@pawsproject.org.
+                If you have any questions about these Terms of Service, please contact us at foodconnet@gmail.com.
               </p>
             </div>
           </div>

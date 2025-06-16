@@ -8,10 +8,8 @@ import { useIsMobile } from '@/hooks/use-mobile';
 const NavItems = [
   { title: 'Home', href: '/' },
   { title: 'Features', href: '/features' },
-  { title: 'Join as Donor', href: '/join-donor' },
-  { title: 'Join as NGO', href: '/join-ngo' },
   { title: 'About', href: '/about' },
-  { title: 'Contact', href: '/contact' },
+  { title: 'Login', href: '/login' },
 ];
 
 export default function Navbar() {
@@ -70,7 +68,7 @@ export default function Navbar() {
             to="/" 
             className="flex items-center space-x-2 font-bold text-xl"
           >
-            <Utensils className={`h-6 w-6 ${isDarkMode ? 'text-paws-green' : 'text-paws-brown'}`} />
+            <Utensils className={`h-6 w-6 ${isDarkMode ? 'text-paws-green' : 'text-black'}`} />
             <span className={`hidden sm:inline ${isDarkMode ? 'text-white' : 'text-black'}`}>
               Food Connect
             </span>

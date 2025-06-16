@@ -2,10 +2,10 @@
 import { useEffect } from 'react';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import DonorForm from '@/components/donor/DonorForm';
+import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { PlusCircle, Clock, CheckCircle, Users } from 'lucide-react';
+import { Users, CheckCircle, Clock, Package } from 'lucide-react';
 
 const recentDonations = [
   {
@@ -60,20 +60,22 @@ export default function DonorDashboard() {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-grow pt-24">
-        <section className="py-12">
-          <div className="container px-6">
-            <div className="mb-8">
-              <h1 className="text-3xl font-bold mb-2">Donor Dashboard</h1>
-              <p className="text-muted-foreground">Welcome back! Manage your food donations and track their impact.</p>
+        {/* Hero Section with Background */}
+        <section className="relative py-20 bg-gradient-to-br from-paws-green/10 to-paws-brown/10">
+          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1593113598332-cd288d649433?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-20"></div>
+          <div className="container px-6 relative z-10">
+            <div className="text-center mb-12">
+              <h1 className="text-4xl font-bold mb-4">Welcome to Your Donor Dashboard</h1>
+              <p className="text-xl text-muted-foreground">Make a difference by sharing your surplus food with those in need.</p>
             </div>
 
             {/* Stats Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-              <Card>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+              <Card className="hover:shadow-lg transition-shadow duration-300">
                 <CardContent className="p-6">
                   <div className="flex items-center">
-                    <div className="p-2 bg-paws-green/10 rounded-lg">
-                      <Users className="h-6 w-6 text-paws-green" />
+                    <div className="p-3 bg-paws-green/10 rounded-lg">
+                      <Package className="h-6 w-6 text-paws-green" />
                     </div>
                     <div className="ml-4">
                       <p className="text-sm font-medium text-muted-foreground">Total Donations</p>
@@ -83,10 +85,10 @@ export default function DonorDashboard() {
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="hover:shadow-lg transition-shadow duration-300">
                 <CardContent className="p-6">
                   <div className="flex items-center">
-                    <div className="p-2 bg-blue-100 rounded-lg">
+                    <div className="p-3 bg-blue-100 rounded-lg">
                       <CheckCircle className="h-6 w-6 text-blue-600" />
                     </div>
                     <div className="ml-4">
@@ -97,10 +99,10 @@ export default function DonorDashboard() {
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="hover:shadow-lg transition-shadow duration-300">
                 <CardContent className="p-6">
                   <div className="flex items-center">
-                    <div className="p-2 bg-yellow-100 rounded-lg">
+                    <div className="p-3 bg-yellow-100 rounded-lg">
                       <Clock className="h-6 w-6 text-yellow-600" />
                     </div>
                     <div className="ml-4">
@@ -111,10 +113,10 @@ export default function DonorDashboard() {
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="hover:shadow-lg transition-shadow duration-300">
                 <CardContent className="p-6">
                   <div className="flex items-center">
-                    <div className="p-2 bg-green-100 rounded-lg">
+                    <div className="p-3 bg-green-100 rounded-lg">
                       <Users className="h-6 w-6 text-green-600" />
                     </div>
                     <div className="ml-4">
@@ -125,31 +127,28 @@ export default function DonorDashboard() {
                 </CardContent>
               </Card>
             </div>
+          </div>
+        </section>
 
-            {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 mb-8">
-              <Button className="flex items-center">
-                <PlusCircle className="mr-2 h-4 w-4" />
-                Post New Donation
-              </Button>
-              <Button variant="outline">View All Donations</Button>
-            </div>
+        {/* Main Form Section */}
+        <section className="py-20">
+          <div className="container px-6">
+            <DonorForm />
+          </div>
+        </section>
 
-            {/* Recent Donations */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Recent Donations</CardTitle>
-                <CardDescription>
-                  Track the status of your latest food donations
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {recentDonations.map((donation) => (
-                    <div key={donation.id} className="flex items-center justify-between p-4 border rounded-lg">
+        {/* Recent Donations Section */}
+        <section className="py-20 bg-muted">
+          <div className="container px-6">
+            <h2 className="text-3xl font-bold text-center mb-12">Your Recent Donations</h2>
+            <div className="max-w-4xl mx-auto space-y-4">
+              {recentDonations.map((donation) => (
+                <Card key={donation.id} className="hover:shadow-lg transition-shadow duration-300">
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between">
                       <div className="flex-1">
-                        <h3 className="font-medium">{donation.title}</h3>
-                        <p className="text-sm text-muted-foreground">
+                        <h3 className="font-semibold text-lg">{donation.title}</h3>
+                        <p className="text-muted-foreground">
                           {donation.quantity} • {donation.ngo}
                         </p>
                         <p className="text-sm text-muted-foreground">
@@ -158,15 +157,12 @@ export default function DonorDashboard() {
                       </div>
                       <div className="flex items-center gap-4">
                         {getStatusBadge(donation.status)}
-                        <Button variant="ghost" size="sm">
-                          View Details
-                        </Button>
                       </div>
                     </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </div>
         </section>
       </main>
