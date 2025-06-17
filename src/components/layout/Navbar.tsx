@@ -83,8 +83,8 @@ export default function Navbar() {
             to="/" 
             className="flex items-center space-x-2 font-bold text-xl"
           >
-            <Utensils className={`h-6 w-6 ${isDarkMode ? 'text-white' : 'text-paws-green'}`} />
-            <span className={`hidden sm:inline ${isDarkMode ? 'text-white' : 'text-paws-green'}`}>
+            <Utensils className="h-6 w-6 text-paws-green" />
+            <span className={`hidden sm:inline ${isDarkMode ? 'text-white' : 'text-black'}`}>
               Food Connect
             </span>
           </NavLink>
@@ -132,7 +132,7 @@ export default function Navbar() {
                   {userType === 'donor' ? 'Donate Now' : 'Find Food'}
                 </Button>
                 <Button
-                  onClick={handleSignOut}
+                  onClick={() => navigate('/profile')}
                   variant="outline"
                   className={`px-4 py-2 rounded-full font-medium hover:scale-105 transition-all duration-300 ${
                     isDarkMode 
@@ -228,7 +228,7 @@ export default function Navbar() {
                   {userType === 'donor' ? 'Donate Now' : 'Find Food'}
                 </Button>
                 <Button
-                  onClick={handleSignOut}
+                  onClick={() => navigate('/profile')}
                   variant="ghost"
                   className="justify-start hover:scale-105 transition-all duration-300"
                 >

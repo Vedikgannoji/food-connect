@@ -48,11 +48,11 @@ export default function About() {
         <section className="relative py-20 overflow-hidden">
           <div className="absolute inset-0 z-0">
             <img 
-              src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?q=80&w=2070&auto=format&fit=crop" 
-              alt="People helping with food distribution" 
+              src="https://images.unsplash.com/photo-1488459716781-31db52582fe9?q=80&w=2070&auto=format&fit=crop" 
+              alt="Community volunteering with food distribution" 
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-black/60"></div>
+            <div className="absolute inset-0 bg-black/50"></div>
           </div>
           <div className="container px-6 relative z-10">
             <div className="text-center max-w-3xl mx-auto">
@@ -74,10 +74,10 @@ export default function About() {
               <div>
                 <h2 className="text-3xl font-bold mb-6">Our Story</h2>
                 <p className="text-muted-foreground mb-6">
-                  Food Connect was created to solve a simple but serious problem — food going to waste while people and animals go hungry. We built a platform that bridges this gap by instantly connecting food donors with NGOs nearby. With just a few clicks, surplus food finds its way to someone who needs it.
+                  Food Connect was created to solve a simple but serious problem of food going to waste while people and animals go hungry. We built a platform that bridges this gap by instantly connecting food donors with NGOs nearby. With just a few clicks, surplus food finds its way to someone who needs it.
                 </p>
                 <p className="text-muted-foreground mb-6">
-                  What started as a small idea grew into a purpose-driven project focused on impact. We believe that with the right tech, even leftovers can change lives — and every donation counts.
+                  What started as a small idea grew into a purpose-driven project focused on impact. We believe that with the right tech, even leftovers can change lives and every donation counts.
                 </p>
                 <Button 
                   onClick={() => navigate('/join-donor')} 
@@ -133,7 +133,11 @@ export default function About() {
               {teamMembers.map((member, index) => (
                 <div key={index} className="text-center group hover:scale-105 transition-all duration-300 hover:-translate-y-2">
                   <div className="w-32 h-32 rounded-full mx-auto mb-4 bg-paws-green/10 flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300">
-                    <User className="w-16 h-16 text-paws-green" />
+                    <img 
+                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=150&auto=format&fit=crop&ixlib=rb-4.0.3" 
+                      alt={`${member.name} profile`}
+                      className="w-full h-full rounded-full object-cover"
+                    />
                   </div>
                   <h3 className="text-xl font-semibold mb-2">{member.name}</h3>
                   <p className="text-muted-foreground">{member.role}</p>
@@ -151,7 +155,7 @@ export default function About() {
               alt="Community working together" 
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-black/70"></div>
+            <div className="absolute inset-0 bg-black/60"></div>
           </div>
           <div className="container px-6 text-center relative z-10">
             <h2 className="text-3xl font-bold mb-6 text-white">Ready to Make a Difference?</h2>

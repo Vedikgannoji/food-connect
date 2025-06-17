@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '@/components/layout/Navbar';
@@ -39,7 +38,7 @@ export default function JoinDonor() {
     setLoading(true);
 
     try {
-      // Create auth user
+      // Create auth user with proper metadata
       const { error: authError } = await signUp(
         formData.email,
         formData.password,
@@ -56,34 +55,34 @@ export default function JoinDonor() {
         return;
       }
 
-      // Get the current user
+      // Get the current user after signup
       const { data: { user } } = await supabase.auth.getUser();
       
       if (user) {
-        // Create donor profile
+        // Update donor profile with additional information
         const { error: profileError } = await supabase
           .from('donor_profiles')
-          .insert({
-            id: user.id,
+          .update({
             phone: formData.phone,
             organization: formData.organization,
             donor_type: formData.donorType,
             address: formData.address,
             description: formData.description
-          });
+          })
+          .eq('id', user.id);
 
         if (profileError) {
-          console.error('Profile creation error:', profileError);
+          console.error('Profile update error:', profileError);
         }
       }
 
       toast({
-        title: "Registration Successful!",
-        description: "Welcome to Food Connect! You can now start donating food.",
+        title: "Account Created Successfully!",
+        description: "Please login using your credentials to continue.",
       });
 
-      // Redirect to donor dashboard
-      setTimeout(() => navigate('/donor-dashboard'), 1500);
+      // Navigate to landing page and then user can login
+      setTimeout(() => navigate('/'), 2000);
 
     } catch (error) {
       console.error('Registration error:', error);
@@ -216,7 +215,11 @@ export default function JoinDonor() {
                       />
                     </div>
 
-                    <Button type="submit" className="w-full" disabled={loading}>
+                    <Button 
+                      type="submit" 
+                      className="w-full hover:scale-105 transition-all duration-300 bg-paws-green hover:bg-paws-green/90" 
+                      disabled={loading}
+                    >
                       {loading ? 'Creating Account...' : 'Create Donor Account'}
                     </Button>
                   </form>

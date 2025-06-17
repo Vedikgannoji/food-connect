@@ -52,7 +52,7 @@ export default function Features() {
       <Navbar />
       <main className="flex-grow pt-24">
         {/* Hero Section */}
-        <section className="relative py-20 bg-gradient-to-br from-paws-green/10 to-paws-brown/10">
+        <section className="relative py-20 bg-gradient-to-br from-paws-green/10 to-paws-green/5">
           <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1488459716781-31db52582fe9?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-20"></div>
           <div className="container px-6 relative z-10">
             <div className="text-center max-w-3xl mx-auto">
@@ -71,9 +71,9 @@ export default function Features() {
           <div className="container px-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {features.map((feature, index) => (
-                <div key={index} className="bg-card rounded-lg p-6 shadow-sm border hover:shadow-md transition-shadow">
-                  <div className="mb-4">{feature.icon}</div>
-                  <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
+                <div key={index} className="bg-card rounded-lg p-6 shadow-sm border hover:shadow-lg hover:scale-105 hover:-translate-y-2 transition-all duration-300 group">
+                  <div className="mb-4 group-hover:scale-110 transition-transform duration-300">{feature.icon}</div>
+                  <h3 className="text-xl font-semibold mb-3 group-hover:text-paws-green transition-colors duration-300">{feature.title}</h3>
                   <p className="text-muted-foreground">{feature.description}</p>
                 </div>
               ))}
@@ -82,17 +82,34 @@ export default function Features() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-muted">
-          <div className="container px-6 text-center">
-            <h2 className="text-3xl font-bold mb-6">Ready to Make a Difference?</h2>
-            <p className="text-xl text-muted-foreground mb-8">
+        <section className="relative py-20 overflow-hidden">
+          <div className="absolute inset-0 z-0">
+            <img 
+              src="https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?q=80&w=2070&auto=format&fit=crop" 
+              alt="Community working together" 
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-black/60"></div>
+          </div>
+          <div className="container px-6 text-center relative z-10">
+            <h2 className="text-3xl font-bold mb-6 text-white">Ready to Make a Difference?</h2>
+            <p className="text-xl text-white/90 mb-8">
               Join thousands of donors and NGOs already making an impact through Food Connect.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" onClick={() => navigate('/join-donor')}>
+              <Button 
+                size="lg" 
+                onClick={() => navigate('/join-donor')}
+                className="hover:scale-105 transition-all duration-300 bg-paws-green hover:bg-paws-green/90"
+              >
                 Become a Donor
               </Button>
-              <Button size="lg" variant="outline" onClick={() => navigate('/join-ngo')}>
+              <Button 
+                size="lg" 
+                variant="outline" 
+                onClick={() => navigate('/join-ngo')}
+                className="border-white text-white hover:bg-white hover:text-black hover:scale-105 transition-all duration-300"
+              >
                 Join as NGO
               </Button>
             </div>

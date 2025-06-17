@@ -14,6 +14,7 @@ import Login from "./pages/Login";
 import DonorDashboard from "./pages/DonorDashboard";
 import NGODashboard from "./pages/NGODashboard";
 import About from "./pages/About";
+import Profile from "./pages/Profile";
 import TermsOfService from "./pages/TermsOfService";
 import NotFound from "./pages/NotFound";
 
@@ -47,6 +48,7 @@ const App = () => (
             <Route path="/donor-dashboard" element={<DonorDashboard />} />
             <Route path="/ngo-dashboard" element={<NGODashboard />} />
             <Route path="/about" element={<About />} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

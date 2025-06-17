@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '@/components/layout/Navbar';
@@ -41,7 +40,7 @@ export default function JoinNGO() {
     setLoading(true);
 
     try {
-      // Create auth user
+      // Create auth user with proper metadata
       const { error: authError } = await signUp(
         formData.email,
         formData.password,
@@ -58,15 +57,14 @@ export default function JoinNGO() {
         return;
       }
 
-      // Get the current user
+      // Get the current user after signup
       const { data: { user } } = await supabase.auth.getUser();
       
       if (user) {
-        // Create NGO profile
+        // Update NGO profile with additional information
         const { error: profileError } = await supabase
           .from('ngo_profiles')
-          .insert({
-            id: user.id,
+          .update({
             contact_name: formData.contactName,
             organization_name: formData.organizationName,
             phone: formData.phone,
@@ -75,20 +73,21 @@ export default function JoinNGO() {
             service_area: formData.serviceArea,
             address: formData.address,
             description: formData.description
-          });
+          })
+          .eq('id', user.id);
 
         if (profileError) {
-          console.error('Profile creation error:', profileError);
+          console.error('Profile update error:', profileError);
         }
       }
 
       toast({
-        title: "NGO Registration Successful!",
-        description: "Welcome to Food Connect! You can now start receiving food donations.",
+        title: "Account Created Successfully!",
+        description: "Please login using your credentials to continue.",
       });
 
-      // Redirect to NGO dashboard
-      setTimeout(() => navigate('/ngo-dashboard'), 1500);
+      // Navigate to landing page and then user can login
+      setTimeout(() => navigate('/'), 2000);
 
     } catch (error) {
       console.error('Registration error:', error);
@@ -243,7 +242,11 @@ export default function JoinNGO() {
                       />
                     </div>
 
-                    <Button type="submit" className="w-full" disabled={loading}>
+                    <Button 
+                      type="submit" 
+                      className="w-full hover:scale-105 transition-all duration-300 bg-paws-green hover:bg-paws-green/90" 
+                      disabled={loading}
+                    >
                       {loading ? 'Creating Account...' : 'Create NGO Account'}
                     </Button>
                   </form>

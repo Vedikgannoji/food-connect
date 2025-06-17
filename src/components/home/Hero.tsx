@@ -21,14 +21,14 @@ export default function Hero() {
 
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
-      {/* Background image with stronger overlay for better text visibility */}
+      {/* Background image with better overlay for text visibility */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="https://images.unsplash.com/photo-1593113598332-cd288d649433?q=80&w=2070&auto=format&fit=crop" 
-          alt="Food being prepared and shared" 
+          src="https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?q=80&w=2070&auto=format&fit=crop" 
+          alt="Community helping with food distribution" 
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/50"></div>
+        <div className="absolute inset-0 bg-black/60"></div>
       </div>
       
       {/* Content */}
