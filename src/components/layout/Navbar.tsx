@@ -1,245 +1,200 @@
 
 import { useState, useEffect } from 'react';
-import { NavLink, useLocation, useNavigate } from 'react-router-dom';
-import { Sun, Moon, Menu, X, Utensils, User } from 'lucide-react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { useIsMobile } from '@/hooks/use-mobile';
+import { Menu, X, Utensils, Moon, Sun, User } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 
 export default function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const location = useLocation();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDark, setIsDark] = useState(false);
+  const { user, userType } = useAuth();
   const navigate = useNavigate();
-  const { user, userType, signOut } = useAuth();
-  const isMobile = useIsMobile();
-
-  const NavItems = [
-    { title: 'Home', href: '/' },
-    { title: 'Features', href: '/features' },
-    { title: 'About', href: '/about' },
-  ];
+  const location = useLocation();
 
   useEffect(() => {
-    const checkScrollPosition = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-
-    window.addEventListener('scroll', checkScrollPosition);
-    return () => window.removeEventListener('scroll', checkScrollPosition);
-  }, []);
-
-  useEffect(() => {
-    const isDark = localStorage.getItem('darkMode') === 'true';
-    setIsDarkMode(isDark);
-    if (isDark) {
+    const theme = localStorage.getItem('theme');
+    if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      setIsDark(true);
       document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
     }
   }, []);
 
-  useEffect(() => {
-    setMobileMenuOpen(false);
-  }, [location.pathname]);
-
-  const toggleDarkMode = () => {
-    const newMode = !isDarkMode;
-    setIsDarkMode(newMode);
-    localStorage.setItem('darkMode', String(newMode));
-    
-    if (newMode) {
+  const toggleTheme = () => {
+    const newTheme = !isDark;
+    setIsDark(newTheme);
+    if (newTheme) {
       document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
     } else {
       document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
     }
   };
 
-  const handleActionButtonClick = () => {
+  const isActive = (path: string) => location.pathname === path;
+
+  const handleAuthAction = () => {
     if (user && userType === 'donor') {
       navigate('/donor-dashboard');
     } else if (user && userType === 'ngo') {
       navigate('/ngo-dashboard');
+    } else {
+      navigate('/login');
     }
   };
 
-  const handleSignOut = async () => {
-    await signOut();
-    navigate('/');
+  const getAuthButtonText = () => {
+    if (user && userType === 'donor') return 'Donate Now';
+    if (user && userType === 'ngo') return 'Find Food';
+    return 'Login';
   };
 
   return (
-    <div className="fixed top-0 left-0 right-0 flex justify-center z-50 pt-4 px-4">
-      <header className={`w-full max-w-6xl transition-all duration-300 rounded-full ${
-        isScrolled ? 'py-2' : 'py-3'
-      } ${
-        isDarkMode 
-          ? 'bg-black/70 text-white' 
-          : 'bg-white/80 text-black'
-      } backdrop-blur-md shadow-lg border ${isDarkMode ? 'border-white/10' : 'border-black/5'}`}>
-        <div className="container flex items-center justify-between">
-          <NavLink 
-            to="/" 
-            className="flex items-center space-x-2 font-bold text-xl"
-          >
-            <Utensils className="h-6 w-6 text-paws-green" />
-            <span className={`hidden sm:inline ${isDarkMode ? 'text-white' : 'text-black'}`}>
-              Food Connect
-            </span>
-          </NavLink>
-          
+    <nav className="fixed top-0 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50 border-b">
+      <div className="container mx-auto px-6">
+        <div className="flex items-center justify-between h-16">
+          <Link to="/" className="flex items-center space-x-2 text-xl font-bold hover:scale-105 transition-transform duration-300">
+            <Utensils className="h-6 w-6 text-blue-600" />
+            <span className="text-black dark:text-white">Food Connect</span>
+          </Link>
+
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-1">
-            {NavItems.map((item) => (
-              <NavLink
-                key={item.href}
-                to={item.href}
-                className={({ isActive }) => `
-                  px-4 py-2 rounded-full transition-all duration-300 hover:scale-105
-                  ${isActive 
-                    ? 'text-white bg-paws-green font-medium shadow-md' 
-                    : isDarkMode
-                      ? 'text-white hover:bg-white/10 font-medium'
-                      : 'text-black hover:bg-black/5 font-medium'
-                  }
-                `}
-              >
-                {item.title}
-              </NavLink>
-            ))}
+          <div className="hidden md:flex items-center space-x-8">
+            <Link 
+              to="/" 
+              className={`hover:text-blue-600 transition-colors hover:scale-105 transform duration-200 ${
+                isActive('/') ? 'text-blue-600 font-semibold' : ''
+              }`}
+            >
+              Home
+            </Link>
+            <Link 
+              to="/features" 
+              className={`hover:text-blue-600 transition-colors hover:scale-105 transform duration-200 ${
+                isActive('/features') ? 'text-blue-600 font-semibold' : ''
+              }`}
+            >
+              Features
+            </Link>
+            <Link 
+              to="/about" 
+              className={`hover:text-blue-600 transition-colors hover:scale-105 transform duration-200 ${
+                isActive('/about') ? 'text-blue-600 font-semibold' : ''
+              }`}
+            >
+              About
+            </Link>
             
-            {!user && (
+            <div className="flex items-center space-x-4">
               <Button
-                onClick={() => navigate('/login')}
                 variant="ghost"
-                className={`px-4 py-2 rounded-full font-medium hover:scale-105 transition-all duration-300 ${
-                  isDarkMode 
-                    ? 'text-white hover:bg-white/10' 
-                    : 'text-black hover:bg-black/5'
-                }`}
+                size="icon"
+                onClick={toggleTheme}
+                className="hover:scale-110 transition-transform duration-300"
               >
-                Login
+                {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
               </Button>
-            )}
-            
-            {user && (
-              <>
+              
+              <Button 
+                onClick={handleAuthAction}
+                className="bg-blue-600 hover:bg-blue-700 text-white hover:scale-105 transition-all duration-300"
+              >
+                {getAuthButtonText()}
+              </Button>
+
+              {user && (
                 <Button
-                  onClick={handleActionButtonClick}
-                  className="px-4 py-2 rounded-full bg-paws-green text-white hover:bg-paws-green/90 font-medium hover:scale-105 transition-all duration-300"
-                >
-                  {userType === 'donor' ? 'Donate Now' : 'Find Food'}
-                </Button>
-                <Button
+                  variant="ghost"
+                  size="icon"
                   onClick={() => navigate('/profile')}
-                  variant="outline"
-                  className={`px-4 py-2 rounded-full font-medium hover:scale-105 transition-all duration-300 ${
-                    isDarkMode 
-                      ? 'border-white/20 text-white hover:bg-white/10' 
-                      : 'border-paws-green/20 text-paws-green hover:bg-paws-green/5'
-                  }`}
+                  className="hover:scale-110 transition-transform duration-300"
                 >
-                  <User className="w-4 h-4 mr-2" />
-                  Profile
+                  <User className="h-5 w-5" />
                 </Button>
-              </>
-            )}
-          </nav>
+              )}
+            </div>
+          </div>
 
-          {/* Right side items */}
-          <div className="flex items-center space-x-2">
+          {/* Mobile menu button */}
+          <div className="md:hidden flex items-center space-x-2">
             <Button
               variant="ghost"
               size="icon"
-              onClick={toggleDarkMode}
-              className={`rounded-full hover:scale-105 transition-all duration-300
-                ${isDarkMode 
-                  ? 'text-white hover:bg-white/10' 
-                  : 'text-black hover:bg-black/5'
-                }`}
-              aria-label="Toggle dark mode"
+              onClick={toggleTheme}
+              className="hover:scale-110 transition-transform duration-300"
             >
-              {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
+              {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </Button>
-
-            {/* Mobile menu button */}
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className={`rounded-full md:hidden hover:scale-105 transition-all duration-300
-                ${isDarkMode 
-                  ? 'text-white hover:bg-white/10' 
-                  : 'text-black hover:bg-black/5'
-                }`}
-              aria-label="Toggle menu"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="hover:scale-110 transition-transform duration-300"
             >
-              {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
+              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
           </div>
         </div>
-      </header>
 
-      {/* Mobile Navigation */}
-      {mobileMenuOpen && (
-        <div className={`
-          absolute top-full left-0 right-0 mt-2 mx-4 rounded-2xl overflow-hidden 
-          transition-all duration-300 animate-fade-in md:hidden
-          ${isDarkMode ? 'bg-black/80' : 'bg-white/90'} 
-          backdrop-blur-md shadow-lg border
-          ${isDarkMode ? 'border-white/10' : 'border-black/5'}
-        `}>
-          <nav className="flex flex-col p-4 space-y-2">
-            {NavItems.map((item) => (
-              <NavLink
-                key={item.href}
-                to={item.href}
-                className={({ isActive }) => `
-                  px-4 py-3 rounded-lg transition-all duration-200 hover:scale-105
-                  ${isActive 
-                    ? 'bg-paws-green text-white font-medium' 
-                    : isDarkMode
-                      ? 'text-white hover:bg-white/10'
-                      : 'text-black hover:bg-black/5'
-                  }
-                `}
+        {/* Mobile Navigation */}
+        {isMenuOpen && (
+          <div className="md:hidden pb-4 animate-in slide-in-from-top-2 duration-200">
+            <div className="flex flex-col space-y-2">
+              <Link 
+                to="/" 
+                className={`block px-3 py-2 hover:text-blue-600 transition-colors ${
+                  isActive('/') ? 'text-blue-600 font-semibold' : ''
+                }`}
+                onClick={() => setIsMenuOpen(false)}
               >
-                {item.title}
-              </NavLink>
-            ))}
-            
-            {!user && (
-              <Button
-                onClick={() => navigate('/login')}
-                variant="ghost"
-                className="justify-start hover:scale-105 transition-all duration-300"
+                Home
+              </Link>
+              <Link 
+                to="/features" 
+                className={`block px-3 py-2 hover:text-blue-600 transition-colors ${
+                  isActive('/features') ? 'text-blue-600 font-semibold' : ''
+                }`}
+                onClick={() => setIsMenuOpen(false)}
               >
-                Login
-              </Button>
-            )}
-            
-            {user && (
-              <>
-                <Button
-                  onClick={handleActionButtonClick}
-                  className="justify-start bg-paws-green text-white hover:bg-paws-green/90 hover:scale-105 transition-all duration-300"
+                Features
+              </Link>
+              <Link 
+                to="/about" 
+                className={`block px-3 py-2 hover:text-blue-600 transition-colors ${
+                  isActive('/about') ? 'text-blue-600 font-semibold' : ''
+                }`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                About
+              </Link>
+              <div className="pt-2 space-y-2">
+                <Button 
+                  onClick={() => {
+                    handleAuthAction();
+                    setIsMenuOpen(false);
+                  }}
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white"
                 >
-                  {userType === 'donor' ? 'Donate Now' : 'Find Food'}
+                  {getAuthButtonText()}
                 </Button>
-                <Button
-                  onClick={() => navigate('/profile')}
-                  variant="ghost"
-                  className="justify-start hover:scale-105 transition-all duration-300"
-                >
-                  <User className="w-4 h-4 mr-2" />
-                  Profile
-                </Button>
-              </>
-            )}
-          </nav>
-        </div>
-      )}
-    </div>
+                {user && (
+                  <Button
+                    variant="outline"
+                    onClick={() => {
+                      navigate('/profile');
+                      setIsMenuOpen(false);
+                    }}
+                    className="w-full"
+                  >
+                    Profile
+                  </Button>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </nav>
   );
 }

@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '@/components/layout/Navbar';
@@ -14,12 +15,12 @@ import { supabase } from '@/integrations/supabase/client';
 
 export default function JoinDonor() {
   const [formData, setFormData] = useState({
-    name: '',
+    fullName: '',
     email: '',
     password: '',
     phone: '',
-    organization: '',
     donorType: '',
+    organization: '',
     address: '',
     description: ''
   });
@@ -42,7 +43,7 @@ export default function JoinDonor() {
       const { error: authError } = await signUp(
         formData.email,
         formData.password,
-        formData.name,
+        formData.fullName,
         'donor'
       );
 
@@ -64,8 +65,8 @@ export default function JoinDonor() {
           .from('donor_profiles')
           .update({
             phone: formData.phone,
-            organization: formData.organization,
             donor_type: formData.donorType,
+            organization: formData.organization,
             address: formData.address,
             description: formData.description
           })
@@ -81,8 +82,8 @@ export default function JoinDonor() {
         description: "Please login using your credentials to continue.",
       });
 
-      // Navigate to landing page and then user can login
-      setTimeout(() => navigate('/'), 2000);
+      // Navigate to login page
+      setTimeout(() => navigate('/login'), 2000);
 
     } catch (error) {
       console.error('Registration error:', error);
@@ -110,27 +111,28 @@ export default function JoinDonor() {
               <div className="text-center mb-12">
                 <h1 className="text-4xl font-bold mb-4">Join as a Food Donor</h1>
                 <p className="text-xl text-muted-foreground">
-                  Help reduce food waste by sharing your surplus food with those in need.
+                  Start making a difference by donating surplus food to those in need.
                 </p>
               </div>
 
-              <Card>
+              <Card className="hover:shadow-lg transition-all duration-300">
                 <CardHeader>
                   <CardTitle>Donor Registration</CardTitle>
                   <CardDescription>
-                    Fill out the form below to start donating food through our platform.
+                    Register as a food donor to start contributing to our mission of ending food waste.
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <Label htmlFor="name">Full Name *</Label>
+                        <Label htmlFor="fullName">Full Name *</Label>
                         <Input
-                          id="name"
-                          value={formData.name}
-                          onChange={(e) => handleInputChange('name', e.target.value)}
+                          id="fullName"
+                          value={formData.fullName}
+                          onChange={(e) => handleInputChange('fullName', e.target.value)}
                           required
+                          className="hover:border-blue-400 focus:border-blue-600 transition-colors"
                         />
                       </div>
                       <div>
@@ -141,6 +143,7 @@ export default function JoinDonor() {
                           value={formData.email}
                           onChange={(e) => handleInputChange('email', e.target.value)}
                           required
+                          className="hover:border-blue-400 focus:border-blue-600 transition-colors"
                         />
                       </div>
                     </div>
@@ -154,6 +157,7 @@ export default function JoinDonor() {
                         onChange={(e) => handleInputChange('password', e.target.value)}
                         required
                         minLength={6}
+                        className="hover:border-blue-400 focus:border-blue-600 transition-colors"
                       />
                     </div>
 
@@ -165,19 +169,21 @@ export default function JoinDonor() {
                           value={formData.phone}
                           onChange={(e) => handleInputChange('phone', e.target.value)}
                           required
+                          className="hover:border-blue-400 focus:border-blue-600 transition-colors"
                         />
                       </div>
                       <div>
                         <Label htmlFor="donorType">Donor Type *</Label>
                         <Select value={formData.donorType} onValueChange={(value) => handleInputChange('donorType', value)}>
-                          <SelectTrigger>
+                          <SelectTrigger className="hover:border-blue-400 focus:border-blue-600 transition-colors">
                             <SelectValue placeholder="Select donor type" />
                           </SelectTrigger>
                           <SelectContent>
+                            <SelectItem value="individual">Individual</SelectItem>
                             <SelectItem value="restaurant">Restaurant</SelectItem>
-                            <SelectItem value="grocery">Grocery Store</SelectItem>
-                            <SelectItem value="household">Household</SelectItem>
+                            <SelectItem value="grocery-store">Grocery Store</SelectItem>
                             <SelectItem value="catering">Catering Service</SelectItem>
+                            <SelectItem value="event-organizer">Event Organizer</SelectItem>
                             <SelectItem value="other">Other</SelectItem>
                           </SelectContent>
                         </Select>
@@ -190,7 +196,8 @@ export default function JoinDonor() {
                         id="organization"
                         value={formData.organization}
                         onChange={(e) => handleInputChange('organization', e.target.value)}
-                        placeholder="Leave blank if individual"
+                        placeholder="Leave blank if individual donor"
+                        className="hover:border-blue-400 focus:border-blue-600 transition-colors"
                       />
                     </div>
 
@@ -200,24 +207,26 @@ export default function JoinDonor() {
                         id="address"
                         value={formData.address}
                         onChange={(e) => handleInputChange('address', e.target.value)}
-                        placeholder="Your pickup address"
+                        placeholder="Complete address for food pickup"
                         required
+                        className="hover:border-blue-400 focus:border-blue-600 transition-colors"
                       />
                     </div>
 
                     <div>
-                      <Label htmlFor="description">Tell us about your food donations</Label>
+                      <Label htmlFor="description">About You/Your Organization</Label>
                       <Textarea
                         id="description"
                         value={formData.description}
                         onChange={(e) => handleInputChange('description', e.target.value)}
-                        placeholder="What type of food do you typically have available? How often do you plan to donate?"
+                        placeholder="Tell us about yourself or your organization and your motivation to donate food"
+                        className="hover:border-blue-400 focus:border-blue-600 transition-colors"
                       />
                     </div>
 
                     <Button 
                       type="submit" 
-                      className="w-full hover:scale-105 transition-all duration-300 bg-paws-green hover:bg-paws-green/90" 
+                      className="w-full hover:scale-105 transition-all duration-300 bg-blue-600 hover:bg-blue-700" 
                       disabled={loading}
                     >
                       {loading ? 'Creating Account...' : 'Create Donor Account'}

@@ -3,39 +3,46 @@ import { useEffect } from 'react';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Clock, MapPin, Shield, Users, Zap, Heart, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { MapPin, Clock, Users, BarChart3, Bell, Shield } from 'lucide-react';
 
 const features = [
   {
-    icon: <MapPin className="h-8 w-8 text-paws-green" />,
-    title: "Real-time Food Mapping",
-    description: "See available food donations on an interactive map with pickup locations and distances."
-  },
-  {
-    icon: <Clock className="h-8 w-8 text-paws-green" />,
+    icon: Zap,
     title: "Instant Matching",
-    description: "Our smart algorithm instantly connects food donors with nearby NGOs based on location and capacity."
+    description: "Our smart algorithm instantly connects food donors with nearby NGOs based on location, capacity, and food type preferences.",
+    color: "text-blue-600"
   },
   {
-    icon: <Users className="h-8 w-8 text-paws-green" />,
-    title: "Community Network",
-    description: "Join a growing network of restaurants, households, and NGOs working together to reduce food waste."
+    icon: MapPin,
+    title: "Real-time Tracking",
+    description: "Track food donations from pickup to delivery with live updates, ensuring transparency and accountability throughout the process.",
+    color: "text-blue-600"
   },
   {
-    icon: <BarChart3 className="h-8 w-8 text-paws-green" />,
-    title: "Impact Analytics",
-    description: "Track your contributions with detailed metrics on meals saved, waste reduced, and lives impacted."
+    icon: Clock,
+    title: "Quick Response",
+    description: "Get connected within minutes of posting a donation. Our platform ensures rapid response times to prevent food spoilage.",
+    color: "text-blue-600"
   },
   {
-    icon: <Bell className="h-8 w-8 text-paws-green" />,
-    title: "Smart Notifications",
-    description: "Get notified about food donations near you and time-sensitive pickup opportunities."
+    icon: Shield,
+    title: "Verified Partners",
+    description: "All NGOs are thoroughly verified and certified, ensuring your donations reach legitimate organizations serving communities.",
+    color: "text-blue-600"
   },
   {
-    icon: <Shield className="h-8 w-8 text-paws-green" />,
-    title: "Quality Assurance",
-    description: "Built-in safety checks and guidelines ensure all food donations meet quality standards."
+    icon: Users,
+    title: "Community Impact",
+    description: "Join a growing community of changemakers. See the collective impact of your contributions through detailed analytics.",
+    color: "text-blue-600"
+  },
+  {
+    icon: Heart,
+    title: "Easy Process",
+    description: "Simple three-step process: Post your donation, get matched with NGOs, coordinate pickup. It's that easy to make a difference.",
+    color: "text-blue-600"
   }
 ];
 
@@ -52,17 +59,22 @@ export default function Features() {
       <Navbar />
       <main className="flex-grow pt-24">
         {/* Hero Section */}
-        <section className="relative py-20 bg-gradient-to-br from-paws-green/10 to-paws-green/5">
-          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1488459716781-31db52582fe9?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-20"></div>
-          <div className="container px-6 relative z-10">
-            <div className="text-center max-w-3xl mx-auto">
-              <h1 className="text-4xl md:text-5xl font-bold mb-6">
-                Powerful Features for <span className="text-paws-green">Food Rescue</span>
-              </h1>
-              <p className="text-xl text-muted-foreground mb-8">
-                Discover how Food Connect makes it easy to donate surplus food and connect with those who need it most.
-              </p>
-            </div>
+        <section className="relative py-20 overflow-hidden">
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{
+              backgroundImage: `url('https://images.unsplash.com/photo-1593113598332-cd288d649433?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')`
+            }}
+          >
+            <div className="absolute inset-0 bg-black/60"></div>
+          </div>
+          <div className="relative z-10 container px-6 text-center text-white">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6">
+              Powerful Features for <span className="text-blue-400">Food Rescue</span>
+            </h1>
+            <p className="text-xl text-gray-200 max-w-3xl mx-auto">
+              Discover how our innovative platform makes food donation simple, efficient, and impactful for everyone involved.
+            </p>
           </div>
         </section>
 
@@ -71,11 +83,19 @@ export default function Features() {
           <div className="container px-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {features.map((feature, index) => (
-                <div key={index} className="bg-card rounded-lg p-6 shadow-sm border hover:shadow-lg hover:scale-105 hover:-translate-y-2 transition-all duration-300 group">
-                  <div className="mb-4 group-hover:scale-110 transition-transform duration-300">{feature.icon}</div>
-                  <h3 className="text-xl font-semibold mb-3 group-hover:text-paws-green transition-colors duration-300">{feature.title}</h3>
-                  <p className="text-muted-foreground">{feature.description}</p>
-                </div>
+                <Card key={index} className="hover:shadow-lg transition-all duration-300 hover:scale-105 hover:-translate-y-2 group">
+                  <CardHeader>
+                    <div className={`w-12 h-12 rounded-lg bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                      <feature.icon className={`h-6 w-6 ${feature.color}`} />
+                    </div>
+                    <CardTitle className="group-hover:text-blue-600 transition-colors duration-300">{feature.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <CardDescription className="text-base leading-relaxed">
+                      {feature.description}
+                    </CardDescription>
+                  </CardContent>
+                </Card>
               ))}
             </div>
           </div>
@@ -83,34 +103,36 @@ export default function Features() {
 
         {/* CTA Section */}
         <section className="relative py-20 overflow-hidden">
-          <div className="absolute inset-0 z-0">
-            <img 
-              src="https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?q=80&w=2070&auto=format&fit=crop" 
-              alt="Community working together" 
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-black/60"></div>
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{
+              backgroundImage: `url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')`
+            }}
+          >
+            <div className="absolute inset-0 bg-black/70"></div>
           </div>
-          <div className="container px-6 text-center relative z-10">
-            <h2 className="text-3xl font-bold mb-6 text-white">Ready to Make a Difference?</h2>
-            <p className="text-xl text-white/90 mb-8">
+          <div className="relative z-10 container px-6 text-center text-white">
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">
+              Ready to Make a Difference?
+            </h2>
+            <p className="text-xl mb-8 text-gray-200 max-w-2xl mx-auto">
               Join thousands of donors and NGOs already making an impact through Food Connect.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
-                size="lg" 
+                size="lg"
                 onClick={() => navigate('/join-donor')}
-                className="hover:scale-105 transition-all duration-300 bg-paws-green hover:bg-paws-green/90"
+                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 text-lg hover:scale-105 transition-all duration-300 shadow-lg"
               >
-                Become a Donor
+                Start Donating <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <Button 
-                size="lg" 
-                variant="outline" 
+                size="lg"
+                variant="outline"
                 onClick={() => navigate('/join-ngo')}
-                className="border-white text-white hover:bg-white hover:text-black hover:scale-105 transition-all duration-300"
+                className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 text-lg hover:scale-105 transition-all duration-300 shadow-lg"
               >
-                Join as NGO
+                Join as NGO <Heart className="ml-2 h-5 w-5" />
               </Button>
             </div>
           </div>

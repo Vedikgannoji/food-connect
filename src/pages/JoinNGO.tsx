@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '@/components/layout/Navbar';
@@ -68,6 +69,7 @@ export default function JoinNGO() {
             contact_name: formData.contactName,
             organization_name: formData.organizationName,
             phone: formData.phone,
+            email: formData.email,
             registration_number: formData.registrationNumber,
             capacity: formData.capacity,
             service_area: formData.serviceArea,
@@ -86,8 +88,8 @@ export default function JoinNGO() {
         description: "Please login using your credentials to continue.",
       });
 
-      // Navigate to landing page and then user can login
-      setTimeout(() => navigate('/'), 2000);
+      // Navigate to login page
+      setTimeout(() => navigate('/login'), 2000);
 
     } catch (error) {
       console.error('Registration error:', error);
@@ -119,7 +121,7 @@ export default function JoinNGO() {
                 </p>
               </div>
 
-              <Card>
+              <Card className="hover:shadow-lg transition-all duration-300">
                 <CardHeader>
                   <CardTitle>NGO Registration</CardTitle>
                   <CardDescription>
@@ -135,6 +137,7 @@ export default function JoinNGO() {
                         value={formData.organizationName}
                         onChange={(e) => handleInputChange('organizationName', e.target.value)}
                         required
+                        className="hover:border-blue-400 focus:border-blue-600 transition-colors"
                       />
                     </div>
 
@@ -146,6 +149,7 @@ export default function JoinNGO() {
                           value={formData.contactName}
                           onChange={(e) => handleInputChange('contactName', e.target.value)}
                           required
+                          className="hover:border-blue-400 focus:border-blue-600 transition-colors"
                         />
                       </div>
                       <div>
@@ -156,6 +160,7 @@ export default function JoinNGO() {
                           value={formData.email}
                           onChange={(e) => handleInputChange('email', e.target.value)}
                           required
+                          className="hover:border-blue-400 focus:border-blue-600 transition-colors"
                         />
                       </div>
                     </div>
@@ -169,6 +174,7 @@ export default function JoinNGO() {
                         onChange={(e) => handleInputChange('password', e.target.value)}
                         required
                         minLength={6}
+                        className="hover:border-blue-400 focus:border-blue-600 transition-colors"
                       />
                     </div>
 
@@ -180,6 +186,7 @@ export default function JoinNGO() {
                           value={formData.phone}
                           onChange={(e) => handleInputChange('phone', e.target.value)}
                           required
+                          className="hover:border-blue-400 focus:border-blue-600 transition-colors"
                         />
                       </div>
                       <div>
@@ -189,6 +196,7 @@ export default function JoinNGO() {
                           value={formData.registrationNumber}
                           onChange={(e) => handleInputChange('registrationNumber', e.target.value)}
                           placeholder="NGO/Trust registration number"
+                          className="hover:border-blue-400 focus:border-blue-600 transition-colors"
                         />
                       </div>
                     </div>
@@ -197,7 +205,7 @@ export default function JoinNGO() {
                       <div>
                         <Label htmlFor="capacity">Daily Serving Capacity *</Label>
                         <Select value={formData.capacity} onValueChange={(value) => handleInputChange('capacity', value)}>
-                          <SelectTrigger>
+                          <SelectTrigger className="hover:border-blue-400 focus:border-blue-600 transition-colors">
                             <SelectValue placeholder="Select capacity" />
                           </SelectTrigger>
                           <SelectContent>
@@ -216,6 +224,7 @@ export default function JoinNGO() {
                           onChange={(e) => handleInputChange('serviceArea', e.target.value)}
                           placeholder="e.g., Central Mumbai, South Delhi"
                           required
+                          className="hover:border-blue-400 focus:border-blue-600 transition-colors"
                         />
                       </div>
                     </div>
@@ -228,6 +237,7 @@ export default function JoinNGO() {
                         onChange={(e) => handleInputChange('address', e.target.value)}
                         placeholder="Complete address with landmark"
                         required
+                        className="hover:border-blue-400 focus:border-blue-600 transition-colors"
                       />
                     </div>
 
@@ -239,12 +249,13 @@ export default function JoinNGO() {
                         onChange={(e) => handleInputChange('description', e.target.value)}
                         placeholder="Tell us about your mission, the communities you serve, and your experience with food distribution"
                         required
+                        className="hover:border-blue-400 focus:border-blue-600 transition-colors"
                       />
                     </div>
 
                     <Button 
                       type="submit" 
-                      className="w-full hover:scale-105 transition-all duration-300 bg-paws-green hover:bg-paws-green/90" 
+                      className="w-full hover:scale-105 transition-all duration-300 bg-blue-600 hover:bg-blue-700" 
                       disabled={loading}
                     >
                       {loading ? 'Creating Account...' : 'Create NGO Account'}
