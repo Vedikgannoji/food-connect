@@ -1,110 +1,102 @@
 
+import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Heart } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { ArrowRight, Utensils } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 
 export default function Hero() {
+  const [isLoaded, setIsLoaded] = useState(false);
   const navigate = useNavigate();
   const { user, userType } = useAuth();
 
-  const handleDonateClick = () => {
-    if (user && userType === 'donor') {
-      navigate('/donor-dashboard');
-    } else {
-      navigate('/join-donor');
-    }
-  };
-
-  const handleNGOClick = () => {
-    if (user && userType === 'ngo') {
-      navigate('/ngo-dashboard');
-    } else {
-      navigate('/join-ngo');
-    }
-  };
+  useEffect(() => {
+    // Simulate image loading and then trigger animations
+    const timer = setTimeout(() => {
+      setIsLoaded(true);
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: `url('https://images.unsplash.com/photo-1488459716781-31db52582fe9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')`
-        }}
-      >
-        <div className="absolute inset-0 bg-black/50"></div>
+    <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      {/* Background image with better overlay for text visibility */}
+      <div className="absolute inset-0 z-0">
+        <img 
+          src="https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?q=80&w=2070&auto=format&fit=crop" 
+          alt="Community helping with food distribution" 
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/60"></div>
       </div>
-
+      
       {/* Content */}
-      <div className="relative z-10 container px-6 py-32 text-center text-white">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
-            Transform Food Waste into
-            <span className="text-blue-400 block mt-2">Hope & Nourishment</span>
-          </h1>
-          
-          <p className="text-xl md:text-2xl mb-8 text-gray-200 animate-fade-in-delay max-w-3xl mx-auto">
-            Every day, millions of meals go to waste while people go hungry. 
-            Join our mission to bridge this gap and create a world where surplus food saves lives.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in-delay-2">
-            {user ? (
-              // Show appropriate button based on user type
-              userType === 'donor' ? (
-                <Button 
-                  size="lg" 
-                  onClick={handleDonateClick}
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 text-lg hover:scale-105 transition-all duration-300 shadow-lg"
-                >
-                  Donate Now <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              ) : userType === 'ngo' ? (
-                <Button 
-                  size="lg" 
-                  onClick={handleNGOClick}
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 text-lg hover:scale-105 transition-all duration-300 shadow-lg"
-                >
-                  Find Food <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              ) : null
-            ) : (
-              // Show both buttons for non-authenticated users
-              <>
-                <Button 
-                  size="lg" 
-                  onClick={handleDonateClick}
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 text-lg hover:scale-105 transition-all duration-300 shadow-lg"
-                >
-                  Donate Food <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-                <Button 
-                  size="lg" 
-                  variant="outline" 
-                  onClick={handleNGOClick}
-                  className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 text-lg hover:scale-105 transition-all duration-300 shadow-lg"
-                >
-                  Join as NGO <Heart className="ml-2 h-5 w-5" />
-                </Button>
-              </>
-            )}
-          </div>
-
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-center animate-fade-in-delay-3">
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 hover:bg-white/20 transition-all duration-300 hover:scale-105">
-              <h3 className="text-2xl font-bold mb-2 text-blue-400">2M+</h3>
-              <p className="text-gray-200">Meals Saved</p>
-            </div>
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 hover:bg-white/20 transition-all duration-300 hover:scale-105">
-              <h3 className="text-2xl font-bold mb-2 text-blue-400">500+</h3>
-              <p className="text-gray-200">Active NGOs</p>
-            </div>
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 hover:bg-white/20 transition-all duration-300 hover:scale-105">
-              <h3 className="text-2xl font-bold mb-2 text-blue-400">1K+</h3>
-              <p className="text-gray-200">Food Donors</p>
-            </div>
-          </div>
+      <div className="container relative z-10 px-6 flex flex-col items-center text-center">
+        <div className={`transition-all duration-1000 ease-out ${isLoaded ? 'opacity-100' : 'opacity-0 translate-y-8'}`}>
+          <span className="inline-block py-2 px-4 rounded-full bg-paws-green/90 text-white text-sm font-medium mb-6 backdrop-blur-sm shadow-lg">
+            Welcome to Food Connect
+          </span>
+        </div>
+        
+        <h1 className={`text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 transition-all duration-1000 delay-300 ease-out drop-shadow-lg ${isLoaded ? 'opacity-100' : 'opacity-0 translate-y-8'}`}>
+          Bridge Hunger. <br className="hidden md:block" />
+          Save Food. <span className="text-paws-green drop-shadow-lg">Connect Lives.</span>
+        </h1>
+        
+        <p className={`max-w-2xl text-lg text-white mb-10 transition-all duration-1000 delay-500 ease-out drop-shadow-md ${isLoaded ? 'opacity-100' : 'opacity-0 translate-y-8'}`}>
+          Join our mission to reduce food waste and fight hunger by connecting food donors 
+          with NGOs in real-time. Together, we can ensure surplus food reaches those who need it most.
+        </p>
+        
+        <div className={`flex flex-col sm:flex-row gap-4 transition-all duration-1000 delay-700 ease-out ${isLoaded ? 'opacity-100' : 'opacity-0 translate-y-8'}`}>
+          {user && userType ? (
+            // Show user-specific button when logged in
+            <Button 
+              size="lg" 
+              className="bg-paws-green hover:bg-paws-green/90 text-white font-medium rounded-full shadow-lg relative overflow-hidden group transform hover:scale-105 transition-all duration-300"
+              onClick={() => {
+                if (userType === 'donor') {
+                  navigate('/donor-dashboard');
+                } else if (userType === 'ngo') {
+                  navigate('/ngo-dashboard');
+                }
+              }}
+            >
+              <Utensils className="mr-2 h-5 w-5" />
+              <span className="relative z-10">{userType === 'donor' ? 'Donate Now' : 'Find Food'}</span>
+              <span className="absolute inset-0 bg-white/20 scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500"></span>
+            </Button>
+          ) : (
+            // Show default buttons when not logged in
+            <>
+              <Button 
+                size="lg" 
+                className="bg-paws-green hover:bg-paws-green/90 text-white font-medium rounded-full shadow-lg relative overflow-hidden group transform hover:scale-105 transition-all duration-300"
+                onClick={() => navigate('/join-donor')}
+              >
+                <Utensils className="mr-2 h-5 w-5" />
+                <span className="relative z-10">Donate Food</span>
+                <span className="absolute inset-0 bg-white/20 scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500"></span>
+              </Button>
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="border-2 border-white text-white hover:bg-white hover:text-black backdrop-blur-sm rounded-full shadow-lg transition-all duration-300 group overflow-hidden transform hover:scale-105"
+                onClick={() => navigate('/join-ngo')}
+              >
+                <span className="relative z-10 group-hover:translate-x-[-4px] transition-transform duration-300">Join as NGO</span>
+                <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+              </Button>
+            </>
+          )}
+        </div>
+      </div>
+      
+      {/* Scroll indicator */}
+      <div className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce transition-all duration-1000 delay-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
+        <div className="w-[30px] h-[50px] rounded-full border-2 border-white/70 flex items-start justify-center p-2">
+          <div className="w-1.5 h-3 bg-white/80 rounded-full animate-float"></div>
         </div>
       </div>
     </section>

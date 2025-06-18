@@ -1,4 +1,3 @@
-
 import { NavLink } from 'react-router-dom';
 import { Heart, Mail, Utensils } from 'lucide-react';
 
@@ -11,7 +10,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
             <div className="flex items-center space-x-2 text-primary font-bold text-xl">
-              <Utensils className="h-6 w-6 text-blue-600" />
+              <Utensils className="h-6 w-6 text-paws-green" />
               <span className="text-black dark:text-white">Food Connect</span>
             </div>
             <p className="text-muted-foreground">
@@ -27,22 +26,22 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-4">Get Started</h3>
             <ul className="space-y-2">
               <li>
-                <NavLink to="/" className="text-muted-foreground hover:text-blue-600 transition-colors hover:translate-x-1 transform duration-200 inline-block">
+                <NavLink to="/" className="text-muted-foreground hover:text-paws-green transition-colors hover:translate-x-1 transform duration-200 inline-block">
                   Home
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/features" className="text-muted-foreground hover:text-blue-600 transition-colors hover:translate-x-1 transform duration-200 inline-block">
+                <NavLink to="/features" className="text-muted-foreground hover:text-paws-green transition-colors hover:translate-x-1 transform duration-200 inline-block">
                   Features
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/join-donor" className="text-muted-foreground hover:text-blue-600 transition-colors hover:translate-x-1 transform duration-200 inline-block">
+                <NavLink to="/join-donor" className="text-muted-foreground hover:text-paws-green transition-colors hover:translate-x-1 transform duration-200 inline-block">
                   Join as Donor
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/join-ngo" className="text-muted-foreground hover:text-blue-600 transition-colors hover:translate-x-1 transform duration-200 inline-block">
+                <NavLink to="/join-ngo" className="text-muted-foreground hover:text-paws-green transition-colors hover:translate-x-1 transform duration-200 inline-block">
                   Join as NGO
                 </NavLink>
               </li>
@@ -53,12 +52,12 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-4">Resources</h3>
             <ul className="space-y-2">
               <li>
-                <NavLink to="/about" className="text-muted-foreground hover:text-blue-600 transition-colors hover:translate-x-1 transform duration-200 inline-block">
+                <NavLink to="/about" className="text-muted-foreground hover:text-paws-green transition-colors hover:translate-x-1 transform duration-200 inline-block">
                   About Us
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/terms-of-service" className="text-muted-foreground hover:text-blue-600 transition-colors hover:translate-x-1 transform duration-200 inline-block">
+                <NavLink to="/terms-of-service" className="text-muted-foreground hover:text-paws-green transition-colors hover:translate-x-1 transform duration-200 inline-block">
                   Terms of Service
                 </NavLink>
               </li>
