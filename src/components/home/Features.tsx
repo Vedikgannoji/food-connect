@@ -91,7 +91,7 @@ export default function Features() {
                 <p className="text-muted-foreground mb-6 flex-grow">{feature.description}</p>
                 <Button 
                   variant="ghost" 
-                  className="self-start p-0 hover:bg-transparent hover:text-primary"
+                  className="self-start p-0 hover:bg-transparent hover:text-primary hover:scale-105 transition-all duration-300"
                   onClick={() => navigate(feature.link)}
                 >
                   Learn more <ArrowRight size={16} className="ml-2" />

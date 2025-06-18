@@ -4,24 +4,20 @@ import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
-import { Users, Target, Heart, Award, User } from 'lucide-react';
+import { Users, Target, Heart, Award } from 'lucide-react';
 
 const teamMembers = [
   {
-    name: "Sai Charan",
-    role: "Founder & CEO"
+    name: "Sai Charan"
   },
   {
-    name: "Saranya",
-    role: "CTO"
+    name: "Saranya"
   },
   {
-    name: "Rajesh Prasad",
-    role: "Head of Operations"
+    name: "Rajesh Prasad"
   },
   {
-    name: "Rishikesh",
-    role: "Head of Community Relations"
+    name: "Rishikesh"
   }
 ];
 
@@ -52,7 +48,7 @@ export default function About() {
               alt="Community volunteering with food distribution" 
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-black/50"></div>
+            <div className="absolute inset-0 bg-black/70"></div>
           </div>
           <div className="container px-6 relative z-10">
             <div className="text-center max-w-3xl mx-auto">
@@ -133,14 +129,11 @@ export default function About() {
               {teamMembers.map((member, index) => (
                 <div key={index} className="text-center group hover:scale-105 transition-all duration-300 hover:-translate-y-2">
                   <div className="w-32 h-32 rounded-full mx-auto mb-4 bg-paws-green/10 flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300">
-                    <img 
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=150&auto=format&fit=crop&ixlib=rb-4.0.3" 
-                      alt={`${member.name} profile`}
-                      className="w-full h-full rounded-full object-cover"
-                    />
+                    <div className="w-20 h-20 rounded-full bg-paws-green/20 flex items-center justify-center">
+                      <Users className="w-10 h-10 text-paws-green" />
+                    </div>
                   </div>
                   <h3 className="text-xl font-semibold mb-2">{member.name}</h3>
-                  <p className="text-muted-foreground">{member.role}</p>
                 </div>
               ))}
             </div>
@@ -151,8 +144,8 @@ export default function About() {
         <section className="relative py-20 overflow-hidden">
           <div className="absolute inset-0 z-0">
             <img 
-              src="https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?q=80&w=2070&auto=format&fit=crop" 
-              alt="Community working together" 
+              src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?q=80&w=2070&auto=format&fit=crop" 
+              alt="Community kitchen and food preparation" 
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-black/60"></div>

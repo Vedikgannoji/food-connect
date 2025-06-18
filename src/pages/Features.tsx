@@ -52,14 +52,15 @@ export default function Features() {
       <Navbar />
       <main className="flex-grow pt-24">
         {/* Hero Section */}
-        <section className="relative py-20 bg-gradient-to-br from-paws-green/10 to-paws-green/5">
-          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1488459716781-31db52582fe9?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-20"></div>
+        <section className="relative py-20">
+          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center"></div>
+          <div className="absolute inset-0 bg-black/50"></div>
           <div className="container px-6 relative z-10">
             <div className="text-center max-w-3xl mx-auto">
-              <h1 className="text-4xl md:text-5xl font-bold mb-6">
+              <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">
                 Powerful Features for <span className="text-paws-green">Food Rescue</span>
               </h1>
-              <p className="text-xl text-muted-foreground mb-8">
+              <p className="text-xl text-white/90 mb-8">
                 Discover how Food Connect makes it easy to donate surplus food and connect with those who need it most.
               </p>
             </div>
@@ -85,8 +86,8 @@ export default function Features() {
         <section className="relative py-20 overflow-hidden">
           <div className="absolute inset-0 z-0">
             <img 
-              src="https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?q=80&w=2070&auto=format&fit=crop" 
-              alt="Community working together" 
+              src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?q=80&w=2070&auto=format&fit=crop" 
+              alt="Volunteers working together" 
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-black/60"></div>

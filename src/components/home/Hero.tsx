@@ -24,8 +24,8 @@ export default function Hero() {
       {/* Background image with better overlay for text visibility */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?q=80&w=2070&auto=format&fit=crop" 
-          alt="Community helping with food distribution" 
+          src="https://images.unsplash.com/photo-1593113598332-cd288d649433?q=80&w=2070&auto=format&fit=crop" 
+          alt="Food distribution helping communities" 
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/60"></div>

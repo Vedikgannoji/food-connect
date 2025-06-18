@@ -83,7 +83,7 @@ export default function Navbar() {
             to="/" 
             className="flex items-center space-x-2 font-bold text-xl"
           >
-            <Utensils className="h-6 w-6 text-paws-green" />
+            <Utensils className="h-6 w-6 text-black dark:text-white" />
             <span className={`hidden sm:inline ${isDarkMode ? 'text-white' : 'text-black'}`}>
               Food Connect
             </span>

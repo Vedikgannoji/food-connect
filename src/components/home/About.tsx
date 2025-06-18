@@ -52,7 +52,7 @@ export default function About() {
               accessible and efficient—one meal at a time.
             </p>
             <Button 
-              className="rounded-full bg-primary hover:bg-primary/90"
+              className="rounded-full bg-primary hover:bg-primary/90 hover:scale-105 transition-all duration-300"
               onClick={() => navigate('/about')}
             >
               Learn More About Us <ArrowRight size={16} className="ml-2" />
