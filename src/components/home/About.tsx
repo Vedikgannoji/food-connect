@@ -62,8 +62,8 @@ export default function About() {
           <div className={`relative transition-all duration-1000 delay-300 ease-out ${isVisible ? 'opacity-100' : 'opacity-0 translate-x-[50px]'}`}>
             <div className="relative z-10 rounded-2xl overflow-hidden shadow-xl">
               <img 
-                src="https://images.unsplash.com/photo-1593113598332-cd288d649433?q=80&w=2070&auto=format&fit=crop" 
-                alt="Volunteers distributing food" 
+                src="/lovable-uploads/6448d76f-ec99-44ae-a6e8-9c1cdbbadf4f.png" 
+                alt="Prepared meals in containers ready for distribution" 
                 className="w-full h-[500px] object-cover"
               />
             </div>
