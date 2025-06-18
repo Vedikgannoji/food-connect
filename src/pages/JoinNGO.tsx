@@ -1,283 +1,247 @@
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Navbar from '@/components/layout/Navbar';
+import Footer from '@/components/layout/Footer';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
-import { useAuth } from '@/contexts/AuthContext';
-import Navbar from '@/components/layout/Navbar';
-import Footer from '@/components/layout/Footer';
+import { supabase } from '@/integrations/supabase/client';
 
 export default function JoinNGO() {
-  const navigate = useNavigate();
-  const { toast } = useToast();
-  const { signUp } = useAuth();
-  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
     organizationName: '',
     contactName: '',
+    email: '',
+    password: '',
     phone: '',
     registrationNumber: '',
     capacity: '',
-    serviceArea: '',
     address: '',
-    description: ''
+    description: '',
+    serviceArea: ''
   });
+  const [loading, setLoading] = useState(false);
+  const { toast } = useToast();
+  const navigate = useNavigate();
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
+  useEffect(() => {
+    document.title = 'Join as NGO - Food Connect';
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (formData.password !== formData.confirmPassword) {
-      toast({
-        title: "Error",
-        description: "Passwords do not match",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    if (formData.password.length < 6) {
-      toast({
-        title: "Error",
-        description: "Password must be at least 6 characters long",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    setIsLoading(true);
+    setLoading(true);
 
     try {
-      const { error } = await signUp(
-        formData.email,
-        formData.password,
-        formData.fullName,
-        'ngo'
-      );
+      // Create auth user with all NGO metadata
+      const { error: authError } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+        options: {
+          data: {
+            full_name: formData.contactName,
+            user_type: 'ngo',
+            organization_name: formData.organizationName,
+            contact_name: formData.contactName,
+            phone: formData.phone,
+            registration_number: formData.registrationNumber,
+            capacity: formData.capacity,
+            service_area: formData.serviceArea,
+            address: formData.address,
+            description: formData.description
+          }
+        }
+      });
 
-      if (error) {
+      if (authError) {
         toast({
-          title: "Error",
-          description: error.message,
+          title: "Registration Failed",
+          description: authError.message,
           variant: "destructive",
         });
-      } else {
-        toast({
-          title: "Success",
-          description: "Account created successfully!",
-        });
-        navigate('/login');
+        return;
       }
-    } catch (error) {
+
       toast({
-        title: "Error",
+        title: "Account Created Successfully!",
+        description: "Please check your email to verify your account, then login to continue.",
+      });
+
+      // Navigate to login page
+      setTimeout(() => navigate('/login'), 2000);
+
+    } catch (error) {
+      console.error('Registration error:', error);
+      toast({
+        title: "Registration Failed",
         description: "An unexpected error occurred. Please try again.",
         variant: "destructive",
       });
     } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
+  };
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
   };
 
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="flex-grow pt-24 pb-12">
-        <div className="container max-w-2xl mx-auto px-6">
-          <Card className="shadow-xl">
-            <CardHeader className="text-center space-y-2">
-              <CardTitle className="text-3xl font-bold">Join as NGO Partner</CardTitle>
-              <CardDescription className="text-lg">
-                Connect with food donors to help feed your community and reduce food waste.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="fullName">Your Full Name *</Label>
-                    <Input
-                      id="fullName"
-                      name="fullName"
-                      value={formData.fullName}
-                      onChange={handleInputChange}
-                      required
-                      placeholder="Enter your full name"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email *</Label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      required
-                      placeholder="Enter your email"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="password">Password *</Label>
-                    <Input
-                      id="password"
-                      name="password"
-                      type="password"
-                      value={formData.password}
-                      onChange={handleInputChange}
-                      required
-                      placeholder="Enter password (min 6 characters)"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="confirmPassword">Confirm Password *</Label>
-                    <Input
-                      id="confirmPassword"
-                      name="confirmPassword"
-                      type="password"
-                      value={formData.confirmPassword}
-                      onChange={handleInputChange}
-                      required
-                      placeholder="Confirm your password"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="organizationName">Organization Name *</Label>
-                    <Input
-                      id="organizationName"
-                      name="organizationName"
-                      value={formData.organizationName}
-                      onChange={handleInputChange}
-                      required
-                      placeholder="Enter NGO name"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="contactName">Contact Person *</Label>
-                    <Input
-                      id="contactName"
-                      name="contactName"
-                      value={formData.contactName}
-                      onChange={handleInputChange}
-                      required
-                      placeholder="Main contact person"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="phone">Phone Number</Label>
-                    <Input
-                      id="phone"
-                      name="phone"
-                      type="tel"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      placeholder="Contact phone number"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="registrationNumber">Registration Number</Label>
-                    <Input
-                      id="registrationNumber"
-                      name="registrationNumber"
-                      value={formData.registrationNumber}
-                      onChange={handleInputChange}
-                      placeholder="NGO registration number"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="capacity">Daily Capacity</Label>
-                    <Input
-                      id="capacity"
-                      name="capacity"
-                      value={formData.capacity}
-                      onChange={handleInputChange}
-                      placeholder="e.g., 100 meals/day"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="serviceArea">Service Area</Label>
-                    <Input
-                      id="serviceArea"
-                      name="serviceArea"
-                      value={formData.serviceArea}
-                      onChange={handleInputChange}
-                      placeholder="Areas you serve"
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="address">Organization Address</Label>
-                  <Input
-                    id="address"
-                    name="address"
-                    value={formData.address}
-                    onChange={handleInputChange}
-                    placeholder="Enter your organization address"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="description">About Your Organization</Label>
-                  <Textarea
-                    id="description"
-                    name="description"
-                    value={formData.description}
-                    onChange={handleInputChange}
-                    placeholder="Tell us about your mission, the communities you serve, and your food distribution experience"
-                    rows={4}
-                  />
-                </div>
-
-                <Button
-                  type="submit"
-                  className="w-full bg-paws-green hover:bg-paws-green/90 text-white hover:scale-105 transition-all duration-300"
-                  disabled={isLoading}
-                >
-                  {isLoading ? 'Creating Account...' : 'Join as NGO Partner'}
-                </Button>
-              </form>
-
-              <div className="text-center text-sm text-muted-foreground">
-                Already have an account?{' '}
-                <Button
-                  variant="link"
-                  onClick={() => navigate('/login')}
-                  className="p-0 h-auto text-paws-green hover:underline"
-                >
-                  Sign in here
-                </Button>
+      <main className="flex-grow pt-24">
+        <section className="py-20">
+          <div className="container px-6">
+            <div className="max-w-2xl mx-auto">
+              <div className="text-center mb-12">
+                <h1 className="text-4xl font-bold mb-4">Join as an NGO Partner</h1>
+                <p className="text-xl text-muted-foreground">
+                  Connect with food donors and help distribute surplus food to those in need.
+                </p>
               </div>
-            </CardContent>
-          </Card>
-        </div>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>NGO Registration</CardTitle>
+                  <CardDescription>
+                    Register your NGO to start receiving food donations through our platform.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    <div>
+                      <Label htmlFor="organizationName">Organization Name *</Label>
+                      <Input
+                        id="organizationName"
+                        value={formData.organizationName}
+                        onChange={(e) => handleInputChange('organizationName', e.target.value)}
+                        required
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="contactName">Contact Person *</Label>
+                        <Input
+                          id="contactName"
+                          value={formData.contactName}
+                          onChange={(e) => handleInputChange('contactName', e.target.value)}
+                          required
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="email">Email Address *</Label>
+                        <Input
+                          id="email"
+                          type="email"
+                          value={formData.email}
+                          onChange={(e) => handleInputChange('email', e.target.value)}
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="password">Password *</Label>
+                      <Input
+                        id="password"
+                        type="password"
+                        value={formData.password}
+                        onChange={(e) => handleInputChange('password', e.target.value)}
+                        required
+                        minLength={6}
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="phone">Phone Number *</Label>
+                        <Input
+                          id="phone"
+                          value={formData.phone}
+                          onChange={(e) => handleInputChange('phone', e.target.value)}
+                          required
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="registrationNumber">Registration Number</Label>
+                        <Input
+                          id="registrationNumber"
+                          value={formData.registrationNumber}
+                          onChange={(e) => handleInputChange('registrationNumber', e.target.value)}
+                          placeholder="NGO/Trust registration number"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="capacity">Daily Serving Capacity *</Label>
+                        <Select value={formData.capacity} onValueChange={(value) => handleInputChange('capacity', value)}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select capacity" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="50-100">50-100 people</SelectItem>
+                            <SelectItem value="100-250">100-250 people</SelectItem>
+                            <SelectItem value="250-500">250-500 people</SelectItem>
+                            <SelectItem value="500+">500+ people</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div>
+                        <Label htmlFor="serviceArea">Service Area *</Label>
+                        <Input
+                          id="serviceArea"
+                          value={formData.serviceArea}
+                          onChange={(e) => handleInputChange('serviceArea', e.target.value)}
+                          placeholder="e.g., Central Mumbai, South Delhi"
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="address">Organization Address *</Label>
+                      <Textarea
+                        id="address"
+                        value={formData.address}
+                        onChange={(e) => handleInputChange('address', e.target.value)}
+                        placeholder="Complete address with landmark"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="description">About Your Organization *</Label>
+                      <Textarea
+                        id="description"
+                        value={formData.description}
+                        onChange={(e) => handleInputChange('description', e.target.value)}
+                        placeholder="Tell us about your mission, the communities you serve, and your experience with food distribution"
+                        required
+                      />
+                    </div>
+
+                    <Button 
+                      type="submit" 
+                      className="w-full hover:scale-105 transition-all duration-300 bg-paws-green hover:bg-paws-green/90" 
+                      disabled={loading}
+                    >
+                      {loading ? 'Creating Account...' : 'Create NGO Account'}
+                    </Button>
+                  </form>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
       </main>
       <Footer />
     </div>

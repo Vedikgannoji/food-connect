@@ -69,22 +69,6 @@ export default function Navbar() {
     navigate('/');
   };
 
-  const isActiveRoute = (href: string) => {
-    return location.pathname === href;
-  };
-
-  const isDonorDashboardActive = () => {
-    return location.pathname === '/donor-dashboard';
-  };
-
-  const isNGODashboardActive = () => {
-    return location.pathname === '/ngo-dashboard';
-  };
-
-  const isProfileActive = () => {
-    return location.pathname === '/profile';
-  };
-
   return (
     <div className="fixed top-0 left-0 right-0 flex justify-center z-50 pt-4 px-4">
       <header className={`w-full max-w-6xl transition-all duration-300 rounded-full ${
@@ -111,15 +95,15 @@ export default function Navbar() {
               <NavLink
                 key={item.href}
                 to={item.href}
-                className={`px-4 py-2 rounded-full transition-all duration-300 hover:scale-105 font-medium ${
-                  isActiveRoute(item.href)
-                    ? isDarkMode 
-                      ? 'bg-green-800 text-white shadow-md'
-                      : 'bg-green-200 text-black shadow-md'
+                className={({ isActive }) => `
+                  px-4 py-2 rounded-full transition-all duration-300 hover:scale-105
+                  ${isActive 
+                    ? 'text-white bg-paws-green font-medium shadow-md' 
                     : isDarkMode
-                      ? 'text-white hover:bg-white/10'
-                      : 'text-black hover:bg-black/5'
-                }`}
+                      ? 'text-white hover:bg-white/10 font-medium'
+                      : 'text-black hover:bg-black/5 font-medium'
+                  }
+                `}
               >
                 {item.title}
               </NavLink>
@@ -143,13 +127,7 @@ export default function Navbar() {
               <>
                 <Button
                   onClick={handleActionButtonClick}
-                  className={`px-4 py-2 rounded-full font-medium hover:scale-105 transition-all duration-300 ${
-                    (isDonorDashboardActive() || isNGODashboardActive())
-                      ? isDarkMode 
-                        ? 'bg-green-800 text-white shadow-md hover:bg-green-700'
-                        : 'bg-green-200 text-black shadow-md hover:bg-green-300'
-                      : 'bg-paws-green text-white hover:bg-paws-green/90'
-                  }`}
+                  className="px-4 py-2 rounded-full bg-paws-green text-white hover:bg-paws-green/90 font-medium hover:scale-105 transition-all duration-300"
                 >
                   {userType === 'donor' ? 'Donate Now' : 'Find Food'}
                 </Button>
@@ -157,13 +135,9 @@ export default function Navbar() {
                   onClick={() => navigate('/profile')}
                   variant="outline"
                   className={`px-4 py-2 rounded-full font-medium hover:scale-105 transition-all duration-300 ${
-                    isProfileActive()
-                      ? isDarkMode 
-                        ? 'bg-green-800 text-white border-green-500 shadow-md'
-                        : 'bg-green-200 text-black border-green-300 shadow-md'
-                      : isDarkMode
-                        ? 'border-green-500 text-white hover:bg-white/10'
-                        : 'border-green-300 text-black hover:bg-paws-green/5'
+                    isDarkMode 
+                      ? 'border-white/20 text-white hover:bg-white/10' 
+                      : 'border-paws-green/20 text-paws-green hover:bg-paws-green/5'
                   }`}
                 >
                   <User className="w-4 h-4 mr-2" />
@@ -221,15 +195,15 @@ export default function Navbar() {
               <NavLink
                 key={item.href}
                 to={item.href}
-                className={`px-4 py-3 rounded-lg transition-all duration-200 hover:scale-105 ${
-                  isActiveRoute(item.href)
-                    ? isDarkMode 
-                      ? 'bg-green-800 text-white font-medium'
-                      : 'bg-green-200 text-black font-medium'
+                className={({ isActive }) => `
+                  px-4 py-3 rounded-lg transition-all duration-200 hover:scale-105
+                  ${isActive 
+                    ? 'bg-paws-green text-white font-medium' 
                     : isDarkMode
                       ? 'text-white hover:bg-white/10'
                       : 'text-black hover:bg-black/5'
-                }`}
+                  }
+                `}
               >
                 {item.title}
               </NavLink>
@@ -249,26 +223,14 @@ export default function Navbar() {
               <>
                 <Button
                   onClick={handleActionButtonClick}
-                  className={`justify-start hover:scale-105 transition-all duration-300 ${
-                    (isDonorDashboardActive() || isNGODashboardActive())
-                      ? isDarkMode 
-                        ? 'bg-green-800 text-white hover:bg-green-700'
-                        : 'bg-green-200 text-black hover:bg-green-300'
-                      : 'bg-paws-green text-white hover:bg-paws-green/90'
-                  }`}
+                  className="justify-start bg-paws-green text-white hover:bg-paws-green/90 hover:scale-105 transition-all duration-300"
                 >
                   {userType === 'donor' ? 'Donate Now' : 'Find Food'}
                 </Button>
                 <Button
                   onClick={() => navigate('/profile')}
                   variant="ghost"
-                  className={`justify-start hover:scale-105 transition-all duration-300 ${
-                    isProfileActive()
-                      ? isDarkMode 
-                        ? 'bg-green-800 text-white'
-                        : 'bg-green-200 text-black'
-                      : ''
-                  }`}
+                  className="justify-start hover:scale-105 transition-all duration-300"
                 >
                   <User className="w-4 h-4 mr-2" />
                   Profile

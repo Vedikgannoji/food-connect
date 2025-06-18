@@ -1,257 +1,221 @@
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Navbar from '@/components/layout/Navbar';
+import Footer from '@/components/layout/Footer';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { useAuth } from '@/contexts/AuthContext';
-import Navbar from '@/components/layout/Navbar';
-import Footer from '@/components/layout/Footer';
+import { supabase } from '@/integrations/supabase/client';
 
 export default function JoinDonor() {
-  const navigate = useNavigate();
-  const { toast } = useToast();
-  const { signUp } = useAuth();
-  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
-    fullName: '',
+    name: '',
     email: '',
     password: '',
-    confirmPassword: '',
     phone: '',
-    donorType: '',
     organization: '',
+    donorType: '',
     address: '',
     description: ''
   });
+  const [loading, setLoading] = useState(false);
+  const { toast } = useToast();
+  const navigate = useNavigate();
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleSelectChange = (value: string) => {
-    setFormData(prev => ({
-      ...prev,
-      donorType: value
-    }));
-  };
+  useEffect(() => {
+    document.title = 'Join as Donor - Food Connect';
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (formData.password !== formData.confirmPassword) {
-      toast({
-        title: "Error",
-        description: "Passwords do not match",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    if (formData.password.length < 6) {
-      toast({
-        title: "Error",
-        description: "Password must be at least 6 characters long",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    setIsLoading(true);
+    setLoading(true);
 
     try {
-      const { error } = await signUp(
-        formData.email,
-        formData.password,
-        formData.fullName,
-        'donor'
-      );
+      // Create auth user with all donor metadata
+      const { error: authError } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+        options: {
+          data: {
+            full_name: formData.name,
+            user_type: 'donor',
+            phone: formData.phone,
+            donor_type: formData.donorType,
+            organization: formData.organization,
+            address: formData.address,
+            description: formData.description
+          }
+        }
+      });
 
-      if (error) {
+      if (authError) {
         toast({
-          title: "Error",
-          description: error.message,
+          title: "Registration Failed",
+          description: authError.message,
           variant: "destructive",
         });
-      } else {
-        toast({
-          title: "Success",
-          description: "Account created successfully!",
-        });
-        navigate('/login');
+        return;
       }
-    } catch (error) {
+
       toast({
-        title: "Error",
+        title: "Account Created Successfully!",
+        description: "Please check your email to verify your account, then login to continue.",
+      });
+
+      // Navigate to login page
+      setTimeout(() => navigate('/login'), 2000);
+
+    } catch (error) {
+      console.error('Registration error:', error);
+      toast({
+        title: "Registration Failed",
         description: "An unexpected error occurred. Please try again.",
         variant: "destructive",
       });
     } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
+  };
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
   };
 
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="flex-grow pt-24 pb-12">
-        <div className="container max-w-2xl mx-auto px-6">
-          <Card className="shadow-xl">
-            <CardHeader className="text-center space-y-2">
-              <CardTitle className="text-3xl font-bold">Join as a Food Donor</CardTitle>
-              <CardDescription className="text-lg">
-                Help reduce food waste by sharing your surplus food with NGOs and communities in need.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="fullName">Full Name *</Label>
-                    <Input
-                      id="fullName"
-                      name="fullName"
-                      value={formData.fullName}
-                      onChange={handleInputChange}
-                      required
-                      placeholder="Enter your full name"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email *</Label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      required
-                      placeholder="Enter your email"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="password">Password *</Label>
-                    <Input
-                      id="password"
-                      name="password"
-                      type="password"
-                      value={formData.password}
-                      onChange={handleInputChange}
-                      required
-                      placeholder="Enter password (min 6 characters)"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="confirmPassword">Confirm Password *</Label>
-                    <Input
-                      id="confirmPassword"
-                      name="confirmPassword"
-                      type="password"
-                      value={formData.confirmPassword}
-                      onChange={handleInputChange}
-                      required
-                      placeholder="Confirm your password"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="phone">Phone Number</Label>
-                    <Input
-                      id="phone"
-                      name="phone"
-                      type="tel"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      placeholder="Enter your phone number"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="donorType">Donor Type</Label>
-                    <Select onValueChange={handleSelectChange} value={formData.donorType}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select donor type" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="restaurant">Restaurant</SelectItem>
-                        <SelectItem value="grocery_store">Grocery Store</SelectItem>
-                        <SelectItem value="individual">Individual</SelectItem>
-                        <SelectItem value="catering">Catering Company</SelectItem>
-                        <SelectItem value="event_organizer">Event Organizer</SelectItem>
-                        <SelectItem value="other">Other</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="organization">Organization/Business Name</Label>
-                  <Input
-                    id="organization"
-                    name="organization"
-                    value={formData.organization}
-                    onChange={handleInputChange}
-                    placeholder="Enter your organization or business name (if applicable)"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="address">Address</Label>
-                  <Input
-                    id="address"
-                    name="address"
-                    value={formData.address}
-                    onChange={handleInputChange}
-                    placeholder="Enter your address"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="description">Tell us about yourself</Label>
-                  <Textarea
-                    id="description"
-                    name="description"
-                    value={formData.description}
-                    onChange={handleInputChange}
-                    placeholder="Describe what type of food you typically have available, how often you might donate, etc."
-                    rows={3}
-                  />
-                </div>
-
-                <Button
-                  type="submit"
-                  className="w-full bg-paws-green hover:bg-paws-green/90 text-white hover:scale-105 transition-all duration-300"
-                  disabled={isLoading}
-                >
-                  {isLoading ? 'Creating Account...' : 'Join as Food Donor'}
-                </Button>
-              </form>
-
-              <div className="text-center text-sm text-muted-foreground">
-                Already have an account?{' '}
-                <Button
-                  variant="link"
-                  onClick={() => navigate('/login')}
-                  className="p-0 h-auto text-paws-green hover:underline"
-                >
-                  Sign in here
-                </Button>
+      <main className="flex-grow pt-24">
+        <section className="py-20">
+          <div className="container px-6">
+            <div className="max-w-2xl mx-auto">
+              <div className="text-center mb-12">
+                <h1 className="text-4xl font-bold mb-4">Join as a Food Donor</h1>
+                <p className="text-xl text-muted-foreground">
+                  Help reduce food waste by sharing your surplus food with those in need.
+                </p>
               </div>
-            </CardContent>
-          </Card>
-        </div>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>Donor Registration</CardTitle>
+                  <CardDescription>
+                    Fill out the form below to start donating food through our platform.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="name">Full Name *</Label>
+                        <Input
+                          id="name"
+                          value={formData.name}
+                          onChange={(e) => handleInputChange('name', e.target.value)}
+                          required
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="email">Email Address *</Label>
+                        <Input
+                          id="email"
+                          type="email"
+                          value={formData.email}
+                          onChange={(e) => handleInputChange('email', e.target.value)}
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="password">Password *</Label>
+                      <Input
+                        id="password"
+                        type="password"
+                        value={formData.password}
+                        onChange={(e) => handleInputChange('password', e.target.value)}
+                        required
+                        minLength={6}
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="phone">Phone Number *</Label>
+                        <Input
+                          id="phone"
+                          value={formData.phone}
+                          onChange={(e) => handleInputChange('phone', e.target.value)}
+                          required
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="donorType">Donor Type *</Label>
+                        <Select value={formData.donorType} onValueChange={(value) => handleInputChange('donorType', value)}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select donor type" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="restaurant">Restaurant</SelectItem>
+                            <SelectItem value="grocery">Grocery Store</SelectItem>
+                            <SelectItem value="household">Household</SelectItem>
+                            <SelectItem value="catering">Catering Service</SelectItem>
+                            <SelectItem value="other">Other</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="organization">Organization/Business Name</Label>
+                      <Input
+                        id="organization"
+                        value={formData.organization}
+                        onChange={(e) => handleInputChange('organization', e.target.value)}
+                        placeholder="Leave blank if individual"
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="address">Address *</Label>
+                      <Textarea
+                        id="address"
+                        value={formData.address}
+                        onChange={(e) => handleInputChange('address', e.target.value)}
+                        placeholder="Your pickup address"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="description">Tell us about your food donations</Label>
+                      <Textarea
+                        id="description"
+                        value={formData.description}
+                        onChange={(e) => handleInputChange('description', e.target.value)}
+                        placeholder="What type of food do you typically have available? How often do you plan to donate?"
+                      />
+                    </div>
+
+                    <Button 
+                      type="submit" 
+                      className="w-full hover:scale-105 transition-all duration-300 bg-paws-green hover:bg-paws-green/90" 
+                      disabled={loading}
+                    >
+                      {loading ? 'Creating Account...' : 'Create Donor Account'}
+                    </Button>
+                  </form>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
       </main>
       <Footer />
     </div>
