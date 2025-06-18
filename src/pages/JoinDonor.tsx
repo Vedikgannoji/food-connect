@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '@/components/layout/Navbar';
@@ -25,7 +26,6 @@ export default function JoinDonor() {
   });
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
-  const { signUp } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -38,13 +38,22 @@ export default function JoinDonor() {
     setLoading(true);
 
     try {
-      // Create auth user with proper metadata
-      const { error: authError } = await signUp(
-        formData.email,
-        formData.password,
-        formData.name,
-        'donor'
-      );
+      // Create auth user with all donor metadata
+      const { error: authError } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+        options: {
+          data: {
+            full_name: formData.name,
+            user_type: 'donor',
+            phone: formData.phone,
+            donor_type: formData.donorType,
+            organization: formData.organization,
+            address: formData.address,
+            description: formData.description
+          }
+        }
+      });
 
       if (authError) {
         toast({
@@ -55,34 +64,13 @@ export default function JoinDonor() {
         return;
       }
 
-      // Get the current user after signup
-      const { data: { user } } = await supabase.auth.getUser();
-      
-      if (user) {
-        // Update donor profile with additional information
-        const { error: profileError } = await supabase
-          .from('donor_profiles')
-          .update({
-            phone: formData.phone,
-            organization: formData.organization,
-            donor_type: formData.donorType,
-            address: formData.address,
-            description: formData.description
-          })
-          .eq('id', user.id);
-
-        if (profileError) {
-          console.error('Profile update error:', profileError);
-        }
-      }
-
       toast({
         title: "Account Created Successfully!",
-        description: "Please login using your credentials to continue.",
+        description: "Please check your email to verify your account, then login to continue.",
       });
 
-      // Navigate to landing page and then user can login
-      setTimeout(() => navigate('/'), 2000);
+      // Navigate to login page
+      setTimeout(() => navigate('/login'), 2000);
 
     } catch (error) {
       console.error('Registration error:', error);

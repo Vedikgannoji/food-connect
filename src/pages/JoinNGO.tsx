@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '@/components/layout/Navbar';
@@ -9,7 +10,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
-import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
 
 export default function JoinNGO() {
@@ -27,7 +27,6 @@ export default function JoinNGO() {
   });
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
-  const { signUp } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -40,13 +39,25 @@ export default function JoinNGO() {
     setLoading(true);
 
     try {
-      // Create auth user with proper metadata
-      const { error: authError } = await signUp(
-        formData.email,
-        formData.password,
-        formData.contactName,
-        'ngo'
-      );
+      // Create auth user with all NGO metadata
+      const { error: authError } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+        options: {
+          data: {
+            full_name: formData.contactName,
+            user_type: 'ngo',
+            organization_name: formData.organizationName,
+            contact_name: formData.contactName,
+            phone: formData.phone,
+            registration_number: formData.registrationNumber,
+            capacity: formData.capacity,
+            service_area: formData.serviceArea,
+            address: formData.address,
+            description: formData.description
+          }
+        }
+      });
 
       if (authError) {
         toast({
@@ -57,37 +68,13 @@ export default function JoinNGO() {
         return;
       }
 
-      // Get the current user after signup
-      const { data: { user } } = await supabase.auth.getUser();
-      
-      if (user) {
-        // Update NGO profile with additional information
-        const { error: profileError } = await supabase
-          .from('ngo_profiles')
-          .update({
-            contact_name: formData.contactName,
-            organization_name: formData.organizationName,
-            phone: formData.phone,
-            registration_number: formData.registrationNumber,
-            capacity: formData.capacity,
-            service_area: formData.serviceArea,
-            address: formData.address,
-            description: formData.description
-          })
-          .eq('id', user.id);
-
-        if (profileError) {
-          console.error('Profile update error:', profileError);
-        }
-      }
-
       toast({
         title: "Account Created Successfully!",
-        description: "Please login using your credentials to continue.",
+        description: "Please check your email to verify your account, then login to continue.",
       });
 
-      // Navigate to landing page and then user can login
-      setTimeout(() => navigate('/'), 2000);
+      // Navigate to login page
+      setTimeout(() => navigate('/login'), 2000);
 
     } catch (error) {
       console.error('Registration error:', error);
