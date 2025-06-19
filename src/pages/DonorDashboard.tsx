@@ -62,11 +62,12 @@ export default function DonorDashboard() {
       <main className="flex-grow pt-24">
         {/* Hero Section with Background */}
         <section className="relative py-20 bg-gradient-to-br from-paws-green/10 to-paws-brown/10">
-          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1593113598332-cd288d649433?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-20"></div>
+          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1593113598332-cd288d649433?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-40"></div>
+          <div className="absolute inset-0 bg-black/30"></div>
           <div className="container px-6 relative z-10">
             <div className="text-center mb-12">
-              <h1 className="text-4xl font-bold mb-4">Welcome to Your Donor Dashboard</h1>
-              <p className="text-xl text-muted-foreground">Make a difference by sharing your surplus food with those in need.</p>
+              <h1 className="text-4xl font-bold mb-4 text-white">Welcome to Your Donor Dashboard</h1>
+              <p className="text-xl text-gray-200">Make a difference by sharing your surplus food with those in need.</p>
             </div>
 
             {/* Stats Cards */}
