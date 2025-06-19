@@ -138,12 +138,13 @@ export default function Navbar() {
               <>
                 <Button
                   onClick={handleActionButtonClick}
+                  variant="outline"
                   className={`px-4 py-2 rounded-full font-medium hover:scale-105 transition-all duration-300 border-2 ${
                     isOnDashboardPage()
                       ? 'bg-paws-green text-white border-paws-green shadow-md'
-                      : isDarkMode
-                        ? 'bg-transparent text-white border-white/20 hover:bg-white/10'
-                        : 'bg-transparent text-paws-green border-paws-green/20 hover:bg-paws-green/5'
+                      : isDarkMode 
+                        ? 'border-white/20 text-white hover:bg-white/10' 
+                        : 'border-paws-green/20 text-black hover:bg-paws-green/5'
                   }`}
                 >
                   {userType === 'donor' ? 'Donate Now' : 'Find Food'}
@@ -255,7 +256,9 @@ export default function Navbar() {
                   className={`justify-start hover:scale-105 transition-all duration-300 ${
                     isOnDashboardPage()
                       ? 'bg-paws-green text-white'
-                      : 'bg-transparent text-paws-green border border-paws-green/20 hover:bg-paws-green/5'
+                      : isDarkMode 
+                        ? 'bg-transparent text-white border border-white/20 hover:bg-white/10'
+                        : 'bg-transparent text-black border border-paws-green/20 hover:bg-paws-green/5'
                   }`}
                 >
                   {userType === 'donor' ? 'Donate Now' : 'Find Food'}
