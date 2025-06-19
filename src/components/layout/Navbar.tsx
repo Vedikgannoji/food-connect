@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { Sun, Moon, Menu, X, Utensils, User } from 'lucide-react';
@@ -125,9 +124,11 @@ export default function Navbar() {
                 onClick={() => navigate('/login')}
                 variant="ghost"
                 className={`px-4 py-2 rounded-full font-medium hover:scale-105 transition-all duration-300 ${
-                  isDarkMode 
-                    ? 'text-white hover:bg-white/10' 
-                    : 'text-black hover:bg-black/5'
+                  location.pathname === '/login'
+                    ? 'text-white bg-paws-green font-medium shadow-md'
+                    : isDarkMode 
+                      ? 'text-white hover:bg-white/10' 
+                      : 'text-black hover:bg-black/5'
                 }`}
               >
                 Login
@@ -243,7 +244,11 @@ export default function Navbar() {
               <Button
                 onClick={() => navigate('/login')}
                 variant="ghost"
-                className="justify-start hover:scale-105 transition-all duration-300"
+                className={`justify-start hover:scale-105 transition-all duration-300 ${
+                  location.pathname === '/login'
+                    ? 'bg-paws-green text-white font-medium'
+                    : isDarkMode ? 'text-white' : 'text-black'
+                }`}
               >
                 Login
               </Button>
