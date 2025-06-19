@@ -69,6 +69,17 @@ export default function Navbar() {
     navigate('/');
   };
 
+  // Check if current page is the dashboard page for the user type
+  const isOnDashboardPage = () => {
+    if (userType === 'donor' && location.pathname === '/donor-dashboard') {
+      return true;
+    }
+    if (userType === 'ngo' && location.pathname === '/ngo-dashboard') {
+      return true;
+    }
+    return false;
+  };
+
   return (
     <div className="fixed top-0 left-0 right-0 flex justify-center z-50 pt-4 px-4">
       <header className={`w-full max-w-6xl transition-all duration-300 rounded-full ${
@@ -127,21 +138,39 @@ export default function Navbar() {
               <>
                 <Button
                   onClick={handleActionButtonClick}
-                  className="px-4 py-2 rounded-full bg-paws-green text-white hover:bg-paws-green/90 font-medium hover:scale-105 transition-all duration-300"
+                  className={`px-4 py-2 rounded-full font-medium hover:scale-105 transition-all duration-300 border-2 ${
+                    isOnDashboardPage()
+                      ? 'bg-paws-green text-white border-paws-green shadow-md'
+                      : isDarkMode
+                        ? 'bg-transparent text-white border-white/20 hover:bg-white/10'
+                        : 'bg-transparent text-paws-green border-paws-green/20 hover:bg-paws-green/5'
+                  }`}
                 >
                   {userType === 'donor' ? 'Donate Now' : 'Find Food'}
                 </Button>
                 <Button
                   onClick={() => navigate('/profile')}
                   variant="outline"
-                  className={`px-4 py-2 rounded-full font-medium hover:scale-105 transition-all duration-300 ${
-                    isDarkMode 
-                      ? 'border-white/20 text-white hover:bg-white/10' 
-                      : 'border-paws-green/20 text-paws-green hover:bg-paws-green/5'
+                  className={`px-4 py-2 rounded-full font-medium hover:scale-105 transition-all duration-300 border-2 ${
+                    location.pathname === '/profile'
+                      ? 'bg-paws-green text-white border-paws-green shadow-md'
+                      : isDarkMode 
+                        ? 'border-white/20 text-white hover:bg-white/10' 
+                        : 'border-paws-green/20 text-black hover:bg-paws-green/5'
                   }`}
                 >
-                  <User className="w-4 h-4 mr-2" />
-                  Profile
+                  <User className={`w-4 h-4 mr-2 ${
+                    location.pathname === '/profile'
+                      ? 'text-white'
+                      : isDarkMode ? 'text-white' : 'text-black'
+                  }`} />
+                  <span className={
+                    location.pathname === '/profile'
+                      ? 'text-white'
+                      : isDarkMode ? 'text-white' : 'text-black'
+                  }>
+                    Profile
+                  </span>
                 </Button>
               </>
             )}
@@ -223,17 +252,35 @@ export default function Navbar() {
               <>
                 <Button
                   onClick={handleActionButtonClick}
-                  className="justify-start bg-paws-green text-white hover:bg-paws-green/90 hover:scale-105 transition-all duration-300"
+                  className={`justify-start hover:scale-105 transition-all duration-300 ${
+                    isOnDashboardPage()
+                      ? 'bg-paws-green text-white'
+                      : 'bg-transparent text-paws-green border border-paws-green/20 hover:bg-paws-green/5'
+                  }`}
                 >
                   {userType === 'donor' ? 'Donate Now' : 'Find Food'}
                 </Button>
                 <Button
                   onClick={() => navigate('/profile')}
                   variant="ghost"
-                  className="justify-start hover:scale-105 transition-all duration-300"
+                  className={`justify-start hover:scale-105 transition-all duration-300 ${
+                    location.pathname === '/profile'
+                      ? 'bg-paws-green text-white'
+                      : isDarkMode ? 'text-white' : 'text-black'
+                  }`}
                 >
-                  <User className="w-4 h-4 mr-2" />
-                  Profile
+                  <User className={`w-4 h-4 mr-2 ${
+                    location.pathname === '/profile'
+                      ? 'text-white'
+                      : isDarkMode ? 'text-white' : 'text-black'
+                  }`} />
+                  <span className={
+                    location.pathname === '/profile'
+                      ? 'text-white'
+                      : isDarkMode ? 'text-white' : 'text-black'
+                  }>
+                    Profile
+                  </span>
                 </Button>
               </>
             )}
