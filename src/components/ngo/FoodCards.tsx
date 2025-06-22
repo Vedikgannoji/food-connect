@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { MapPin, Clock, User, Camera, Filter } from 'lucide-react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { MapPin, Clock, User, Leaf, Beef, Utensils } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 interface FoodDonation {
@@ -25,7 +25,7 @@ interface FoodDonation {
 const mockDonations: FoodDonation[] = [
   {
     id: 1,
-    title: "🍛 Veg Fried Rice",
+    title: "Vegetable Fried Rice",
     quantity: "15 Plates",
     type: "veg",
     suitableFor: "Humans",
@@ -33,13 +33,13 @@ const mockDonations: FoodDonation[] = [
     pickupTime: "7:00 PM",
     expiryTime: "9:00 PM",
     location: "MG Road, Bangalore",
-    image: "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=300&h=200&fit=crop",
-    notes: "Kept in fridge, packed individually",
+    image: "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=400&h=250&fit=crop&auto=format",
+    notes: "Kept in refrigerator, packed individually",
     status: "available"
   },
   {
     id: 2,
-    title: "🥪 Fresh Sandwiches",
+    title: "Fresh Sandwiches",
     quantity: "20 Pieces",
     type: "veg",
     suitableFor: "Humans",
@@ -47,12 +47,13 @@ const mockDonations: FoodDonation[] = [
     pickupTime: "6:30 PM",
     expiryTime: "8:30 PM",
     location: "Koramangala, Bangalore",
-    notes: "Made fresh today morning",
+    image: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?w=400&h=250&fit=crop&auto=format",
+    notes: "Made fresh this morning",
     status: "available"
   },
   {
     id: 3,
-    title: "🍲 Mixed Curry",
+    title: "Mixed Curry",
     quantity: "5 Kg",
     type: "mixed",
     suitableFor: "Both",
@@ -60,13 +61,13 @@ const mockDonations: FoodDonation[] = [
     pickupTime: "8:00 PM",
     expiryTime: "10:00 PM",
     location: "Whitefield, Bangalore",
-    image: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=300&h=200&fit=crop",
-    notes: "Suitable for animals too",
+    image: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=400&h=250&fit=crop&auto=format",
+    notes: "Contains both vegetarian and non-vegetarian items",
     status: "available"
   },
   {
     id: 4,
-    title: "🍗 Chicken Biryani",
+    title: "Chicken Biryani",
     quantity: "10 Plates",
     type: "non-veg",
     suitableFor: "Humans",
@@ -74,8 +75,36 @@ const mockDonations: FoodDonation[] = [
     pickupTime: "7:30 PM",
     expiryTime: "9:30 PM",
     location: "Indiranagar, Bangalore",
-    image: "https://images.unsplash.com/photo-1563379091339-03246963d4d6?w=300&h=200&fit=crop",
-    notes: "Fresh and hot",
+    image: "https://images.unsplash.com/photo-1563379091339-03246963d4d6?w=400&h=250&fit=crop&auto=format",
+    notes: "Freshly prepared and hot",
+    status: "available"
+  },
+  {
+    id: 5,
+    title: "Dal and Rice",
+    quantity: "8 Portions",
+    type: "veg",
+    suitableFor: "Humans",
+    postedBy: "Community Kitchen",
+    pickupTime: "6:00 PM",
+    expiryTime: "8:00 PM",
+    location: "HSR Layout, Bangalore",
+    image: "https://images.unsplash.com/photo-1721322800607-8c38375eef04?w=400&h=250&fit=crop&auto=format",
+    notes: "Nutritious home-style meal",
+    status: "available"
+  },
+  {
+    id: 6,
+    title: "Fruit Salad",
+    quantity: "12 Bowls",
+    type: "veg",
+    suitableFor: "Both",
+    postedBy: "Fresh Fruits Corner",
+    pickupTime: "5:30 PM",
+    expiryTime: "7:00 PM",
+    location: "Brigade Road, Bangalore",
+    image: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=400&h=250&fit=crop&auto=format",
+    notes: "Fresh seasonal fruits, suitable for all ages",
     status: "available"
   }
 ];
@@ -92,18 +121,27 @@ export default function FoodCards() {
       setDonations(prev => prev.filter(d => d.id !== donationId));
       setClaimedDonations(prev => [...prev, { ...donation, status: 'claimed' }]);
       toast({
-        title: "Donation Claimed Successfully!",
-        description: "You've claimed this donation. Please ensure pickup before expiry.",
+        title: "Donation Claimed Successfully",
+        description: "Please ensure pickup before expiry time.",
       });
     }
   };
 
   const getTypeColor = (type: string) => {
     switch (type) {
-      case 'veg': return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200';
-      case 'non-veg': return 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200';
-      case 'mixed': return 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200';
-      default: return 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200';
+      case 'veg': return 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-900/20 dark:text-emerald-300 dark:border-emerald-700';
+      case 'non-veg': return 'bg-red-50 text-red-700 border-red-200 dark:bg-red-900/20 dark:text-red-300 dark:border-red-700';
+      case 'mixed': return 'bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-900/20 dark:text-amber-300 dark:border-amber-700';
+      default: return 'bg-gray-50 text-gray-700 border-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600';
+    }
+  };
+
+  const getTypeIcon = (type: string) => {
+    switch (type) {
+      case 'veg': return <Leaf className="h-3 w-3" />;
+      case 'non-veg': return <Beef className="h-3 w-3" />;
+      case 'mixed': return <Utensils className="h-3 w-3" />;
+      default: return null;
     }
   };
 
@@ -117,105 +155,108 @@ export default function FoodCards() {
       {/* Available Food Section */}
       <div>
         <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
-            🍽️ Available Food Near You
+          <h2 className="text-3xl font-bold mb-4 text-gray-900 dark:text-gray-100">
+            Available Food Near You
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            These donations are currently available in your area. Review the details and claim what's needed to serve your community.
+          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            Review available donations in your area and claim what's needed to serve your community.
           </p>
         </div>
 
-        {/* Filter Section */}
+        {/* Professional Filter Section */}
         <div className="mb-8 flex justify-center">
-          <Card className="p-6 bg-gradient-to-r from-blue-50 to-green-50 dark:from-gray-800 dark:to-gray-700 border-2 border-blue-200 dark:border-gray-600">
+          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
             <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2">
-                <Filter className="h-5 w-5 text-blue-600" />
-                <span className="font-medium text-gray-700 dark:text-gray-200">Filter by type:</span>
-              </div>
-              <RadioGroup
-                value={filterType}
-                onValueChange={setFilterType}
-                className="flex gap-6"
-              >
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="all" id="all" />
-                  <label htmlFor="all" className="cursor-pointer font-medium">All</label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="veg" id="veg" />
-                  <label htmlFor="veg" className="cursor-pointer font-medium text-green-600">🌱 Veg</label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="non-veg" id="non-veg" />
-                  <label htmlFor="non-veg" className="cursor-pointer font-medium text-red-600">🍖 Non-Veg</label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="mixed" id="mixed" />
-                  <label htmlFor="mixed" className="cursor-pointer font-medium text-orange-600">🍽️ Mixed</label>
-                </div>
-              </RadioGroup>
+              <span className="font-medium text-gray-700 dark:text-gray-200 text-sm">Filter by Type:</span>
+              <Select value={filterType} onValueChange={setFilterType}>
+                <SelectTrigger className="w-48 bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600">
+                  <SelectValue placeholder="Select food type" />
+                </SelectTrigger>
+                <SelectContent className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
+                  <SelectItem value="all" className="hover:bg-gray-50 dark:hover:bg-gray-700">
+                    <div className="flex items-center gap-2">
+                      <Utensils className="h-4 w-4" />
+                      <span>All Types</span>
+                    </div>
+                  </SelectItem>
+                  <SelectItem value="veg" className="hover:bg-gray-50 dark:hover:bg-gray-700">
+                    <div className="flex items-center gap-2">
+                      <Leaf className="h-4 w-4 text-emerald-600" />
+                      <span>Vegetarian</span>
+                    </div>
+                  </SelectItem>
+                  <SelectItem value="non-veg" className="hover:bg-gray-50 dark:hover:bg-gray-700">
+                    <div className="flex items-center gap-2">
+                      <Beef className="h-4 w-4 text-red-600" />
+                      <span>Non-Vegetarian</span>
+                    </div>
+                  </SelectItem>
+                  <SelectItem value="mixed" className="hover:bg-gray-50 dark:hover:bg-gray-700">
+                    <div className="flex items-center gap-2">
+                      <Utensils className="h-4 w-4 text-amber-600" />
+                      <span>Mixed</span>
+                    </div>
+                  </SelectItem>
+                </SelectContent>
+              </Select>
             </div>
-          </Card>
+          </div>
         </div>
 
-        {/* Enhanced Card Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {filteredDonations.map((donation, index) => (
+        {/* Professional Card Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {filteredDonations.map((donation) => (
             <Card 
               key={donation.id} 
-              className={`group hover:shadow-2xl transition-all duration-500 transform hover:scale-[1.02] 
-                ${index % 2 === 0 
-                  ? 'bg-gradient-to-br from-blue-50 to-white dark:from-gray-800 dark:to-gray-700 border-l-4 border-l-blue-500' 
-                  : 'bg-gradient-to-br from-green-50 to-white dark:from-gray-700 dark:to-gray-800 border-l-4 border-l-green-500'
-                } 
-                animate-fade-in hover:shadow-blue-200/50 dark:hover:shadow-gray-600/50`}
+              className="group hover:shadow-lg transition-all duration-300 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700"
             >
               <CardContent className="p-0">
                 <div className="flex flex-col md:flex-row">
                   {/* Image Section */}
                   <div className="md:w-2/5 relative overflow-hidden">
-                    {donation.image ? (
-                      <div className="relative h-48 md:h-full">
-                        <img 
-                          src={donation.image} 
-                          alt={donation.title}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                        />
-                        <div className="absolute top-3 right-3">
-                          <Badge className={`${getTypeColor(donation.type)} font-semibold px-3 py-1`}>
-                            {donation.type === 'veg' ? '🌱 VEG' : donation.type === 'non-veg' ? '🍖 NON-VEG' : '🍽️ MIXED'}
-                          </Badge>
-                        </div>
+                    <div className="relative h-48 md:h-full">
+                      <img 
+                        src={donation.image} 
+                        alt={donation.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        onError={(e) => {
+                          // Fallback image if main image fails
+                          const target = e.target as HTMLImageElement;
+                          target.src = `https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=400&h=250&fit=crop&auto=format`;
+                        }}
+                      />
+                      <div className="absolute top-3 right-3">
+                        <Badge className={`${getTypeColor(donation.type)} font-medium px-2 py-1 border text-xs`}>
+                          <div className="flex items-center gap-1">
+                            {getTypeIcon(donation.type)}
+                            <span>{donation.type === 'veg' ? 'VEG' : donation.type === 'non-veg' ? 'NON-VEG' : 'MIXED'}</span>
+                          </div>
+                        </Badge>
                       </div>
-                    ) : (
-                      <div className="h-48 md:h-full bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-600 dark:to-gray-700 flex items-center justify-center">
-                        <Camera className="h-12 w-12 text-gray-400" />
-                      </div>
-                    )}
+                    </div>
                   </div>
 
                   {/* Content Section */}
                   <div className="md:w-3/5 p-6 flex flex-col justify-between">
                     <div className="space-y-4">
                       <div className="flex justify-between items-start">
-                        <h3 className="font-bold text-xl text-gray-800 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                        <h3 className="font-semibold text-lg text-gray-900 dark:text-gray-100">
                           {donation.title}
                         </h3>
                       </div>
                       
                       <div className="grid grid-cols-2 gap-3 text-sm">
                         <div className="flex items-center gap-2">
-                          <span className="font-semibold text-gray-600 dark:text-gray-300">Quantity:</span>
+                          <span className="font-medium text-gray-600 dark:text-gray-400">Quantity:</span>
                           <span className="text-blue-600 dark:text-blue-400 font-medium">{donation.quantity}</span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <span className="font-semibold text-gray-600 dark:text-gray-300">For:</span>
-                          <span className="text-green-600 dark:text-green-400 font-medium">{donation.suitableFor}</span>
+                          <span className="font-medium text-gray-600 dark:text-gray-400">Suitable for:</span>
+                          <span className="text-emerald-600 dark:text-emerald-400 font-medium">{donation.suitableFor}</span>
                         </div>
                       </div>
                       
-                      <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
+                      <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
                         <User className="h-4 w-4" />
                         <span className="font-medium">{donation.postedBy}</span>
                       </div>
@@ -231,15 +272,15 @@ export default function FoodCards() {
                         </div>
                       </div>
                       
-                      <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
+                      <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
                         <MapPin className="h-4 w-4" />
                         <span>{donation.location}</span>
                       </div>
                       
                       {donation.notes && (
-                        <div className="bg-yellow-50 dark:bg-yellow-900/20 p-3 rounded-lg border-l-4 border-yellow-400">
-                          <p className="text-sm text-yellow-800 dark:text-yellow-200 italic">
-                            💡 "{donation.notes}"
+                        <div className="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-lg border-l-4 border-blue-400 dark:border-blue-500">
+                          <p className="text-sm text-blue-800 dark:text-blue-200">
+                            <strong>Note:</strong> {donation.notes}
                           </p>
                         </div>
                       )}
@@ -247,9 +288,9 @@ export default function FoodCards() {
                     
                     <Button 
                       onClick={() => handleClaim(donation.id)}
-                      className="mt-4 w-full bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700 text-white font-semibold py-3 rounded-lg transform transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+                      className="mt-4 w-full bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800 text-white font-medium py-2.5 rounded-md transition-colors duration-200"
                     >
-                      🤝 Claim This Donation
+                      Claim This Donation
                     </Button>
                   </div>
                 </div>
@@ -262,32 +303,32 @@ export default function FoodCards() {
       {/* My Pickups Section */}
       {claimedDonations.length > 0 && (
         <div className="mt-12">
-          <h3 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
-            📋 My Claimed Donations
+          <h3 className="text-2xl font-semibold mb-6 text-center text-gray-900 dark:text-gray-100">
+            My Claimed Donations
           </h3>
           <div className="space-y-4">
             {claimedDonations.map((donation) => (
-              <Card key={`claimed-${donation.id}`} className="border-l-4 border-l-orange-500 bg-gradient-to-r from-orange-50 to-yellow-50 dark:from-orange-900/20 dark:to-yellow-900/20 hover:shadow-lg transition-all duration-300">
+              <Card key={`claimed-${donation.id}`} className="border-l-4 border-l-amber-500 bg-amber-50 dark:bg-amber-900/10 hover:shadow-md transition-all duration-200">
                 <CardContent className="p-6">
                   <div className="flex justify-between items-center">
                     <div className="space-y-2">
-                      <h4 className="font-semibold text-lg text-gray-800 dark:text-gray-100">{donation.title}</h4>
-                      <p className="text-sm text-gray-600 dark:text-gray-300">
+                      <h4 className="font-semibold text-lg text-gray-900 dark:text-gray-100">{donation.title}</h4>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
                         <strong>Donor:</strong> {donation.postedBy}
                       </p>
-                      <p className="text-sm text-gray-600 dark:text-gray-300">
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
                         <strong>Location:</strong> {donation.location}
                       </p>
                     </div>
                     <div className="text-right space-y-3">
-                      <Badge className="bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200 px-3 py-1">
-                        ⏳ Pending Pickup
+                      <Badge className="bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300 px-3 py-1">
+                        Pending Pickup
                       </Badge>
                       <p className="text-sm text-red-600 dark:text-red-400 font-medium">
                         Expires: {donation.expiryTime}
                       </p>
-                      <Button size="sm" className="bg-green-600 hover:bg-green-700 text-white">
-                        📤 Confirm Pickup
+                      <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700 text-white">
+                        Confirm Pickup
                       </Button>
                     </div>
                   </div>
