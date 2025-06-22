@@ -17,18 +17,18 @@ export default function NGODashboard() {
       <Navbar />
       <main className="flex-grow pt-24">
         {/* Hero Section with Background */}
-        <section className="relative py-20 bg-gradient-to-br from-blue-50 to-green-50">
+        <section className="relative py-20 bg-gradient-to-br from-blue-50 to-green-50 dark:from-gray-900 dark:to-gray-800">
           <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1488459716781-31db52582fe9?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-20"></div>
-          <div className="absolute inset-0 bg-black/40"></div>
+          <div className="absolute inset-0 bg-black/60"></div>
           <div className="container px-6 relative z-10">
             <div className="text-center mb-12">
               <h1 className="text-4xl font-bold mb-4 text-white">NGO Dashboard</h1>
-              <p className="text-xl text-gray-200">Connect with food donors and help serve your community.</p>
+              <p className="text-xl text-gray-100">Connect with food donors and help serve your community.</p>
             </div>
 
             {/* Stats Cards */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-              <Card className="hover:shadow-lg transition-shadow duration-300">
+              <Card className="hover:shadow-lg transition-shadow duration-300 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm">
                 <CardContent className="p-6">
                   <div className="flex items-center">
                     <div className="p-3 bg-paws-green/10 rounded-lg">
@@ -42,7 +42,7 @@ export default function NGODashboard() {
                 </CardContent>
               </Card>
 
-              <Card className="hover:shadow-lg transition-shadow duration-300">
+              <Card className="hover:shadow-lg transition-shadow duration-300 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm">
                 <CardContent className="p-6">
                   <div className="flex items-center">
                     <div className="p-3 bg-blue-100 rounded-lg">
@@ -56,7 +56,7 @@ export default function NGODashboard() {
                 </CardContent>
               </Card>
 
-              <Card className="hover:shadow-lg transition-shadow duration-300">
+              <Card className="hover:shadow-lg transition-shadow duration-300 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm">
                 <CardContent className="p-6">
                   <div className="flex items-center">
                     <div className="p-3 bg-yellow-100 rounded-lg">
@@ -70,7 +70,7 @@ export default function NGODashboard() {
                 </CardContent>
               </Card>
 
-              <Card className="hover:shadow-lg transition-shadow duration-300">
+              <Card className="hover:shadow-lg transition-shadow duration-300 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm">
                 <CardContent className="p-6">
                   <div className="flex items-center">
                     <div className="p-3 bg-green-100 rounded-lg">
