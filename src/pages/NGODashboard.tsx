@@ -1,15 +1,40 @@
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import FoodCards from '@/components/ngo/FoodCards';
 import { Card, CardContent } from '@/components/ui/card';
 import { Package, Users, Clock, CheckCircle } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
 
 export default function NGODashboard() {
+  const [userServiceArea, setUserServiceArea] = useState<string>('Bangalore');
+
   useEffect(() => {
     document.title = 'NGO Dashboard - Food Connect';
     window.scrollTo(0, 0);
+    
+    // Fetch user's service area from NGO profile
+    const fetchUserServiceArea = async () => {
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (user) {
+          const { data: ngoProfile } = await supabase
+            .from('ngo_profiles')
+            .select('service_area')
+            .eq('id', user.id)
+            .single();
+          
+          if (ngoProfile?.service_area) {
+            setUserServiceArea(ngoProfile.service_area);
+          }
+        }
+      } catch (error) {
+        console.log('Could not fetch user service area:', error);
+      }
+    };
+
+    fetchUserServiceArea();
   }, []);
 
   return (
@@ -19,11 +44,11 @@ export default function NGODashboard() {
         {/* Hero Section with Background */}
         <section className="relative py-20 bg-gradient-to-br from-blue-50 to-green-50">
           <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1488459716781-31db52582fe9?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-20"></div>
-          <div className="absolute inset-0 bg-black/40"></div>
+          <div className="absolute inset-0 bg-black/50"></div>
           <div className="container px-6 relative z-10">
             <div className="text-center mb-12">
               <h1 className="text-4xl font-bold mb-4 text-white">NGO Dashboard</h1>
-              <p className="text-xl text-gray-200">Connect with food donors and help serve your community.</p>
+              <p className="text-xl text-gray-200">Connect with food donors and help serve your community in {userServiceArea}.</p>
             </div>
 
             {/* Stats Cards */}
@@ -90,7 +115,7 @@ export default function NGODashboard() {
         {/* Main Content */}
         <section className="py-20">
           <div className="container px-6">
-            <FoodCards />
+            <FoodCards userServiceArea={userServiceArea} />
           </div>
         </section>
       </main>
