@@ -106,6 +106,90 @@ const mockDonations: FoodDonation[] = [
     image: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=400&h=250&fit=crop&auto=format",
     notes: "Fresh seasonal fruits, suitable for all ages",
     status: "available"
+  },
+  {
+    id: 7,
+    title: "Pizza Slices",
+    quantity: "25 Slices",
+    type: "veg",
+    suitableFor: "Humans",
+    postedBy: "Milano Pizzeria",
+    pickupTime: "8:30 PM",
+    expiryTime: "10:30 PM",
+    location: "Commercial Street, Bangalore",
+    image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&h=250&fit=crop&auto=format",
+    notes: "Margherita and veggie supreme pizzas",
+    status: "available"
+  },
+  {
+    id: 8,
+    title: "Mutton Curry",
+    quantity: "6 Kg",
+    type: "non-veg",
+    suitableFor: "Humans",
+    postedBy: "Nawab's Kitchen",
+    pickupTime: "7:00 PM",
+    expiryTime: "9:00 PM",
+    location: "Fraser Town, Bangalore",
+    image: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=400&h=250&fit=crop&auto=format",
+    notes: "Spicy traditional mutton curry with rice",
+    status: "available"
+  },
+  {
+    id: 9,
+    title: "Bread Rolls",
+    quantity: "30 Pieces",
+    type: "veg",
+    suitableFor: "Humans",
+    postedBy: "Baker's Delight",
+    pickupTime: "6:45 PM",
+    expiryTime: "8:45 PM",
+    location: "Jayanagar, Bangalore",
+    image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&h=250&fit=crop&auto=format",
+    notes: "Fresh baked rolls with butter",
+    status: "available"
+  },
+  {
+    id: 10,
+    title: "Fish Curry",
+    quantity: "4 Kg",
+    type: "non-veg",
+    suitableFor: "Humans",
+    postedBy: "Coastal Kitchen",
+    pickupTime: "7:15 PM",
+    expiryTime: "9:15 PM",
+    location: "Malleshwaram, Bangalore",
+    image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=400&h=250&fit=crop&auto=format",
+    notes: "Traditional fish curry with coconut",
+    status: "available"
+  },
+  {
+    id: 11,
+    title: "Vegetable Soup",
+    quantity: "15 Bowls",
+    type: "veg",
+    suitableFor: "Both",
+    postedBy: "Healthy Bites Cafe",
+    pickupTime: "6:15 PM",
+    expiryTime: "8:15 PM",
+    location: "RT Nagar, Bangalore",
+    image: "https://images.unsplash.com/photo-1547592180-85f173990554?w=400&h=250&fit=crop&auto=format",
+    notes: "Nutritious mixed vegetable soup",
+    status: "available"
+  },
+  {
+    id: 12,
+    title: "Pasta Salad",
+    quantity: "18 Portions",
+    type: "veg",
+    suitableFor: "Humans",
+    postedBy: "Italian Corner",
+    pickupTime: "7:45 PM",
+    expiryTime: "9:45 PM",
+    location: "Electronic City, Bangalore",
+    image: "https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?w=400&h=250&fit=crop&auto=format",
+    notes: "Cold pasta salad with fresh vegetables",
+    status: "available"
   }
 ];
 
@@ -220,9 +304,8 @@ export default function FoodCards() {
                         alt={donation.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         onError={(e) => {
-                          // Fallback image if main image fails
                           const target = e.target as HTMLImageElement;
-                          target.src = `https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=400&h=250&fit=crop&auto=format`;
+                          target.src = "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=400&h=250&fit=crop&auto=format";
                         }}
                       />
                       <div className="absolute top-3 right-3">
@@ -300,36 +383,54 @@ export default function FoodCards() {
         </div>
       </div>
 
-      {/* My Pickups Section */}
+      {/* My Claimed Donations Section - Updated Layout */}
       {claimedDonations.length > 0 && (
         <div className="mt-12">
           <h3 className="text-2xl font-semibold mb-6 text-center text-gray-900 dark:text-gray-100">
             My Claimed Donations
           </h3>
-          <div className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {claimedDonations.map((donation) => (
-              <Card key={`claimed-${donation.id}`} className="border-l-4 border-l-amber-500 bg-amber-50 dark:bg-amber-900/10 hover:shadow-md transition-all duration-200">
+              <Card key={`claimed-${donation.id}`} className="border-l-4 border-l-amber-500 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/10 dark:to-orange-900/10 hover:shadow-md transition-all duration-200">
                 <CardContent className="p-6">
-                  <div className="flex justify-between items-center">
-                    <div className="space-y-2">
-                      <h4 className="font-semibold text-lg text-gray-900 dark:text-gray-100">{donation.title}</h4>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">
-                        <strong>Donor:</strong> {donation.postedBy}
-                      </p>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">
-                        <strong>Location:</strong> {donation.location}
-                      </p>
+                  <div className="flex items-start gap-4">
+                    <div className="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                      <img 
+                        src={donation.image} 
+                        alt={donation.title}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.src = "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=400&h=250&fit=crop&auto=format";
+                        }}
+                      />
                     </div>
-                    <div className="text-right space-y-3">
-                      <Badge className="bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300 px-3 py-1">
-                        Pending Pickup
-                      </Badge>
-                      <p className="text-sm text-red-600 dark:text-red-400 font-medium">
-                        Expires: {donation.expiryTime}
-                      </p>
-                      <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700 text-white">
-                        Confirm Pickup
-                      </Button>
+                    <div className="flex-grow space-y-3">
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <h4 className="font-semibold text-lg text-gray-900 dark:text-gray-100">{donation.title}</h4>
+                          <p className="text-sm text-gray-600 dark:text-gray-400">
+                            <strong>Quantity:</strong> {donation.quantity}
+                          </p>
+                        </div>
+                        <Badge className="bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300 px-3 py-1 text-xs">
+                          Pending Pickup
+                        </Badge>
+                      </div>
+                      
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-gray-600 dark:text-gray-400">
+                        <p><strong>Donor:</strong> {donation.postedBy}</p>
+                        <p><strong>Location:</strong> {donation.location}</p>
+                      </div>
+                      
+                      <div className="flex justify-between items-center pt-2">
+                        <p className="text-sm text-red-600 dark:text-red-400 font-medium">
+                          Expires: {donation.expiryTime}
+                        </p>
+                        <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2">
+                          Confirm Pickup
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </CardContent>
