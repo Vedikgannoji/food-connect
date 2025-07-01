@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -47,7 +46,7 @@ const mockDonations: FoodDonation[] = [
     pickupTime: "6:30 PM",
     expiryTime: "8:30 PM",
     location: "Koramangala, Bangalore",
-    image: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?w=400&h=250&fit=crop&auto=format",
+    image: "https://images.unsplash.com/photo-1553909489-cd47e0ef937f?w=400&h=250&fit=crop&auto=format",
     notes: "Made fresh this morning",
     status: "available"
   },
@@ -89,7 +88,7 @@ const mockDonations: FoodDonation[] = [
     pickupTime: "6:00 PM",
     expiryTime: "8:00 PM",
     location: "HSR Layout, Bangalore",
-    image: "https://images.unsplash.com/photo-1721322800607-8c38375eef04?w=400&h=250&fit=crop&auto=format",
+    image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&h=250&fit=crop&auto=format",
     notes: "Nutritious home-style meal",
     status: "available"
   },
@@ -103,7 +102,7 @@ const mockDonations: FoodDonation[] = [
     pickupTime: "5:30 PM",
     expiryTime: "7:00 PM",
     location: "Brigade Road, Bangalore",
-    image: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=400&h=250&fit=crop&auto=format",
+    image: "https://images.unsplash.com/photo-1590301157890-4810ed352733?w=400&h=250&fit=crop&auto=format",
     notes: "Fresh seasonal fruits, suitable for all ages",
     status: "available"
   },
@@ -159,7 +158,7 @@ const mockDonations: FoodDonation[] = [
     pickupTime: "7:15 PM",
     expiryTime: "9:15 PM",
     location: "Malleshwaram, Bangalore",
-    image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=400&h=250&fit=crop&auto=format",
+    image: "https://images.unsplash.com/photo-1604909052743-94e838986d24?w=400&h=250&fit=crop&auto=format",
     notes: "Traditional fish curry with coconut",
     status: "available"
   },
@@ -187,8 +186,120 @@ const mockDonations: FoodDonation[] = [
     pickupTime: "7:45 PM",
     expiryTime: "9:45 PM",
     location: "Electronic City, Bangalore",
-    image: "https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?w=400&h=250&fit=crop&auto=format",
+    image: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=400&h=250&fit=crop&auto=format",
     notes: "Cold pasta salad with fresh vegetables",
+    status: "available"
+  },
+  {
+    id: 13,
+    title: "Paneer Butter Masala",
+    quantity: "12 Portions",
+    type: "veg",
+    suitableFor: "Humans",
+    postedBy: "Taste of India",
+    pickupTime: "7:30 PM",
+    expiryTime: "9:30 PM",
+    location: "Basavanagudi, Bangalore",
+    image: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=400&h=250&fit=crop&auto=format",
+    notes: "Rich and creamy paneer curry with naan",
+    status: "available"
+  },
+  {
+    id: 14,
+    title: "Grilled Chicken",
+    quantity: "8 Portions",
+    type: "non-veg",
+    suitableFor: "Humans",
+    postedBy: "BBQ Express",
+    pickupTime: "8:15 PM",
+    expiryTime: "10:15 PM",
+    location: "Rajajinagar, Bangalore",
+    image: "https://images.unsplash.com/photo-1532550907401-a500c9a57435?w=400&h=250&fit=crop&auto=format",
+    notes: "Juicy grilled chicken with herbs",
+    status: "available"
+  },
+  {
+    id: 15,
+    title: "Vegetable Pulao",
+    quantity: "20 Portions",
+    type: "veg",
+    suitableFor: "Humans",
+    postedBy: "Home Delights",
+    pickupTime: "6:45 PM",
+    expiryTime: "8:45 PM",
+    location: "Hebbal, Bangalore",
+    image: "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=400&h=250&fit=crop&auto=format",
+    notes: "Aromatic basmati rice with mixed vegetables",
+    status: "available"
+  },
+  {
+    id: 16,
+    title: "Idli Sambar",
+    quantity: "25 Sets",
+    type: "veg",
+    suitableFor: "Humans",
+    postedBy: "South Indian Kitchen",
+    pickupTime: "6:00 PM",
+    expiryTime: "8:00 PM",
+    location: "Marathahalli, Bangalore",
+    image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=400&h=250&fit=crop&auto=format",
+    notes: "Traditional South Indian breakfast with coconut chutney",
+    status: "available"
+  },
+  {
+    id: 17,
+    title: "Mixed Vegetable Curry",
+    quantity: "10 Kg",
+    type: "veg",
+    suitableFor: "Both",
+    postedBy: "Green Garden Restaurant",
+    pickupTime: "7:00 PM",
+    expiryTime: "9:00 PM",
+    location: "Yeshwanthpur, Bangalore",
+    image: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=400&h=250&fit=crop&auto=format",
+    notes: "Healthy mixed vegetable curry with roti",
+    status: "available"
+  },
+  {
+    id: 18,
+    title: "Egg Fried Rice",
+    quantity: "14 Portions",
+    type: "non-veg",
+    suitableFor: "Humans",
+    postedBy: "Dragon Kitchen",
+    pickupTime: "8:00 PM",
+    expiryTime: "10:00 PM",
+    location: "Banashankari, Bangalore",
+    image: "https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=400&h=250&fit=crop&auto=format",
+    notes: "Flavorful fried rice with scrambled eggs",
+    status: "available"
+  },
+  {
+    id: 19,
+    title: "Dosa with Chutney",
+    quantity: "30 Pieces",
+    type: "veg",
+    suitableFor: "Humans",
+    postedBy: "Udupi Corner",
+    pickupTime: "6:30 PM",
+    expiryTime: "8:30 PM",
+    location: "Kammanahalli, Bangalore",
+    image: "https://images.unsplash.com/photo-1694470466671-0c7bf2e5db48?w=400&h=250&fit=crop&auto=format",
+    notes: "Crispy dosas with sambar and coconut chutney",
+    status: "available"
+  },
+  {
+    id: 20,
+    title: "Rajma Rice",
+    quantity: "16 Portions",
+    type: "veg",
+    suitableFor: "Humans",
+    postedBy: "Punjab Kitchen",
+    pickupTime: "7:15 PM",
+    expiryTime: "9:15 PM",
+    location: "Vijayanagar, Bangalore",
+    image: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=400&h=250&fit=crop&auto=format",
+    notes: "Kidney beans curry with steamed rice",
     status: "available"
   }
 ];
