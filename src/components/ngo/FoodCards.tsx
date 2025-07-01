@@ -37,20 +37,6 @@ const mockDonations: FoodDonation[] = [
     status: "available"
   },
   {
-    id: 2,
-    title: "Fresh Sandwiches",
-    quantity: "20 Pieces",
-    type: "veg",
-    suitableFor: "Humans",
-    postedBy: "Home Kitchen",
-    pickupTime: "6:30 PM",
-    expiryTime: "8:30 PM",
-    location: "Koramangala, Bangalore",
-    image: "https://images.unsplash.com/photo-1553909489-cd47e0ef937f?w=400&h=250&fit=crop&auto=format",
-    notes: "Made fresh this morning",
-    status: "available"
-  },
-  {
     id: 3,
     title: "Mixed Curry",
     quantity: "5 Kg",
@@ -65,20 +51,6 @@ const mockDonations: FoodDonation[] = [
     status: "available"
   },
   {
-    id: 4,
-    title: "Chicken Biryani",
-    quantity: "10 Plates",
-    type: "non-veg",
-    suitableFor: "Humans",
-    postedBy: "Royal Kitchen",
-    pickupTime: "7:30 PM",
-    expiryTime: "9:30 PM",
-    location: "Indiranagar, Bangalore",
-    image: "https://images.unsplash.com/photo-1563379091339-03246963d4d6?w=400&h=250&fit=crop&auto=format",
-    notes: "Freshly prepared and hot",
-    status: "available"
-  },
-  {
     id: 5,
     title: "Dal and Rice",
     quantity: "8 Portions",
@@ -88,7 +60,7 @@ const mockDonations: FoodDonation[] = [
     pickupTime: "6:00 PM",
     expiryTime: "8:00 PM",
     location: "HSR Layout, Bangalore",
-    image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&h=250&fit=crop&auto=format",
+    image: "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=400&h=250&fit=crop&auto=format",
     notes: "Nutritious home-style meal",
     status: "available"
   },
@@ -102,7 +74,7 @@ const mockDonations: FoodDonation[] = [
     pickupTime: "5:30 PM",
     expiryTime: "7:00 PM",
     location: "Brigade Road, Bangalore",
-    image: "https://images.unsplash.com/photo-1590301157890-4810ed352733?w=400&h=250&fit=crop&auto=format",
+    image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&h=250&fit=crop&auto=format",
     notes: "Fresh seasonal fruits, suitable for all ages",
     status: "available"
   },
@@ -158,7 +130,7 @@ const mockDonations: FoodDonation[] = [
     pickupTime: "7:15 PM",
     expiryTime: "9:15 PM",
     location: "Malleshwaram, Bangalore",
-    image: "https://images.unsplash.com/photo-1604909052743-94e838986d24?w=400&h=250&fit=crop&auto=format",
+    image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=400&h=250&fit=crop&auto=format",
     notes: "Traditional fish curry with coconut",
     status: "available"
   },
@@ -186,7 +158,7 @@ const mockDonations: FoodDonation[] = [
     pickupTime: "7:45 PM",
     expiryTime: "9:45 PM",
     location: "Electronic City, Bangalore",
-    image: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=400&h=250&fit=crop&auto=format",
+    image: "https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?w=400&h=250&fit=crop&auto=format",
     notes: "Cold pasta salad with fresh vegetables",
     status: "available"
   },
@@ -272,20 +244,6 @@ const mockDonations: FoodDonation[] = [
     location: "Banashankari, Bangalore",
     image: "https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=400&h=250&fit=crop&auto=format",
     notes: "Flavorful fried rice with scrambled eggs",
-    status: "available"
-  },
-  {
-    id: 19,
-    title: "Dosa with Chutney",
-    quantity: "30 Pieces",
-    type: "veg",
-    suitableFor: "Humans",
-    postedBy: "Udupi Corner",
-    pickupTime: "6:30 PM",
-    expiryTime: "8:30 PM",
-    location: "Kammanahalli, Bangalore",
-    image: "https://images.unsplash.com/photo-1694470466671-0c7bf2e5db48?w=400&h=250&fit=crop&auto=format",
-    notes: "Crispy dosas with sambar and coconut chutney",
     status: "available"
   },
   {
